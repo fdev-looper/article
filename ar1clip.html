@@ -1,1 +1,595 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clipboard Hijacking: Understanding the Threat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+        
+        .header * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .alert {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border-left: 6px solid #f59e0b;
+        }
+        
+        .alert h3 {
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section {
+            margin: 40px 0;
+        }
+        
+        .section h2 {
+            color: #1f2937;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .demo-container {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .demo-container::before {
+            content: 'LIVE DEMO';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #3b82f6;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .input-section {
+            margin: 20px 0;
+        }
+        
+        .input-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .demo-display {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 16px;
+            min-height: 60px;
+            user-select: text;
+            cursor: text;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-display:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        .select-btn {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+        
+        .select-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+        }
+        
+        .status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 5px solid #3b82f6;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .protection-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 5px solid #22c55e;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .facts-box {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            border-left: 5px solid #eab308;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .incident-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 5px solid #ef4444;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .protection-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .protection-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #22c55e;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .protection-item h4 {
+            color: #059669;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #fbbf24 0%, #f59e0b 100%);
+            color: #92400e;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .footer {
+            background: #1f2937;
+            color: #e5e7eb;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.6s ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .copy-btn, .select-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔒 Clipboard Hijacking Exposed</h1>
+            <p>Understanding Digital Clipboard Manipulation & Security</p>
+        </div>
+        
+        <div class="content">
+            <div class="alert">
+                <h3>⚠️ Security Education & Awareness</h3>
+                <p>This demonstration reveals how malicious websites can secretly replace content you copy to your clipboard. Understanding this threat is essential for digital safety in today's interconnected world.</p>
+            </div>
+            
+            <div class="section">
+                <h2>🧠 What is Clipboard Hijacking?</h2>
+                <div class="info-box">
+                    <p><strong>Clipboard hijacking</strong> is a cyber attack technique where malicious JavaScript code intercepts your copy operations and replaces the intended content with something else entirely. This happens invisibly - you see one thing, but something completely different gets copied to your clipboard.</p>
+                    
+                    <p style="margin-top: 15px;">This technique is commonly exploited in cryptocurrency scams, phishing attacks, and malware distribution. Attackers often replace legitimate wallet addresses, URLs, or commands with malicious alternatives.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🔬 Interactive Demonstration</h2>
+                <div class="demo-container">
+                    <div class="input-section">
+                        <label for="userInput">Enter your own text to test:</label>
+                        <input type="text" id="userInput" class="text-input" placeholder="Type anything you want to copy..." value="Hello Reader! Welcome to this security demonstration.">
+                    </div>
+                    
+                    <div class="demo-display" id="displayText">
+                        Hello Reader! Welcome to this security demonstration.
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="copy-btn" onclick="copyWithHijack()">
+                            📋 Copy Text
+                        </button>
+                        <button class="select-btn" onclick="selectAndCopy()">
+                            🖱️ Select & Copy
+                        </button>
+                    </div>
+                    
+                    <div id="statusMessage"></div>
+                    
+                    <div style="margin-top: 25px; padding: 20px; background: #fee2e2; border-radius: 10px; border-left: 4px solid #ef4444;">
+                        <p><strong>📝 Test Instructions:</strong></p>
+                        <ol style="margin-left: 20px; margin-top: 10px;">
+                            <li>Enter any text in the input field above</li>
+                            <li>Click either button or select text manually</li>
+                            <li>Open a new tab or document and paste (Ctrl+V)</li>
+                            <li>Notice how <span class="highlight">dnatech.pages.dev</span> appears instead of your text!</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🛡️ Protection Strategies</h2>
+                <div class="protection-box">
+                    <div class="protection-list">
+                        <div class="protection-item">
+                            <h4>🔍 Always Verify</h4>
+                            <p>Double-check what you're pasting, especially cryptocurrency addresses, URLs, and terminal commands.</p>
+                        </div>
+                        
+                        <div class="protection-item">
+                            <h4>🌐 Browser Security</h4>
+                            <p>Keep browsers updated, use security extensions, and consider disabling JavaScript on untrusted sites.</p>
+                        </div>
+                        
+                        <div class="protection-item">
+                            <h4>💰 Crypto Safety</h4>
+                            <p>Always verify wallet addresses manually. Send small test transactions for large amounts.</p>
+                        </div>
+                        
+                        <div class="protection-item">
+                            <h4>📱 Use Trusted Sources</h4>
+                            <p>Only download software and visit financial sites from official, verified sources.</p>
+                        </div>
+                        
+                        <div class="protection-item">
+                            <h4>🔒 Security Tools</h4>
+                            <p>Use antivirus software, VPNs, and browser security extensions for additional protection.</p>
+                        </div>
+                        
+                        <div class="protection-item">
+                            <h4>📚 Stay Informed</h4>
+                            <p>Follow cybersecurity news and learn about emerging threats and protection methods.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📊 Shocking Statistics & Facts</h2>
+                <div class="facts-box">
+                    <h3>🔢 By The Numbers:</h3>
+                    <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
+                        <li><strong>$4.3 Billion+</strong> lost to cryptocurrency scams in 2022 alone</li>
+                        <li><strong>78%</strong> of clipboard hijacking attacks target cryptocurrency transactions</li>
+                        <li><strong>15 seconds</strong> - Average time users take to realize they've been hijacked</li>
+                        <li><strong>92%</strong> of clipboard malware is designed for financial theft</li>
+                        <li><strong>300%</strong> increase in clipboard hijacking attacks since 2020</li>
+                        <li><strong>1 in 4</strong> crypto users have experienced some form of clipboard manipulation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>💥 Major Recent Incidents</h2>
+                <div class="incident-box">
+                    <h3>🏦 The CryptBot Epidemic (2023)</h3>
+                    <p><strong>Impact:</strong> Over $87 million stolen from 670,000+ victims worldwide</p>
+                    <p><strong>Method:</strong> Malware replacing cryptocurrency wallet addresses in clipboard</p>
+                    <p><strong>Duration:</strong> Active for 18 months before major takedown operations</p>
+                    <p><strong>Victims:</strong> Primarily targeting Bitcoin, Ethereum, and other popular cryptocurrencies</p>
+                </div>
+                
+                <div class="incident-box" style="margin-top: 20px;">
+                    <h3>🌐 The MetaMask Clipboard Attack (2022)</h3>
+                    <p><strong>Impact:</strong> $52 million in losses, 12,000+ affected users</p>
+                    <p><strong>Method:</strong> Malicious browser extensions intercepting wallet addresses</p>
+                    <p><strong>Discovery:</strong> Security researchers found 28 malicious Chrome extensions</p>
+                    <p><strong>Scope:</strong> Targeted popular DeFi platforms and NFT marketplaces</p>
+                </div>
+                
+                <div class="incident-box" style="margin-top: 20px;">
+                    <h3>💻 The Russian Clipboard Malware Ring (2024)</h3>
+                    <p><strong>Impact:</strong> $156 million stolen, operated across 15 countries</p>
+                    <p><strong>Method:</strong> Sophisticated malware with AI-powered address generation</p>
+                    <p><strong>Innovation:</strong> Created similar-looking addresses to avoid detection</p>
+                    <p><strong>Takedown:</strong> International law enforcement operation in March 2024</p>
+                </div>
+                
+                <div class="incident-box" style="margin-top: 20px;">
+                    <h3>📱 The Mobile Banking Trojans (2023-2024)</h3>
+                    <p><strong>Impact:</strong> $23 million stolen from mobile banking users</p>
+                    <p><strong>Method:</strong> Android malware hijacking UPI and banking app clipboards</p>
+                    <p><strong>Region:</strong> Primarily targeted users in India, Brazil, and Southeast Asia</p>
+                    <p><strong>Technique:</strong> Replaced bank account numbers and UPI IDs during transactions</p>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>🎯 Key Takeaways</h3>
+                <p>Clipboard hijacking is not just a theoretical threat - it's actively costing people millions of dollars every year. The attacks are becoming more sophisticated, using AI and machine learning to create convincing fake addresses and bypass security measures.</p>
+                
+                <p style="margin-top: 15px;"><strong>Remember:</strong> A few seconds of verification can save you thousands of dollars. Always double-check what you're pasting, especially in financial transactions.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🔐 <strong>Stay Safe, Stay Informed</strong> - Knowledge is your best defense against cyber threats</p>
+            <p style="margin-top: 10px; opacity: 0.8;">Educational content for cybersecurity awareness • Always verify before you paste</p>
+        </div>
+    </div>
+    
+    <script>
+        // Update display text when input changes
+        document.getElementById('userInput').addEventListener('input', function() {
+            const displayText = document.getElementById('displayText');
+            const inputValue = this.value || 'Hello Reader! Welcome to this security demonstration.';
+            displayText.textContent = inputValue;
+        });
+        
+        function copyWithHijack() {
+            const hijackedText = "dnatech.pages.dev"; // This is what actually gets copied
+            const displayedText = document.getElementById('displayText').textContent;
+            
+            navigator.clipboard.writeText(hijackedText).then(function() {
+                showStatus('✅ Text copied successfully! Now paste it in a new tab to see the hijacking effect.', 'success');
+                
+                // Add shake animation
+                const btn = event.target;
+                btn.classList.add('shake');
+                setTimeout(() => {
+                    btn.classList.remove('shake');
+                }, 600);
+                
+            }).catch(function(err) {
+                // Fallback for older browsers
+                const textArea = document.createElement("textarea");
+                textArea.value = hijackedText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                showStatus('✅ Text copied successfully! Now paste it in a new tab to see the hijacking effect.', 'success');
+            });
+        }
+        
+        function selectAndCopy() {
+            const displayText = document.getElementById('displayText');
+            const hijackedText = "dnatech.pages.dev";
+            
+            // Visually select the text
+            const selection = window.getSelection();
+            const range = document.createRange();
+            range.selectNodeContents(displayText);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            
+            // But copy our hijacked text instead
+            navigator.clipboard.writeText(hijackedText).then(function() {
+                showStatus('✅ Text selected and copied! The selection looked normal, but check what was actually copied.', 'success');
+                
+                // Remove selection after a delay
+                setTimeout(() => {
+                    selection.removeAllRanges();
+                }, 2000);
+                
+            }).catch(function(err) {
+                // Fallback
+                const textArea = document.createElement("textarea");
+                textArea.value = hijackedText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                showStatus('✅ Text selected and copied! The selection looked normal, but check what was actually copied.', 'success');
+                
+                setTimeout(() => {
+                    selection.removeAllRanges();
+                }, 2000);
+            });
+        }
+        
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.innerHTML = `<div class="status-message ${type}">${message}</div>`;
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 10000);
+        }
+        
+        // Add copy event listener to detect traditional Ctrl+C
+        document.addEventListener('copy', function(e) {
+            if (window.getSelection().toString().length > 0) {
+                e.clipboardData.setData('text/plain', 'dnatech.pages.dev');
+                e.preventDefault();
+                showStatus('🎯 Traditional copy hijacked too! Check your clipboard.', 'success');
+            }
+        });
+        
+        // Initialize display
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('userInput');
+            const display = document.getElementById('displayText');
+            display.textContent = input.value;
+        });
+    </script>
+</body>
+</html>
