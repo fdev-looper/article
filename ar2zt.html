@@ -591,7 +591,12 @@
             position: relative;
             z-index: 1;
         }
-        
+        .footer {
+    text-align: center;   /* Center the text horizontally */
+    padding: 15px 0;      /* Optional: top-bottom padding */
+    background-color: #f5f5f5; /* optional: footer bg color */
+}
+
         .author-section p {
             font-size: 1.125rem;
             opacity: 0.9;
@@ -733,12 +738,31 @@
     </div>
     
     <div class="container">
-        <div class="main-content">
-            <div class="section">
-                <div class="section-header">
-                    <h2 class="section-title">Personal Risk Assessment</h2>
-                    <p class="section-subtitle">Discover your security gaps and learn Zero Trust principles through personalized analysis</p>
-                </div>
+    <div class="main-content">
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Personal Risk Assessment</h2>
+                <p class="section-subtitle">Discover your security gaps and learn Zero Trust principles through personalized analysis</p>
+            </div>
+
+            <!-- Zero Trust Explanation -->
+            <div class="zero-trust-info">
+                <h3>What is Zero Trust?</h3>
+                <p>Zero Trust is a security framework that assumes **no one — inside or outside your network — should be trusted by default**. Every access request is verified, no matter who makes it.</p>
+
+                <h3>Why Zero Trust?</h3>
+                <p>Traditional security models assume that users inside a network are trustworthy. Zero Trust flips this idea, **reducing the risk of breaches, lateral movement of attackers, and data leaks**.</p>
+
+                <h3>Zero Trust for Organizations</h3>
+                <p>Businesses use Zero Trust to protect sensitive data and infrastructure. It includes **identity verification, device security checks, and least-privilege access** so that even if an attacker enters, damage is minimized.</p>
+
+                <h3>Zero Trust for Normal Users</h3>
+                <p>Even for individuals, Zero Trust matters: **use strong passwords, enable multi-factor authentication (MFA), update devices regularly, and be cautious with apps and links**. This mindset keeps your personal data safe and prevents your device from being a stepping stone for attacks.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
                 
                 <div class="risk-calculator">
                     <div class="calculator-title">How Secure Are Your Digital Habits?</div>
