@@ -847,67 +847,7 @@
                     </div>
                 </section>
 
-                <section class="section">
-                    <div class="section-header">
-                        <div class="section-icon">🎯</div>
-                        <h2 class="section-title">How OTP Scams Work Technically</h2>
-                    </div>
-                    
-                    <div class="tech-section">
-                        <h3>🔬 Technical Deep Dive</h3>
-                        
-                        <div class="tech-grid">
-                            <div class="tech-card">
-                                <h4>📡 SS7 Protocol Exploitation</h4>
-                                <p>Advanced attackers exploit vulnerabilities in the SS7 (Signaling System 7) protocol used by telecom networks. They can intercept SMS messages containing OTPs by redirecting them to attacker-controlled numbers.</p>
-                                <div class="code-example">
-// SS7 Network Message Interception
-SEND_ROUTING_INFO_FOR_SMS
-TARGET: +91XXXXXXXXXX
-REDIRECT_TO: ATTACKER_MSISDN
-INTERCEPT: OTP_MESSAGE</div>
-                            </div>
-                            
-                            <div class="tech-card">
-                                <h4>📱 SIM Swapping Attack</h4>
-                                <p>Attackers use social engineering on telecom customer service to transfer victim's phone number to a SIM card they control. All OTP messages then go to the attacker's device.</p>
-                                <div class="code-example">
-1. Gather victim's personal info
-2. Call telecom provider
-3. Claim lost phone/SIM
-4. Request SIM swap
-5. Receive all OTP codes</div>
-                            </div>
-                            
-                            <div class="tech-card">
-                                <h4>🦠 Malware-Based Interception</h4>
-                                <p>Banking trojans and SMS stealers can intercept OTP messages directly from victim's phone. They run in background and forward messages to command-and-control servers.</p>
-                                <div class="code-example">
-// Android SMS Interception
-BroadcastReceiver smsReceiver = new BroadcastReceiver() {
-    public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
-            // Extract OTP and send to C&C server
-        }
-    }
-};</div>
-                            </div>
-                            
-                            <div class="tech-card">
-                                <h4>🌐 Web Session Hijacking</h4>
-                                <p>Attackers use phishing websites that look identical to legitimate banking sites. When victims enter login credentials, attackers use them in real-time to initiate transactions, then ask for OTP.</p>
-                                <div class="code-example">
-# Real-time Phishing Attack
-1. Victim enters credentials on fake site
-2. Attacker logs into real site immediately
-3. Attacker initiates money transfer
-4. Real bank sends OTP to victim
-5. Fake site asks victim for "verification OTP"
-6. Money transferred to attacker's account</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+               
 
                 <section class="section">
                     <div class="section-header">
