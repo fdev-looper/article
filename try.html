@@ -60,46 +60,67 @@
       50% { transform: scale(1.02); }
       100% { transform: scale(1); }
     }
-    .config-section {
+    .category-section {
       background: #f8f9fa;
-      padding: 20px;
-      border-radius: 10px;
+      padding: 25px;
+      border-radius: 15px;
       margin-bottom: 25px;
+      border: 2px solid #e9ecef;
     }
-    .config-section label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+    .category-section h3 {
+      margin: 0 0 15px 0;
       color: #2c3e50;
+      font-size: 1.3em;
     }
-    .config-section input {
-      width: 100%;
-      padding: 10px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .category-btn {
+      background: linear-gradient(45deg, #74b9ff, #0984e3);
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
       font-size: 14px;
-      box-sizing: border-box;
+      font-weight: 500;
     }
-    .config-section small {
-      color: #7f8c8d;
-      font-size: 12px;
+    .category-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
+    }
+    .category-btn.selected {
+      background: linear-gradient(45deg, #00b894, #00cec9);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
+    }
+    .custom-input-section {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 12px;
+      border: 2px solid #ddd;
     }
     #userPrompt {
       width: 100%;
-      padding: 20px;
+      padding: 15px;
       font-size: 16px;
-      border: 3px solid transparent;
-      border-radius: 15px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
       resize: vertical;
       box-sizing: border-box;
       font-family: inherit;
-      background: linear-gradient(white, white) padding-box, linear-gradient(45deg, #667eea, #764ba2) border-box;
       transition: all 0.3s ease;
     }
     #userPrompt:focus {
       outline: none;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
     #generateBtn {
       width: 100%;
@@ -115,8 +136,6 @@
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 1px;
-      position: relative;
-      overflow: hidden;
     }
     #generateBtn:hover:not(:disabled) {
       transform: translateY(-3px);
@@ -161,26 +180,6 @@
       border-color: #a3d9a5;
       color: #155724;
     }
-    .examples {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
-    }
-    .example-chip {
-      background: linear-gradient(45deg, #74b9ff, #0984e3);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 25px;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.3s ease;
-      font-size: 14px;
-    }
-    .example-chip:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
-    }
   </style>
 </head>
 <body>
@@ -188,33 +187,57 @@
     <h1>🍌 Nano Banana 3D Generator</h1>
     <p class="subtitle">AI-Powered Nano Banana Style 3D Figurine Prompts</p>
     
-    <div class="config-section">
-      <label for="edgeFunctionUrl">Supabase Edge Function URL:</label>
-      <input type="url" id="edgeFunctionUrl" placeholder="https://your-project.supabase.co/functions/v1/generate-prompt" value="">
-      <small>Apne Supabase project ka edge function URL daalen</small>
-    </div>
-    
     <div class="usage-counter" id="usageCounter">
       🎯 Remaining Uses: <span id="remainingUses">3</span>/3
     </div>
     
-    <div class="examples">
-      <div class="example-chip" onclick="setExample('Cute robot with LED eyes')">🤖 Cute Robot</div>
-      <div class="example-chip" onclick="setExample('Kawaii dragon with tiny wings')">🐲 Mini Dragon</div>
-      <div class="example-chip" onclick="setExample('Chibi astronaut with helmet')">👨‍🚀 Space Explorer</div>
-      <div class="example-chip" onclick="setExample('Tiny fairy house with mushrooms')">🧚‍♀️ Fairy House</div>
+    <div class="category-section">
+      <h3>🌐 Universal / Techy Figurines</h3>
+      <div class="category-grid">
+        <button class="category-btn" data-category="desk-tech">🖥️ Desk Tech Professional</button>
+        <button class="category-btn" data-category="smart-gadget">📱 Smart Gadget Collector</button>
+        <button class="category-btn" data-category="office-model">💼 Minimalist Office Model</button>
+        <button class="category-btn" data-category="tech-buddy">🧸 Everyday Tech Buddy Plush</button>
+        <button class="category-btn" data-category="student-life">📚 Student Life Figurine</button>
+        <button class="category-btn" data-category="creator-studio">🎙️ Creator Studio Figurine</button>
+        <button class="category-btn" data-category="traveler-tech">🎒 Traveler Tech Toy</button>
+        <button class="category-btn" data-category="casual-gamer">🎮 Casual Gamer Model</button>
+        <button class="category-btn" data-category="modern-designer">🎨 Modern Designer Collectible</button>
+        <button class="category-btn" data-category="tech-conference">☕ Tech Conference Figurine</button>
+        <button class="category-btn" data-category="myself">🤳 For Myself</button>
+        <button class="category-btn" data-category="custom">✨ Describe Your Nano Banana Idea</button>
+      </div>
+      
+      <div class="custom-input-section" id="customSection" style="display: none;">
+        <textarea id="userPrompt" rows="4" placeholder="Describe your Nano Banana figurine idea in detail... (e.g., 'cyberpunk cat with neon stripes sitting on a glowing base', 'magical crystal unicorn with rainbow mane', 'steampunk owl with brass gears and goggles')"></textarea>
+      </div>
     </div>
-    
-    <textarea id="userPrompt" rows="4" placeholder="Describe your Nano Banana idea... (e.g., 'cyberpunk cat with neon stripes', 'magical crystal unicorn', 'steampunk owl with gears')"></textarea>
     
     <button id="generateBtn">🎨 Generate AI Prompt</button>
     
-    <div id="output">🔐 Your AI-generated Nano Banana prompt will appear here (API key secured on server)...</div>
+    <div id="output">🔐 Your AI-generated Nano Banana prompt will appear here...</div>
   </div>
 
   <script>
+    const EDGE_FUNCTION_URL = 'https://mpqgbztbuvkvxgijndpv.supabase.co/functions/v1/generate-prompt';
+    
     let usageCount = 0;
     const maxUsage = 3;
+    let selectedCategory = null;
+    
+    const categoryPrompts = {
+      'desk-tech': 'Create a sleek 1/8 scale figurine of a modern professional sitting at a computer desk, with a round transparent acrylic base. Add a clean packaging box with geometric tech patterns.',
+      'smart-gadget': 'Make a small figurine holding a smartphone and wearing wireless headphones, casual modern outfit, glossy finish. Place it against a soft neutral backdrop with a futuristic box nearby.',
+      'office-model': 'Render a figurine of a businessperson in formal attire, standing with a laptop in hand. Acrylic base with glowing blue ring, and a matte white packaging box featuring abstract lines.',
+      'tech-buddy': 'Create a plush toy version of a friendly character with oversized hoodie, laptop bag, and sneakers, fuzzy textures. Place it in front of a soft gradient background, trendy pastel tones.',
+      'student-life': 'Make a collectible of a student figurine, wearing casual clothes, sitting with a tablet and books, on a clear acrylic base. Box should have colorful notebook-style patterns.',
+      'creator-studio': 'Design a figurine of a content creator at a desk with microphone + laptop, neon accents on acrylic base. Add a futuristic packaging box with digital wave designs.',
+      'traveler-tech': 'Generate a figurine with a backpack and tablet, standing on a round acrylic base styled like a map. Include a matte navy-blue packaging box with airplane icons.',
+      'casual-gamer': 'Create a figurine seated on a beanbag chair with a handheld gaming console, headphones around the neck. Packaging box shows pixel-style artwork and bold neon colors.',
+      'modern-designer': 'Make a figurine of a person with sketchbook + stylus pen, standing near a tablet screen, clear acrylic base. Packaging box is black with sleek holographic design.',
+      'tech-conference': 'Render a small figurine in business-casual clothes, holding a coffee cup and badge lanyard, standing on a clean transparent stand. Box has gradient blue/purple abstract graphics.',
+      'myself': 'Create a 1/7 scale commercialized figurine of the character in the photo, realistic style, on a computer desk, with a round transparent acrylic base and no text. Next to it, add a toy packaging box printed with original artwork.'
+    };
     
     // Load usage count
     function loadUsageCount() {
@@ -254,16 +277,31 @@
       }
     }
     
-    // Set example text
-    function setExample(text) {
-      document.getElementById('userPrompt').value = text;
-    }
+    // Handle category selection
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('category-btn')) {
+        // Remove selected class from all buttons
+        document.querySelectorAll('.category-btn').forEach(btn => {
+          btn.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked button
+        e.target.classList.add('selected');
+        selectedCategory = e.target.dataset.category;
+        
+        // Show/hide custom section
+        const customSection = document.getElementById('customSection');
+        if (selectedCategory === 'custom') {
+          customSection.style.display = 'block';
+        } else {
+          customSection.style.display = 'none';
+        }
+      }
+    });
     
-    // Generate prompt using Edge Function
+    // Generate prompt
     document.getElementById("generateBtn").addEventListener("click", async () => {
-      const userInput = document.getElementById("userPrompt").value.trim();
       const outputDiv = document.getElementById("output");
-      const edgeFunctionUrl = document.getElementById("edgeFunctionUrl").value.trim();
       
       // Check usage limit
       if (usageCount >= maxUsage) {
@@ -272,29 +310,50 @@
         return;
       }
       
-      if (!userInput) {
+      if (!selectedCategory) {
         outputDiv.className = "error";
-        outputDiv.textContent = "Please enter your Nano Banana figurine idea!";
+        outputDiv.textContent = "Please select a category first!";
         return;
       }
       
-      if (!edgeFunctionUrl) {
-        outputDiv.className = "error";
-        outputDiv.textContent = "Please enter your Supabase Edge Function URL first!";
+      let promptText = '';
+      
+      // Special handling for "For Myself" - direct prompt, no API call
+      if (selectedCategory === 'myself') {
+        outputDiv.className = "success";
+        outputDiv.textContent = categoryPrompts[selectedCategory];
+        
+        // Update usage count
+        usageCount++;
+        localStorage.setItem('nanoBananaUsage', usageCount.toString());
+        updateUsageDisplay();
         return;
+      }
+      
+      if (selectedCategory === 'custom') {
+        const userInput = document.getElementById("userPrompt").value.trim();
+        if (!userInput) {
+          outputDiv.className = "error";
+          outputDiv.textContent = "Please describe your Nano Banana figurine idea!";
+          return;
+        }
+        
+        promptText = userInput;
+      } else {
+        promptText = categoryPrompts[selectedCategory];
       }
       
       outputDiv.className = "loading";
       outputDiv.textContent = "🤖 AI is creating your Nano Banana prompt...";
       
       try {
-        const response = await fetch(edgeFunctionUrl, {
+        const response = await fetch(EDGE_FUNCTION_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            prompt: userInput
+            prompt: promptText
           })
         });
         
@@ -308,9 +367,6 @@
           usageCount++;
           localStorage.setItem('nanoBananaUsage', usageCount.toString());
           updateUsageDisplay();
-          
-          // Save URL for next time
-          localStorage.setItem('edgeFunctionUrl', edgeFunctionUrl);
         } else {
           throw new Error(data.error || 'API call failed');
         }
@@ -318,15 +374,7 @@
       } catch (error) {
         console.error('Error:', error);
         outputDiv.className = "error";
-        outputDiv.textContent = `❌ Error: ${error.message}. Please check your Edge Function URL and try again.`;
-      }
-    });
-    
-    // Load saved URL
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedUrl = localStorage.getItem('edgeFunctionUrl');
-      if (savedUrl) {
-        document.getElementById('edgeFunctionUrl').value = savedUrl;
+        outputDiv.textContent = `❌ Error: ${error.message}. Please try again.`;
       }
     });
     
