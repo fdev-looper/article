@@ -36,7 +36,7 @@
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             min-height: 100vh;
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
@@ -52,7 +52,7 @@
         /* Header Section */
         .header {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 80px 0 60px;
             color: white;
             position: relative;
         }
@@ -61,7 +61,7 @@
             display: inline-flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-size: 1.8rem;
             font-weight: 800;
             letter-spacing: -0.02em;
@@ -87,7 +87,7 @@
         }
         
         .hero-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2.8rem, 6vw, 5rem);
             font-weight: 900;
             margin-bottom: 30px;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
@@ -99,9 +99,9 @@
         }
         
         .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-size: clamp(1.3rem, 3vw, 1.9rem);
             color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-style: italic;
             font-weight: 400;
         }
@@ -139,32 +139,34 @@
             box-shadow: var(--shadow-xl);
             border: 1px solid rgba(255, 255, 255, 0.2);
             overflow: hidden;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         
         .content-section {
-            padding: 50px 40px;
+            padding: 60px 50px;
         }
         
         .section-title {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: center;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.2;
         }
         
         .section-subtitle {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--accent-color);
-            margin: 40px 0 20px 0;
+            margin: 50px 0 25px 0;
             font-weight: 700;
             position: relative;
-            padding-left: 30px;
+            padding-left: 35px;
+            line-height: 1.3;
         }
         
         .section-subtitle::before {
@@ -181,25 +183,27 @@
         }
         
         .intro-text {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             line-height: 1.8;
             color: var(--text-secondary);
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             text-align: justify;
+            font-weight: 500;
         }
         
         .highlight-box {
             background: linear-gradient(135deg, var(--accent-color), var(--success-color));
             color: white;
-            padding: 30px;
-            border-radius: 20px;
-            margin: 40px 0;
+            padding: 40px;
+            border-radius: 25px;
+            margin: 50px 0;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.3);
+            box-shadow: 0 20px 50px rgba(78, 205, 196, 0.3);
             position: relative;
             overflow: hidden;
+            line-height: 1.6;
         }
         
         .highlight-box::before {
@@ -219,26 +223,28 @@
         }
         
         .text-content {
-            font-size: 1.15rem;
-            line-height: 1.7;
+            font-size: 1.2rem;
+            line-height: 1.8;
             color: var(--text-secondary);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            text-align: justify;
         }
         
         .content-list {
-            margin: 25px 0 25px 40px;
+            margin: 30px 0 30px 50px;
         }
         
         .content-list li {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
-            margin: 15px 0;
-            line-height: 1.6;
+            margin: 20px 0;
+            line-height: 1.7;
+            text-align: justify;
         }
         
         .content-list li::marker {
             color: var(--accent-color);
-            font-size: 1.2em;
+            font-size: 1.3em;
         }
         
         /* Interactive Challenge Section */
@@ -247,22 +253,23 @@
             backdrop-filter: blur(30px);
             border: 2px solid rgba(102, 126, 234, 0.3);
             border-radius: 40px;
-            padding: 60px 30px;
-            margin: 60px 0;
+            padding: 80px 30px;
+            margin: 80px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
         .challenge-title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color), var(--danger-color));
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             animation: textGlow 2s ease-in-out infinite alternate;
+            line-height: 1.2;
         }
         
         @keyframes textGlow {
@@ -271,10 +278,11 @@
         }
         
         .challenge-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 40px;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 50px;
             font-weight: 500;
+            line-height: 1.5;
         }
         
         /* Card Slider */
@@ -282,8 +290,8 @@
             position: relative;
             width: 100%;
             max-width: 700px;
-            height: 600px;
-            margin: 50px auto;
+            height: 700px;
+            margin: 60px auto;
             perspective: 1200px;
             overflow: hidden;
             cursor: grab;
@@ -305,7 +313,7 @@
             backdrop-filter: blur(25px);
             border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 25px;
-            padding: 40px 30px;
+            padding: 40px 25px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -313,7 +321,7 @@
             text-align: center;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
             position: relative;
-            overflow: hidden;
+            overflow-y: auto;
         }
         
         .card-question {
@@ -321,26 +329,30 @@
             color: var(--accent-color);
             margin-bottom: 25px;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .card-problem {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             color: var(--text-primary);
             margin-bottom: 35px;
             font-weight: 800;
-            line-height: 1.3;
+            line-height: 1.4;
+            max-width: 100%;
+            word-wrap: break-word;
         }
         
         .challenge-input {
             background: rgba(255, 255, 255, 1);
             border: 3px solid var(--accent-color);
             border-radius: 15px;
-            padding: 18px 25px;
+            padding: 20px 25px;
             color: var(--text-primary);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             width: 100%;
             max-width: 350px;
-            margin: 20px 0;
+            margin: 25px 0;
             text-align: center;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
@@ -368,12 +380,12 @@
             background: rgba(255, 255, 255, 1);
             border: 3px solid var(--accent-color);
             border-radius: 15px;
-            padding: 18px 25px;
+            padding: 20px 25px;
             color: var(--text-primary);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             width: 100%;
-            max-width: 400px;
-            margin: 20px 0;
+            max-width: 450px;
+            margin: 25px 0;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             font-weight: 500;
@@ -381,8 +393,9 @@
             box-shadow: 0 5px 15px rgba(78, 205, 196, 0.2);
             outline: none;
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
             text-align: left;
+            line-height: 1.5;
         }
         
         .challenge-textarea:focus {
@@ -394,24 +407,25 @@
         
         .mcq-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 35px 0;
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
         }
         
         .mcq-choice {
             background: rgba(255, 255, 255, 0.95);
             border: 3px solid rgba(102, 126, 234, 0.3);
             border-radius: 15px;
-            padding: 18px;
+            padding: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             color: var(--text-primary);
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 600;
             transform: translateZ(0);
+            line-height: 1.4;
         }
         
         .mcq-choice:hover {
@@ -431,15 +445,17 @@
             background: linear-gradient(135deg, var(--danger-color), var(--accent-color));
             border: none;
             border-radius: 25px;
-            padding: 15px 35px;
+            padding: 18px 40px;
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin: 20px 8px;
+            margin: 25px 8px;
             box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
             font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .action-button:hover {
@@ -448,15 +464,16 @@
         }
         
         .result-display {
-            margin-top: 25px;
-            padding: 20px;
+            margin-top: 30px;
+            padding: 25px;
             border-radius: 15px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s ease;
-            max-width: 450px;
+            max-width: 500px;
+            line-height: 1.5;
         }
         
         .result-display.show {
@@ -483,18 +500,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-            margin-top: 40px;
+            gap: 40px;
+            margin-top: 50px;
         }
         
         .nav-btn {
             background: rgba(255, 255, 255, 0.9);
             border: 2px solid rgba(102, 126, 234, 0.3);
             border-radius: 50%;
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             color: var(--text-primary);
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -527,16 +544,17 @@
         
         .card-counter {
             color: var(--accent-color);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 800;
             text-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
         }
         
         .swipe-indicator {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            margin-top: 25px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-top: 30px;
             animation: fadeInOut 3s ease-in-out infinite;
+            font-weight: 500;
         }
         
         @keyframes fadeInOut {
@@ -550,40 +568,45 @@
             backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 40px;
-            padding: 80px 50px;
-            margin: 80px 0;
+            padding: 100px 60px;
+            margin: 100px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
         .motivation-title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            line-height: 1.2;
         }
         
         .motivation-content {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             line-height: 1.8;
             color: rgba(255, 255, 255, 0.9);
             max-width: 900px;
             margin: 0 auto;
+            text-align: justify;
         }
         
         .motivation-content p {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
         
         .motivation-highlight {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--accent-color);
             text-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+            text-align: center;
+            display: block;
+            margin: 40px 0;
         }
         
         /* Author Section */
@@ -591,9 +614,9 @@
             background: linear-gradient(135deg, var(--dark-color) 0%, #636e72 100%);
             color: white;
             text-align: center;
-            padding: 40px 30px;
-            border-radius: 24px;
-            margin-top: 40px;
+            padding: 50px 40px;
+            border-radius: 30px;
+            margin-top: 50px;
             position: relative;
             overflow: hidden;
         }
@@ -616,51 +639,53 @@
         }
         
         .author-section h3 {
-            font-size: 1.8em;
+            font-size: 2rem;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .author-info {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            margin-top: 25px;
+            gap: 25px;
+            margin-top: 30px;
             flex-wrap: wrap;
         }
         
         .author-avatar {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5em;
+            font-size: 1.8em;
             font-weight: 700;
             color: white;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
         
         .author-details h4 {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         
         .author-details p {
             opacity: 0.9;
-            font-size: 1em;
+            font-size: 1.1em;
+            line-height: 1.4;
         }
         
         /* Footer */
         .footer {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
             color: white;
             opacity: 0.8;
+            font-size: 1.1rem;
         }
         
         /* Responsive Design */
@@ -669,22 +694,26 @@
                 padding: 15px;
             }
             
+            .header {
+                padding: 60px 0 40px;
+            }
+            
             .hero-image {
                 width: 250px;
                 height: 250px;
             }
             
             .content-section {
-                padding: 40px 25px;
+                padding: 50px 30px;
             }
             
             .challenge-arena {
-                padding: 40px 20px;
-                margin: 40px 0;
+                padding: 60px 20px;
+                margin: 60px 0;
             }
             
             .card-slider {
-                height: 650px;
+                height: 750px;
                 max-width: 95%;
             }
             
@@ -697,25 +726,33 @@
             }
             
             .challenge-title {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.7rem;
             }
             
             .mcq-grid {
                 grid-template-columns: 1fr;
-                max-width: 280px;
+                max-width: 300px;
             }
             
             .nav-controls {
-                gap: 20px;
+                gap: 25px;
             }
             
             .motivation-zone {
-                padding: 50px 25px;
-                margin: 50px 0;
+                padding: 60px 30px;
+                margin: 60px 0;
             }
             
             .motivation-title {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .card-question {
@@ -723,17 +760,21 @@
             }
             
             .card-problem {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             
             .challenge-input {
-                max-width: 280px;
-                font-size: 1.1rem;
+                max-width: 300px;
+                font-size: 1.2rem;
             }
             
             .challenge-textarea {
-                max-width: 300px;
-                font-size: 1rem;
+                max-width: 320px;
+                font-size: 1.1rem;
+            }
+            
+            .content-list {
+                margin-left: 30px;
             }
         }
         
@@ -850,7 +891,7 @@
                         <div class="card-question">Logic Puzzle</div>
                         <div class="card-problem">If you have <strong>5 apples</strong>, you eat <strong>2</strong>, and then buy <strong>7 more</strong>, how many apples do you have in total?</div>
                         <input type="number" class="challenge-input" id="apples" placeholder="Your answer">
-                        <button class="action-button" onclick="checkAnswer('apples', 10, 'result4', 'Perfect! 5 - 2 + 7 = 10 apples total!', 'Let\\'s think step by step: 5 apples - 2 eaten + 7 bought = 10 apples!')">Check Answer</button>
+                        <button class="action-button" onclick="checkApplesAnswer()">Check Answer</button>
                         <div class="result-display" id="result4"></div>
                     </div>
 
@@ -866,16 +907,16 @@
                     <!-- Card 6: Creative Problem -->
                     <div class="challenge-card">
                         <div class="card-question">Creative Thinking</div>
-                        <div class="card-problem" style="font-size: 1.4rem; line-height: 1.4;">A man lives on the 20th floor of an apartment. Every morning he takes the elevator down to the ground floor. When he comes home, he takes the elevator to the 10th floor and walks the rest - except on rainy days, when he takes the elevator all the way up. Why?</div>
+                        <div class="card-problem" style="font-size: 1.3rem; line-height: 1.4;">A man lives on the 20th floor of an apartment. Every morning he takes the elevator down to the ground floor. When he comes home, he takes the elevator to the 10th floor and walks the rest - except on rainy days, when he takes the elevator all the way up. Why?</div>
                         <textarea class="challenge-textarea" id="elevator" placeholder="Type your reasoning..."></textarea>
                         <button class="action-button" onclick="checkElevator()">Check Answer</button>
                         <div class="result-display" id="result6"></div>
                     </div>
 
-                    <!-- Card 7: Lateral Thinking -->
+                    <!-- Card 7: Lateral Thinking - Changed to Rupees -->
                     <div class="challenge-card">
                         <div class="card-question">Lateral Thinking</div>
-                        <div class="card-problem">You have two coins that add up to 30 cents. One of them is not a nickel (5 cents). What are the two coins?</div>
+                        <div class="card-problem">You have two coins that add up to ₹11. One of them is not a ₹1 coin. What are the two coins?</div>
                         <input type="text" class="challenge-input" id="coins" placeholder="Your answer">
                         <button class="action-button" onclick="checkCoins()">Check Answer</button>
                         <div class="result-display" id="result7"></div>
@@ -952,7 +993,7 @@
         <!-- Author Section -->
         <div class="author-section">
             <h3>About DNATech Research</h3>
-            <p>We investigate emerging cyber threats and provide actionable security insights to protect digital users worldwide.</p>
+            <p>I investigate emerging cyber threats and provide actionable security insights to protect digital users worldwide.</p>
             <div class="author-info">
                 <div class="author-avatar">D</div>
                 <div class="author-details">
@@ -1007,14 +1048,38 @@
             const cardSlider = document.querySelector('.card-slider');
             if (!cardSlider) return;
             
-            // Touch events for mobile
-            cardSlider.addEventListener('touchstart', handleTouchStart, { passive: true });
-            cardSlider.addEventListener('touchmove', handleTouchMove, { passive: false });
-            cardSlider.addEventListener('touchend', handleTouchEnd, { passive: true });
+            // Touch events for mobile - but not on input fields
+            cardSlider.addEventListener('touchstart', (e) => {
+                if (!e.target.classList.contains('challenge-input') && !e.target.classList.contains('challenge-textarea') && !e.target.classList.contains('mcq-choice')) {
+                    handleTouchStart(e);
+                }
+            }, { passive: true });
             
-            // Mouse events for desktop
-            cardSlider.addEventListener('mousedown', handleMouseStart);
-            cardSlider.addEventListener('mousemove', handleMouseMove);
+            cardSlider.addEventListener('touchmove', (e) => {
+                if (!e.target.classList.contains('challenge-input') && !e.target.classList.contains('challenge-textarea') && !e.target.classList.contains('mcq-choice')) {
+                    handleTouchMove(e);
+                }
+            }, { passive: false });
+            
+            cardSlider.addEventListener('touchend', (e) => {
+                if (!e.target.classList.contains('challenge-input') && !e.target.classList.contains('challenge-textarea') && !e.target.classList.contains('mcq-choice')) {
+                    handleTouchEnd(e);
+                }
+            }, { passive: true });
+            
+            // Mouse events for desktop - but not on input fields
+            cardSlider.addEventListener('mousedown', (e) => {
+                if (!e.target.classList.contains('challenge-input') && !e.target.classList.contains('challenge-textarea') && !e.target.classList.contains('mcq-choice')) {
+                    handleMouseStart(e);
+                }
+            });
+            
+            cardSlider.addEventListener('mousemove', (e) => {
+                if (!e.target.classList.contains('challenge-input') && !e.target.classList.contains('challenge-textarea') && !e.target.classList.contains('mcq-choice')) {
+                    handleMouseMove(e);
+                }
+            });
+            
             cardSlider.addEventListener('mouseup', handleMouseEnd);
             cardSlider.addEventListener('mouseleave', handleMouseEnd);
         }
@@ -1211,6 +1276,23 @@
             }
         }
 
+        // Fixed function for the apples question
+        function checkApplesAnswer() {
+            const inputElement = document.getElementById('apples');
+            const resultElement = document.getElementById('result4');
+            
+            if (!inputElement || !resultElement) return;
+            
+            const answer = inputElement.value.trim();
+            
+            if (parseInt(answer) === 10 || answer === '10') {
+                showResult(resultElement, 'Perfect! 5 - 2 + 7 = 10 apples total!', true);
+                setTimeout(() => autoAdvance(), 1500);
+            } else {
+                showResult(resultElement, 'Let\'s think step by step: 5 apples - 2 eaten + 7 bought = 10 apples!', false);
+            }
+        }
+
         function checkMCQ(cardNumber) {
             const resultElement = document.getElementById('result' + cardNumber);
             if (!resultElement) return;
@@ -1249,8 +1331,8 @@
             
             const answer = inputElement.value.toLowerCase();
             
-            if ((answer.includes('quarter') && answer.includes('nickel')) || (answer.includes('25') && answer.includes('5'))) {
-                showResult(resultElement, 'Clever thinking! A quarter (25¢) and a nickel (5¢). One of them (the quarter) is not a nickel!', true);
+            if ((answer.includes('10') && answer.includes('1')) || answer.includes('ten') || answer.includes('one')) {
+                showResult(resultElement, 'Clever thinking! A ₹10 coin and a ₹1 coin. One of them (the ₹10) is not a ₹1 coin!', true);
                 setTimeout(() => {
                     // Special completion message for the last question
                     setTimeout(() => {
@@ -1258,7 +1340,7 @@
                     }, 2000);
                 }, 1500);
             } else {
-                showResult(resultElement, 'Think carefully about the wording: "One of them is not a nickel" - but the other one CAN be! Quarter + Nickel = 30¢', false);
+                showResult(resultElement, 'Think carefully about the wording: "One of them is not a ₹1 coin" - but the other one CAN be! ₹10 + ₹1 = ₹11', false);
             }
         }
 
