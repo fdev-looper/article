@@ -823,17 +823,6 @@
                 <p class="text-content">AI can throw ideas at me, outline sections, and even suggest phrases. But if I just copy-paste what it gives, then the article is no longer mine — it's the machine's remix of data.</p>
                 
                 <div class="highlight-box">
-                    This shows the paradox of AI dependence:<br>
-                    AI brings speed. Humans bring authenticity.<br>
-                    Without the human filter, AI's content has no meaning.
-                </div>
-
-                <h3 class="section-subtitle">Why Humans Fall Into Dependence</h3>
-                <p class="text-content">It's in our psychology. Humans are naturally drawn to shortcuts, comfort, and external helpers. Every new tool has shifted that balance: first machines, then calculators, then the internet. Now, AI is the next in line.</p>
-                <p class="text-content">Even I admit that I often reach for a calculator for small things like 36 + 47 — something our brain is perfectly capable of handling. Earlier generations, like my parents, could calculate the total for 10 grocery items in their mind without any calculator. Why? They didn't have calculators. They relied on mental math or tools like the abacus to handle long numbers. The shift to calculators was convenient, but it quietly trained us to stop exercising our mental calculation skills.</p>
-                <p class="text-content">And that's the catch: the more we outsource, the less we exercise our own thinking muscles. Dependency makes life easy, but it also makes us fragile. We stopped giving our brain the small workouts it needs — those quick mental exercises that keep it sharp.</p>
-
-                <div class="highlight-box">
                     So here's the real question: In the future, would you depend on AI for your physical fitness? No — because you know your body needs its own training. Then why compromise with your mind? The brain is the commander; if you weaken it, the whole system collapses.
                 </div>
 
@@ -1384,17 +1373,6 @@
             content.innerHTML = `
                 <h3 style="font-size: 2rem; margin-bottom: 20px;">🧠 Congratulations! 🎉</h3>
                 <p style="font-size: 1.2rem; line-height: 1.6;">You've completed all challenges. Your human brain is truly amazing!</p>
-                <button onclick="this.closest('div').remove()" style="
-                    background: white;
-                    color: var(--accent-color);
-                    border: none;
-                    padding: 15px 30px;
-                    border-radius: 25px;
-                    font-weight: 700;
-                    font-size: 1.1rem;
-                    cursor: pointer;
-                    margin-top: 20px;
-                ">Continue Reading</button>
             `;
             
             modal.appendChild(content);
@@ -1406,6 +1384,13 @@
                     modal.remove();
                 }
             });
+            
+            // Auto-remove modal after 3 seconds
+            setTimeout(() => {
+                if (modal.parentNode) {
+                    modal.remove();
+                }
+            }, 3000);
         }
 
         // Auto-advance to next card after correct answer
@@ -1433,3 +1418,4 @@
     </script>
 </body>
 </html>
+                 
