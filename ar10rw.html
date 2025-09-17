@@ -4,7 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>When Right Feels Wrong: Understanding Perspectives | DNATech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning-gradient: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            --dark-gradient: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,15 +25,16 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Inter', 'Georgia', serif;
             line-height: 1.6;
             color: #2c3e50;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
+            scroll-behavior: smooth;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             box-shadow: 0 0 30px rgba(0,0,0,0.1);
@@ -28,8 +42,8 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
+            background: var(--primary-gradient);
+            padding: 40px;
             text-align: center;
             color: white;
             position: relative;
@@ -57,254 +71,292 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             position: relative;
             z-index: 2;
         }
 
         .logo {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             background: white;
-            border-radius: 15px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             color: #667eea;
-            font-size: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 22px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
         .brand-info h1 {
-            font-size: 2.5rem;
-            margin-bottom: 5px;
+            font-size: 2.8rem;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 800;
         }
 
         .meta-info {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            opacity: 0.95;
         }
 
         .article-content {
-            padding: 40px;
+            padding: 50px 40px;
         }
 
         .title-section {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
+            margin-bottom: 50px;
+            padding-bottom: 35px;
             border-bottom: 3px solid #667eea;
         }
 
         .main-title {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             color: #2c3e50;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-weight: 300;
         }
 
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #7f8c8d;
             font-style: italic;
         }
 
         .content-section {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
         }
 
         .content-section h2 {
             color: #667eea;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            margin-bottom: 25px;
             border-left: 4px solid #667eea;
-            padding-left: 15px;
+            padding-left: 20px;
         }
 
         .content-section p {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin-bottom: 18px;
+            font-size: 1.15rem;
             text-align: justify;
+            line-height: 1.8;
         }
 
         .example-card {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
             border-left: 5px solid #667eea;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .example-card h4 {
             color: #495057;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 35px 0;
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary-gradient);
             color: white;
-            padding: 25px;
-            border-radius: 15px;
+            padding: 30px;
+            border-radius: 18px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             transition: transform 0.3s ease;
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: bold;
             display: block;
         }
 
         .stat-label {
-            font-size: 1rem;
+            font-size: 1.1rem;
             opacity: 0.9;
         }
 
         .genz-stats {
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-            margin: 40px -40px;
-            padding: 40px;
+            margin: 50px -40px;
+            padding: 50px 40px;
             color: white;
         }
 
         .genz-title {
             text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 30px;
+            font-size: 2.5rem;
+            margin-bottom: 35px;
+            font-weight: 800;
         }
 
         .interactive-section {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            margin: 40px -40px;
-            padding: 40px;
+            background: var(--accent-gradient);
+            margin: 50px -40px;
+            padding: 50px 40px;
             color: white;
         }
 
         .interactive-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            margin-bottom: 35px;
+            font-weight: 700;
         }
 
         .quiz-container {
             position: relative;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             overflow: hidden;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
         }
 
         .quiz-slider {
             display: flex;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             touch-action: pan-y;
         }
 
         .scenario {
             min-width: 100%;
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 40px;
         }
 
         .scenario h4 {
-            margin-bottom: 15px;
-            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
             text-align: center;
+            font-weight: 700;
         }
 
         .scenario-type {
             text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 15px;
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .scenario-desc {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.7;
         }
 
         .options {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 20px;
+            margin: 25px 0;
         }
 
         .option-btn {
             background: rgba(255,255,255,0.2);
             border: 2px solid rgba(255,255,255,0.3);
             color: white;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            font-size: 1.05rem;
             text-align: left;
+            font-weight: 500;
+            line-height: 1.5;
         }
 
         .option-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.35);
             transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .option-btn.selected {
             background: rgba(255,255,255,0.4);
             border-color: rgba(255,255,255,0.8);
+            font-weight: 600;
         }
 
         .result {
-            background: rgba(0,0,0,0.2);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
+            background: rgba(0,0,0,0.25);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
             display: none;
+            backdrop-filter: blur(10px);
         }
 
         .result.show {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.6s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result h5 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .result p {
+            line-height: 1.7;
+            font-size: 1.05rem;
         }
 
         .navigation {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 30px;
-            background: rgba(0,0,0,0.1);
+            padding: 25px 40px;
+            background: rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
         }
 
         .nav-btn {
             background: rgba(255,255,255,0.2);
             border: 2px solid rgba(255,255,255,0.3);
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 12px 25px;
+            border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            font-weight: 600;
         }
 
         .nav-btn:hover:not(:disabled) {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
         }
 
         .nav-btn:disabled {
@@ -314,12 +366,12 @@
 
         .progress-dots {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: rgba(255,255,255,0.3);
             transition: all 0.3s ease;
@@ -327,13 +379,14 @@
 
         .dot.active {
             background: white;
-            transform: scale(1.2);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
         }
 
         .final-analysis {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            margin: 40px -40px;
-            padding: 40px;
+            background: var(--dark-gradient);
+            margin: 50px -40px;
+            padding: 50px 40px;
             color: white;
             display: none;
         }
@@ -350,39 +403,123 @@
 
         .analysis-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 35px 0;
         }
 
         .analysis-card {
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            padding: 25px;
+            border-radius: 18px;
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .analysis-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #ffd700;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #2c3e50;
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 12px;
         }
 
         .conclusion-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 40px -40px -40px;
-            padding: 40px;
+            background: var(--primary-gradient);
+            margin: 50px -40px -50px;
+            padding: 50px 40px;
             color: white;
             text-align: center;
         }
 
         .conclusion-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .author-section {
+            background: var(--dark-gradient);
+            color: white;
+            text-align: center;
+            padding: 50px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .author-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: float 30s ease-in-out infinite reverse;
+        }
+
+        .author-section * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .author-section h3 {
             font-size: 2rem;
+            font-weight: 800;
             margin-bottom: 20px;
         }
 
-        .highlight-box {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 20px 0;
-            backdrop-filter: blur(10px);
+        .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .author-details h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .author-details p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            background: #2d3436;
+            color: white;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 margin: 0;
@@ -390,7 +527,7 @@
             }
 
             .header {
-                padding: 20px;
+                padding: 30px 20px;
             }
 
             .logo-section {
@@ -399,29 +536,33 @@
             }
 
             .brand-info h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .article-content {
-                padding: 20px;
-            }
-
-            .main-title {
-                font-size: 2rem;
-            }
-
-            .interactive-section, .conclusion-section, .genz-stats, .final-analysis {
-                margin-left: -20px;
-                margin-right: -20px;
                 padding: 30px 20px;
             }
 
+            .main-title {
+                font-size: 2.2rem;
+            }
+
+            .interactive-section, .conclusion-section, .genz-stats, .final-analysis, .author-section {
+                margin-left: -20px;
+                margin-right: -20px;
+                padding: 40px 20px;
+            }
+
             .scenario {
-                padding: 20px;
+                padding: 25px;
             }
 
             .navigation {
-                padding: 15px 20px;
+                padding: 20px 25px;
+            }
+
+            .stats-grid, .analysis-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -462,7 +603,7 @@
             </div>
 
             <div class="genz-stats">
-                <h2 class="genz-title">🧠 The Gen Z Reality Check</h2>
+                <h2 class="genz-title">The Gen Z Reality Check</h2>
                 <div class="stats-grid">
                     <div class="stat-card" style="background: rgba(255,255,255,0.15);">
                         <span class="stat-number">47%</span>
@@ -481,7 +622,7 @@
                         <span class="stat-label">value being in control and knowing what's happening</span>
                     </div>
                 </div>
-                <p style="text-align: center; font-size: 1.1rem; margin-top: 20px;">Gen Z faces unique challenges: higher anxiety, social media pressure, economic uncertainty, and the burden of making "right" choices in an increasingly complex world.</p>
+                <p style="text-align: center; font-size: 1.15rem; margin-top: 25px;">Gen Z faces unique challenges: higher anxiety, social media pressure, economic uncertainty, and the burden of making "right" choices in an increasingly complex world.</p>
             </div>
 
             <div class="content-section">
@@ -492,22 +633,22 @@
                 <h2>Different Perspectives Shape Reality</h2>
                 
                 <div class="example-card">
-                    <h4>🚬 The Smoking Dilemma</h4>
+                    <h4>The Smoking Dilemma</h4>
                     <p>Smoking is often seen as wrong because it harms health. But the smoker might think: "Am I hurting anyone else? I know the risks, but it's my choice." Both perspectives are valid in their own context.</p>
                 </div>
 
                 <div class="example-card">
-                    <h4>🗳️ Political Views</h4>
+                    <h4>Political Views</h4>
                     <p>Two people can look at the same political event and form opposite opinions. One sees a policy as fair, another as harmful. Upbringing and exposure shape how we see things.</p>
                 </div>
 
                 <div class="example-card">
-                    <h4>🕊️ Religious Beliefs</h4>
+                    <h4>Religious Beliefs</h4>
                     <p>Religious or spiritual beliefs guide many choices. Certain rituals or moral codes may define right or wrong differently for different people.</p>
                 </div>
 
                 <div class="example-card">
-                    <h4>💝 Relationships</h4>
+                    <h4>Relationships</h4>
                     <p>In personal relationships, deciding right or wrong can be tricky. Suppose a friend borrows money and can't return it on time. You might feel it's wrong, but from their perspective, they are doing their best under tough circumstances.</p>
                 </div>
             </div>
@@ -522,98 +663,104 @@
             </div>
 
             <div class="interactive-section">
-                <h2 class="interactive-title">🧭 Psychology Test: Swipe Through 6 Scenarios</h2>
-                <p style="text-align: center; margin-bottom: 30px;">Test your decision-making across friends, family, authority, and psychology. Swipe left/right or use arrows!</p>
+                <h2 class="interactive-title">Psychology Test: Swipe Through 6 Scenarios</h2>
+                <p style="text-align: center; margin-bottom: 35px; font-size: 1.1rem;">Test your decision-making across friends, family, authority, and psychology. Swipe left/right or use arrows!</p>
                 
                 <div class="quiz-container" id="quizContainer">
                     <div class="quiz-slider" id="quizSlider">
                         <!-- Scenario 1: Friend Psychology -->
                         <div class="scenario">
-                            <div class="scenario-type">👫 Friend Psychology</div>
+                            <div class="scenario-type">Friend Psychology</div>
                             <h4>The Borrowed Book Dilemma</h4>
-                            <p>Your friend borrowed your favorite book 6 months ago and hasn't returned it. You need it for an important exam. What's the right approach?</p>
+                            <p class="scenario-desc">Your friend borrowed your favorite book 6 months ago and hasn't returned it. You need it for an important exam. What's the right approach?</p>
                             <div class="options">
                                 <button class="option-btn" onclick="selectOption(0, 'A', this)">Ask directly but kindly for the book back</button>
                                 <button class="option-btn" onclick="selectOption(0, 'B', this)">Buy another copy and say nothing</button>
                                 <button class="option-btn" onclick="selectOption(0, 'C', this)">Get angry and demand it back immediately</button>
                             </div>
                             <div class="result" id="result0">
-                                <strong>Psychology Insight:</strong> <span id="analysis0"></span>
+                                <h5>Psychology Analysis:</h5>
+                                <p id="analysis0"></p>
                             </div>
                         </div>
 
                         <!-- Scenario 2: Family Dynamics -->
                         <div class="scenario">
-                            <div class="scenario-type">👨‍👩‍👧‍👦 Family Dynamics</div>
+                            <div class="scenario-type">Family Dynamics</div>
                             <h4>The Family Secret</h4>
-                            <p>You discover your sibling has been lying to your parents about their grades. They beg you not to tell, saying it would "destroy their relationship with parents."</p>
+                            <p class="scenario-desc">You discover your sibling has been lying to your parents about their grades. They beg you not to tell, saying it would "destroy their relationship with parents."</p>
                             <div class="options">
                                 <button class="option-btn" onclick="selectOption(1, 'A', this)">Keep their secret to maintain trust</button>
                                 <button class="option-btn" onclick="selectOption(1, 'B', this)">Tell your parents immediately</button>
                                 <button class="option-btn" onclick="selectOption(1, 'C', this)">Help them create a plan to tell parents themselves</button>
                             </div>
                             <div class="result" id="result1">
-                                <strong>Psychology Insight:</strong> <span id="analysis1"></span>
+                                <h5>Psychology Analysis:</h5>
+                                <p id="analysis1"></p>
                             </div>
                         </div>
 
-                        <!-- Scenario 3: Teacher/Authority -->
+                        <!-- Scenario 3: Authority -->
                         <div class="scenario">
-                            <div class="scenario-type">🎓 Authority Dynamics</div>
+                            <div class="scenario-type">Authority Dynamics</div>
                             <h4>The Unfair Teacher</h4>
-                            <p>Your teacher consistently gives lower grades to students from certain backgrounds. You have evidence but speaking up might affect your own grades and college applications.</p>
+                            <p class="scenario-desc">Your teacher consistently gives lower grades to students from certain backgrounds. You have evidence but speaking up might affect your own grades and college applications.</p>
                             <div class="options">
                                 <button class="option-btn" onclick="selectOption(2, 'A', this)">Stay quiet to protect your future</button>
                                 <button class="option-btn" onclick="selectOption(2, 'B', this)">Report it to the principal immediately</button>
                                 <button class="option-btn" onclick="selectOption(2, 'C', this)">Gather more evidence and involve other students</button>
                             </div>
                             <div class="result" id="result2">
-                                <strong>Psychology Insight:</strong> <span id="analysis2"></span>
+                                <h5>Psychology Analysis:</h5>
+                                <p id="analysis2"></p>
                             </div>
                         </div>
 
                         <!-- Scenario 4: Social Psychology -->
                         <div class="scenario">
-                            <div class="scenario-type">🌐 Social Psychology</div>
+                            <div class="scenario-type">Social Psychology</div>
                             <h4>The Viral Mistake</h4>
-                            <p>Your friend accidentally posts something offensive on social media that goes viral. They're getting death threats and their mental health is deteriorating. They ask you to lie and say you posted it instead.</p>
+                            <p class="scenario-desc">Your friend accidentally posts something offensive on social media that goes viral. They're getting death threats and their mental health is deteriorating. They ask you to lie and say you posted it instead.</p>
                             <div class="options">
                                 <button class="option-btn" onclick="selectOption(3, 'A', this)">Take the blame to help your friend</button>
                                 <button class="option-btn" onclick="selectOption(3, 'B', this)">Refuse and tell them to face consequences</button>
                                 <button class="option-btn" onclick="selectOption(3, 'C', this)">Help them craft a genuine apology instead</button>
                             </div>
                             <div class="result" id="result3">
-                                <strong>Psychology Insight:</strong> <span id="analysis3"></span>
+                                <h5>Psychology Analysis:</h5>
+                                <p id="analysis3"></p>
                             </div>
                         </div>
 
-                        <!-- Scenario 5: Peer Pressure Psychology -->
+                        <!-- Scenario 5: Peer Pressure -->
                         <div class="scenario">
-                            <div class="scenario-type">🎭 Peer Pressure Psychology</div>
+                            <div class="scenario-type">Peer Pressure Psychology</div>
                             <h4>The Party Dilemma</h4>
-                            <p>Your entire friend group is going to a party where you know there will be underage drinking and potentially dangerous activities. They're pressuring you to come, saying you're "being boring" if you don't.</p>
+                            <p class="scenario-desc">Your entire friend group is going to a party where you know there will be underage drinking and potentially dangerous activities. They're pressuring you to come, saying you're "being boring" if you don't.</p>
                             <div class="options">
                                 <button class="option-btn" onclick="selectOption(4, 'A', this)">Go to the party to maintain friendships</button>
                                 <button class="option-btn" onclick="selectOption(4, 'B', this)">Refuse completely and stay home</button>
                                 <button class="option-btn" onclick="selectOption(4, 'C', this)">Suggest alternative activities for the group</button>
                             </div>
                             <div class="result" id="result4">
-                                <strong>Psychology Insight:</strong> <span id="analysis4"></span>
+                                <h5>Psychology Analysis:</h5>
+                                <p id="analysis4"></p>
                             </div>
                         </div>
 
-                        <!-- Scenario 6: Mental Health Psychology -->
+                        <!-- Scenario 6: Mental Health -->
                         <div class="scenario">
-                            <div class="scenario-type">🧠 Mental Health Psychology</div>
+                            <div class="scenario-type">Mental Health Psychology</div>
                             <h4>The Struggling Friend</h4>
-                            <p>Your close friend has been showing signs of depression - isolating themselves, making concerning comments about "not wanting to be here anymore." They made you promise not to tell anyone, but you're genuinely worried.</p>
+                            <p class="scenario-desc">Your close friend has been showing signs of depression - isolating themselves, making concerning comments about "not wanting to be here anymore." They made you promise not to tell anyone, but you're genuinely worried.</p>
                             <div class="options">
                                 <button class="option-btn" onclick="selectOption(5, 'A', this)">Keep their secret and try to help them yourself</button>
                                 <button class="option-btn" onclick="selectOption(5, 'B', this)">Break the promise and immediately tell a trusted adult</button>
                                 <button class="option-btn" onclick="selectOption(5, 'C', this)">Encourage them to seek help while staying supportive</button>
                             </div>
                             <div class="result" id="result5">
-                                <strong>Psychology Insight:</strong> <span id="analysis5"></span>
+                                <h5>Psychology Analysis:</h5>
+                                <p id="analysis5"></p>
                             </div>
                         </div>
                     </div>
@@ -634,8 +781,8 @@
             </div>
 
             <div class="final-analysis" id="finalAnalysis">
-                <h2 style="text-align: center; margin-bottom: 30px;">🎯 Your Combined Psychology Profile</h2>
-                <div id="combinedAnalysis" style="text-align: center; font-size: 1.2rem; margin-bottom: 30px;">
+                <h2 style="text-align: center; margin-bottom: 35px; font-size: 2.5rem;">Your Psychology Profile</h2>
+                <div id="combinedAnalysis" style="text-align: center; font-size: 1.25rem; margin-bottom: 35px;">
                     Complete all scenarios to see your decision-making pattern analysis!
                 </div>
                 <div class="analysis-grid" id="analysisGrid">
@@ -645,15 +792,15 @@
 
             <div class="content-section">
                 <h2>A Simple Rule for Right and Wrong</h2>
-                <div class="highlight-box" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); color: #2c3e50; border-left: 5px solid #667eea; padding: 25px;">
-                    <p><strong>Choices that don't harm humanity, don't destroy your happiness, and don't hurt your loved ones' happiness are usually right.</strong></p>
+                <div class="highlight-box">
+                    <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 20px;"><strong>Choices that don't harm humanity, don't destroy your happiness, and don't hurt your loved ones' happiness are usually right.</strong></p>
                     
-                    <p style="margin-top: 20px;"><strong>Other points to consider:</strong></p>
-                    <ul style="margin: 15px 0; padding-left: 20px;">
-                        <li><strong>Intent matters:</strong> Good intentions often indicate a morally right approach.</li>
-                        <li><strong>Empathy counts:</strong> Think about how your action affects others emotionally and practically.</li>
-                        <li><strong>Long-term consequences:</strong> Short-term pleasure may create long-term harm.</li>
-                        <li><strong>See through others' eyes:</strong> If a decision feels wrong, try to view it from the other person's perspective.</li>
+                    <p style="margin-top: 25px; font-size: 1.1rem; font-weight: 600;">Other points to consider:</p>
+                    <ul style="margin: 20px 0; padding-left: 25px; font-size: 1.05rem;">
+                        <li style="margin: 10px 0;"><strong>Intent matters:</strong> Good intentions often indicate a morally right approach.</li>
+                        <li style="margin: 10px 0;"><strong>Empathy counts:</strong> Think about how your action affects others emotionally and practically.</li>
+                        <li style="margin: 10px 0;"><strong>Long-term consequences:</strong> Short-term pleasure may create long-term harm.</li>
+                        <li style="margin: 10px 0;"><strong>See through others' eyes:</strong> If a decision feels wrong, try to view it from the other person's perspective.</li>
                     </ul>
                 </div>
             </div>
@@ -661,11 +808,27 @@
 
         <footer class="conclusion-section">
             <h2>The Final Perspective</h2>
-            <div class="highlight-box">
-                <p><strong>Right and wrong are mostly about perspective.</strong></p>
-                <p>Before making decisions, pause and think about your values, reasoning, and the bigger picture. Emotions matter, but don't let them control your choices blindly. Take a moment to reflect, consider other perspectives, and balance your judgment with experience and filtered ancient wisdom — that's how we can make better, conscious decisions.</p>
+            <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); margin-top: 25px;">
+                <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 20px;"><strong>Right and wrong are mostly about perspective.</strong></p>
+                <p style="font-size: 1.1rem; line-height: 1.7;">Before making decisions, pause and think about your values, reasoning, and the bigger picture. Emotions matter, but don't let them control your choices blindly. Take a moment to reflect, consider other perspectives, and balance your judgment with experience and filtered ancient wisdom — that's how we can make better, conscious decisions.</p>
             </div>
         </footer>
+
+        <div class="author-section">
+            <h3>About DNATech Research</h3>
+            <p style="font-size: 1.15rem; margin: 20px 0;">We investigate emerging cyber threats and provide actionable security insights to protect digital users worldwide.</p>
+            <div class="author-info">
+                <div class="author-avatar">D</div>
+                <div class="author-details">
+                    <h4>DNATech Security Notes</h4>
+                    <p>Threat Horizon Scout | Preparing for Tomorrow's Cyber Fights</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p style="font-size: 1.1rem;">© 2025 DNATech Notes. Stay informed. Stay secure.</p>
+        </div>
     </div>
 
     <script>
@@ -677,53 +840,63 @@
         let isDragging = false;
 
         const responses = {
-            0: { // Friend Psychology
-                'A': "This shows emotional maturity and healthy assertiveness. You respect both your needs and the relationship. Research shows direct, kind communication strengthens trust and prevents resentment buildup.",
-                'B': "While avoiding conflict feels safe, this pattern can lead to suppressed needs and one-sided relationships. You might be prioritizing harmony over your legitimate rights.",
-                'C': "Aggressive responses often indicate poor emotional regulation. This approach damages relationships and doesn't model healthy conflict resolution."
+            0: { // Friend Psychology - Assertiveness & Communication
+                'A': "This demonstrates healthy assertiveness and emotional intelligence. You're practicing direct, respectful communication - a key trait in psychologically mature individuals. Research shows this approach builds stronger relationships and prevents resentment buildup. You understand that healthy boundaries benefit both parties.",
+                'B': "This suggests conflict avoidance tendencies, possibly rooted in people-pleasing behaviors. While your empathy is admirable, consistently avoiding direct communication can lead to suppressed needs and one-sided relationships. This pattern often stems from fear of confrontation or low self-worth.",
+                'C': "This indicates poor emotional regulation and possible underlying stress or frustration. Aggressive responses often mask deeper insecurities and damage relationships. This reaction style typically develops from past experiences where gentle approaches didn't work, but it's counterproductive in most situations."
             },
-            1: { // Family Dynamics
-                'A': "You value loyalty but might be enabling destructive behavior. Family systems theory shows that secrets often create more problems than they solve, especially when they involve deception.",
-                'B': "This shows moral clarity but lacks empathy for complex family dynamics. Sometimes the 'right' choice requires more nuanced approaches that consider emotional consequences.",
-                'C': "This demonstrates emotional intelligence and systems thinking. You're helping your sibling develop accountability while maintaining family trust - a mature approach to complex situations."
+            1: { // Family Dynamics - Loyalty vs Truth
+                'A': "You value loyalty and family harmony, but this choice reveals potential codependent tendencies. While family bonds are important, enabling deceptive behavior can perpetuate unhealthy family dynamics. You might struggle with boundary-setting and truth-telling when it could cause discomfort.",
+                'B': "This shows strong moral conviction but lacks emotional intelligence regarding family systems. Your black-and-white thinking, while ethically sound, doesn't consider the complex emotional consequences. This approach might indicate rigid thinking patterns or difficulty navigating nuanced situations.",
+                'C': "This demonstrates exceptional emotional maturity and systems thinking. You're helping your sibling develop personal accountability while preserving family trust - showing both empathy and wisdom. This approach indicates strong leadership potential and understanding of complex relationship dynamics."
             },
-            2: { // Authority Dynamics
-                'A': "Self-preservation is natural, but research shows that bystander effect often perpetuates injustice. Your silence might inadvertently support systemic problems.",
-                'B': "This shows moral courage but might lack strategic thinking. Sometimes immediate action without evidence can backfire and harm those you're trying to help.",
-                'C': "This demonstrates strategic moral reasoning. You're gathering support and evidence - research shows collective action is more effective than individual whistleblowing."
+            2: { // Authority Dynamics - Courage vs Self-Preservation
+                'A': "This reveals natural self-preservation instincts but also potential bystander syndrome. Your choice suggests you might struggle with taking action when personal costs are high. This could indicate anxiety about authority figures or past experiences where speaking up led to negative consequences.",
+                'B': "This shows moral courage and strong ethical convictions. You're willing to sacrifice personal gain for justice - a trait found in natural leaders and change-makers. However, this approach might sometimes lack strategic thinking about effectiveness and potential backlash.",
+                'C': "This demonstrates strategic intelligence and collaborative leadership. You understand that systemic change requires collective action and evidence - showing both moral conviction and practical wisdom. This approach indicates strong problem-solving skills and understanding of social dynamics."
             },
-            3: { // Social Psychology
-                'A': "While your loyalty is admirable, taking false responsibility prevents your friend from learning important life lessons about accountability and might not actually help their mental health.",
-                'B': "This response shows strong moral boundaries but lacks empathy for someone in crisis. Sometimes rigid moral stances can be counterproductive during mental health emergencies.",
-                'C': "This shows emotional intelligence and practical wisdom. You're helping them take accountability while providing support - research shows this approach leads to better outcomes."
+            3: { // Social Psychology - Accountability vs Loyalty
+                'A': "While your loyalty is touching, this choice suggests potential martyr complex tendencies. Taking undeserved blame prevents your friend from learning important lessons about accountability. This pattern might stem from low self-worth or need to be needed by others.",
+                'B': "This shows strong personal boundaries and belief in natural consequences. While psychologically healthy in terms of not enabling, this approach lacks empathy for someone in crisis. You might struggle with balancing support and accountability in relationships.",
+                'C': "This demonstrates perfect balance of support and accountability - hallmark of emotional intelligence. You're helping your friend face reality while providing emotional support. This approach shows mature understanding of how people grow through taking responsibility rather than avoiding it."
             },
-            4: { // Peer Pressure Psychology
-                'A': "You're prioritizing social acceptance over personal values. Research shows that teens who regularly compromise their values for peer acceptance often develop identity issues and lower self-esteem.",
-                'B': "This shows strong personal boundaries and self-respect. However, completely refusing might indicate social anxiety or inflexibility. Balance is key in maintaining friendships while staying true to yourself.",
-                'C': "This demonstrates leadership and creative problem-solving. You're maintaining friendships while steering the group toward healthier choices - a sign of emotional maturity and social intelligence."
+            4: { // Peer Pressure - Identity vs Belonging
+                'A': "This suggests strong need for social belonging, possibly indicating fear of rejection or abandonment. While social connections are important, regularly compromising your values for acceptance can lead to identity confusion and resentment. This pattern often develops from insecure attachment styles.",
+                'B': "This shows strong personal integrity and self-respect. You're prioritizing your values over social pressure - indicating good self-esteem and clear personal boundaries. However, complete social withdrawal might suggest some social anxiety or rigid thinking patterns.",
+                'C': "This demonstrates social leadership and creative problem-solving. You're maintaining your values while preserving friendships through positive alternatives. This approach shows high emotional intelligence, leadership potential, and ability to influence others positively rather than being influenced negatively."
             },
-            5: { // Mental Health Psychology
-                'A': "Your loyalty is touching, but mental health crises require professional intervention. Research shows untrained friends often feel overwhelmed and may miss critical warning signs.",
-                'B': "This shows you understand the gravity of mental health issues. Sometimes breaking promises is necessary to save lives. Mental health professionals emphasize that safety trumps confidentiality.",
-                'C': "This demonstrates perfect balance of support and responsibility. You're respecting their autonomy while ensuring they get professional help - the approach recommended by mental health experts."
+            5: { // Mental Health - Support vs Professional Help
+                'A': "Your caring nature is beautiful, but this choice reveals potential savior complex tendencies. Untrained individuals often feel overwhelmed by mental health crises and may miss critical warning signs. This approach, while well-intentioned, could be dangerous and reflects difficulty recognizing your limitations.",
+                'B': "This shows you understand the gravity of mental health issues and prioritize safety over promises. Breaking confidentiality for safety reasons demonstrates mature understanding that some situations require professional intervention. This choice shows emotional maturity and responsible decision-making.",
+                'C': "This represents the ideal balance of support and professional guidance. You're respecting their autonomy while ensuring they get appropriate help. This approach shows emotional intelligence, understanding of mental health, and ability to be supportive without being controlling."
             }
         };
 
-        const profileAnalysis = {
-            'AAAAAA': {
-                type: "The People Pleaser",
-                description: "You consistently prioritize others' feelings over practical solutions. While your empathy is beautiful, you might struggle with boundaries and self-advocacy.",
-                advice: "Practice saying 'no' and remember that healthy relationships require honesty, not just harmony."
+        const profileTypes = {
+            'supportive_leader': {
+                type: "The Supportive Leader",
+                description: "You consistently choose balanced approaches that consider multiple perspectives while maintaining strong moral principles. You demonstrate high emotional intelligence and natural leadership abilities.",
+                advice: "Your balanced approach to relationships and challenges is your greatest strength. Continue developing these skills as they're rare and valuable in today's world."
             },
-            'CCCCCC': {
-                type: "The Wise Navigator",
-                description: "You consistently choose balanced, thoughtful approaches that consider multiple perspectives. You demonstrate emotional intelligence and strategic thinking.",
-                advice: "Continue developing your natural leadership abilities - the world needs more people who can find middle ground."
+            'people_pleaser': {
+                type: "The Harmony Seeker", 
+                description: "You tend to prioritize relationships and avoiding conflict, sometimes at the expense of addressing core issues or standing up for important principles.",
+                advice: "Practice setting boundaries and expressing your needs directly. Remember that healthy conflict often strengthens relationships rather than damaging them."
             },
-            'BBBBBB': {
-                type: "The Direct Communicator",
-                description: "You value honesty and direct action. While this clarity is admirable, some situations benefit from more nuanced approaches.",
-                advice: "Consider adding more empathy and strategic thinking to your natural directness for even better outcomes."
+            'direct_confronter': {
+                type: "The Truth Teller",
+                description: "You value honesty and direct action, sometimes struggling to consider the emotional impact of your approach on others or the complexity of situations.",
+                advice: "Your moral clarity is admirable. Consider adding more empathy and strategic thinking to your natural directness for even better outcomes."
+            },
+            'strategic_thinker': {
+                type: "The Wise Strategist",
+                description: "You approach problems with both emotional intelligence and practical wisdom, considering long-term consequences and multiple stakeholder needs.",
+                advice: "Your strategic mindset combined with emotional awareness is powerful. Continue developing these complementary skills."
+            },
+            'conflicted_navigator': {
+                type: "The Complex Thinker",
+                description: "Your responses vary significantly by situation, showing flexibility but possibly indicating uncertainty about your core values or decision-making framework.",
+                advice: "Reflect on your core values to develop more consistent decision-making patterns. Consider what principles matter most to you across different contexts."
             }
         };
 
@@ -748,7 +921,7 @@
 
             // Check if all questions are answered
             if (Object.keys(userAnswers).length === totalScenarios) {
-                generateFinalAnalysis();
+                setTimeout(() => generateFinalAnalysis(), 1000);
             }
         }
 
@@ -757,89 +930,68 @@
             const combinedAnalysis = document.getElementById('combinedAnalysis');
             const analysisGrid = document.getElementById('analysisGrid');
 
-            // Create pattern string
-            let pattern = '';
+            // Analyze response patterns
+            const counts = { A: 0, B: 0, C: 0 };
             for (let i = 0; i < totalScenarios; i++) {
-                pattern += userAnswers[i] || 'X';
+                if (userAnswers[i]) counts[userAnswers[i]]++;
             }
 
-            // Determine profile type
-            let profile = profileAnalysis[pattern];
-            if (!profile) {
-                // Count choices
-                const counts = { A: 0, B: 0, C: 0 };
-                for (let choice of pattern) {
-                    if (counts[choice] !== undefined) counts[choice]++;
-                }
-
-                // Determine dominant pattern
-                const maxChoice = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-                
-                if (counts.A >= 3) {
-                    profile = {
-                        type: "The Harmony Seeker",
-                        description: "You tend to prioritize relationships and emotional comfort, sometimes at the expense of addressing root problems. Your empathy is your strength, but consider when directness might serve everyone better.",
-                        advice: "Practice balanced assertiveness - you can be kind AND clear about your needs."
-                    };
-                } else if (counts.B >= 3) {
-                    profile = {
-                        type: "The Truth Teller",
-                        description: "You value honesty and direct action. You're not afraid to tackle problems head-on, though sometimes a gentler approach might achieve better results.",
-                        advice: "Your moral clarity is admirable - consider adding strategic patience to your toolkit."
-                    };
-                } else if (counts.C >= 3) {
-                    profile = {
-                        type: "The Balanced Thinker",
-                        description: "You consistently seek solutions that honor multiple perspectives. You understand that the best choices often require creativity and patience.",
-                        advice: "Your wisdom is impressive - continue developing your natural ability to see the bigger picture."
-                    };
-                } else {
-                    profile = {
-                        type: "The Complex Navigator",
-                        description: "You adapt your approach based on the situation, which shows flexibility. However, you might benefit from developing more consistent core principles to guide your decisions.",
-                        advice: "Reflect on your core values to help create more consistent decision-making patterns."
-                    };
-                }
+            // Determine personality type
+            let profileKey = 'conflicted_navigator';
+            
+            if (counts.C >= 4) {
+                profileKey = 'supportive_leader';
+            } else if (counts.A >= 4) {
+                profileKey = 'people_pleaser';  
+            } else if (counts.B >= 4) {
+                profileKey = 'direct_confronter';
+            } else if (counts.C >= 3) {
+                profileKey = 'strategic_thinker';
             }
+
+            const profile = profileTypes[profileKey];
 
             combinedAnalysis.innerHTML = `
-                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; backdrop-filter: blur(10px);">
-                    <h3 style="color: #ff6b6b; margin-bottom: 15px;">${profile.type}</h3>
-                    <p style="margin-bottom: 15px;">${profile.description}</p>
-                    <p><strong>Growth Advice:</strong> ${profile.advice}</p>
+                <div style="background: rgba(255,255,255,0.15); padding: 30px; border-radius: 20px; backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.25);">
+                    <h3 style="color: #ffd700; margin-bottom: 20px; font-size: 1.8rem;">${profile.type}</h3>
+                    <p style="margin-bottom: 20px; line-height: 1.7;">${profile.description}</p>
+                    <p style="font-weight: 600;"><strong>Growth Path:</strong> ${profile.advice}</p>
                 </div>
             `;
 
             // Create detailed breakdown
             const categories = [
-                { name: "Friend Relations", answer: userAnswers[0], emoji: "👫" },
-                { name: "Family Dynamics", answer: userAnswers[1], emoji: "👨‍👩‍👧‍👦" },
-                { name: "Authority Issues", answer: userAnswers[2], emoji: "🎓" },
-                { name: "Social Pressure", answer: userAnswers[3], emoji: "🌐" },
-                { name: "Peer Influence", answer: userAnswers[4], emoji: "🎭" },
-                { name: "Mental Health", answer: userAnswers[5], emoji: "🧠" }
+                { name: "Friend Relations", answer: userAnswers[0], emoji: "👫", area: "Communication Style" },
+                { name: "Family Dynamics", answer: userAnswers[1], emoji: "👨‍👩‍👧‍👦", area: "Loyalty vs Truth" },
+                { name: "Authority Issues", answer: userAnswers[2], emoji: "🎓", area: "Courage vs Safety" },
+                { name: "Social Pressure", answer: userAnswers[3], emoji: "🌐", area: "Accountability Style" },
+                { name: "Peer Influence", answer: userAnswers[4], emoji: "🎭", area: "Identity vs Belonging" },
+                { name: "Mental Health", answer: userAnswers[5], emoji: "🧠", area: "Support vs Professional Help" }
             ];
 
             analysisGrid.innerHTML = categories.map(cat => `
                 <div class="analysis-card">
                     <h4>${cat.emoji} ${cat.name}</h4>
-                    <p>Choice: ${cat.answer}</p>
-                    <div style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
-                        ${getChoiceDescription(cat.answer)}
-                    </div>
+                    <p><strong>Choice Pattern:</strong> ${getChoiceDescription(cat.answer)}</p>
+                    <p style="margin-top: 12px; font-size: 0.95rem; opacity: 0.9;"><strong>Focus Area:</strong> ${cat.area}</p>
                 </div>
             `).join('');
 
             finalAnalysis.classList.add('show');
+            
+            // Smooth scroll to results
+            setTimeout(() => {
+                finalAnalysis.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
         }
 
         function getChoiceDescription(choice) {
             const descriptions = {
-                'A': "Harmony-focused approach",
-                'B': "Direct action approach", 
-                'C': "Balanced strategy approach"
+                'A': "Harmony & Relationship Focused",
+                'B': "Direct & Principled Action", 
+                'C': "Balanced & Strategic Thinking"
             };
-            return descriptions[choice] || "No choice made";
+            return descriptions[choice] || "No choice recorded";
         }
 
         function nextScenario() {
@@ -881,7 +1033,6 @@
                 nextBtn.onclick = () => {
                     if (Object.keys(userAnswers).length === totalScenarios) {
                         generateFinalAnalysis();
-                        document.getElementById('finalAnalysis').scrollIntoView({ behavior: 'smooth' });
                     } else {
                         alert('Please answer all questions first!');
                     }
@@ -974,24 +1125,20 @@
         updateNavigation();
         quizContainer.style.cursor = 'grab';
 
-        // Add smooth scrolling for better UX
+        // Smooth scrolling for better UX
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
 
-        // Add reading progress indicator
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            
-            // You can add a progress bar here if needed
-        });
+        // Performance: Reduce animations on low-end devices
+        const isLowEndDevice = navigator.hardwareConcurrency <= 4;
+        if (isLowEndDevice) {
+            document.body.style.setProperty('--animation-duration', '0.1s');
+        }
     </script>
-</body>
-</html>
