@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Privacy Demo - What Data Can Be Collected</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #2d3436;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .data-section {
+            background: #2d3436;
+            color: #00ff88;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #74b9ff;
+        }
+
+        .data-section h3 {
+            color: #74b9ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .data-item {
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #636e72;
+        }
+
+        .data-label {
+            color: #74b9ff;
+            font-weight: bold;
+            display: inline-block;
+            width: 180px;
+        }
+
+        .data-value {
+            color: #00ff88;
+            word-break: break-all;
+        }
+
+        .alert {
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #c92a2a;
+            font-weight: 600;
+        }
+
+        .info-box {
+            background: rgba(17, 153, 142, 0.1);
+            border: 2px solid #00b894;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #00b894;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background: #2d3436;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .location-section {
+            margin-top: 20px;
+        }
+
+        .location-btn {
+            background: linear-gradient(135deg, #00b894 0%, #38ef7d 100%);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .data-label {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Privacy Demonstration</h1>
+            <p>This page shows what data can be collected when you scan a QR code</p>
+        </div>
+
+        <div class="content">
+            <div class="warning-box">
+                ⚠️ <strong>Educational Demo Only</strong><br>
+                This demonstrates data collection risks. We do NOT store or misuse this information.
+            </div>
+
+            <div class="data-section">
+                <h3>📱 Your Device Information (Automatically Collected)</h3>
+                <div class="data-item">
+                    <span class="data-label">Browser:</span>
+                    <span class="data-value" id="browser">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Operating System:</span>
+                    <span class="data-value" id="platform">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Screen Resolution:</span>
+                    <span class="data-value" id="screen">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Language:</span>
+                    <span class="data-value" id="language">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Timezone:</span>
+                    <span class="data-value" id="timezone">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Cookies Enabled:</span>
+                    <span class="data-value" id="cookies">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Online Status:</span>
+                    <span class="data-value" id="online">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Device Memory:</span>
+                    <span class="data-value" id="memory">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Connection Type:</span>
+                    <span class="data-value" id="connection">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">User Agent:</span>
+                    <span class="data-value" id="userAgent">Loading...</span>
+                </div>
+            </div>
+
+            <div class="location-section">
+                <div class="info-box">
+                    <strong>🌍 Location Information</strong><br>
+                    Many QR codes request your location. Click below to see what location data can be accessed:
+                </div>
+                <button class="btn location-btn" onclick="getLocation()">📍 Show Location Data</button>
+                
+                <div class="data-section hidden" id="locationData">
+                    <h3>🌍 Location Information (Requires Permission)</h3>
+                    <div id="locationDetails">Loading...</div>
+                </div>
+            </div>
+
+            <div class="alert">
+                🚨 <strong>Privacy Alert:</strong> All this information was collected automatically when you opened this page. Malicious QR codes can gather this data silently without your knowledge.
+            </div>
+
+            <div class="data-section">
+                <h3>📊 Additional Tracking Capabilities</h3>
+                <div class="data-item">
+                    <span class="data-label">Session Duration:</span>
+                    <span class="data-value" id="sessionTime">0 seconds</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Page Views:</span>
+                    <span class="data-value" id="pageViews">1</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Visit Timestamp:</span>
+                    <span class="data-value" id="timestamp">Loading...</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Referrer:</span>
+                    <span class="data-value" id="referrer">Loading...</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>🛡️ How to Protect Yourself:</strong><br>
+                • Always verify QR code sources before scanning<br>
+                • Check the URL preview before opening<br>
+                • Use incognito/private browsing mode<br>
+                • Be cautious with location permissions<br>
+                • Regularly clear browser data and cookies
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <button class="btn" onclick="window.history.back()">← Return to Article</button>
+                <button class="btn" onclick="refreshData()">🔄 Refresh Data</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>DNATech Privacy Demonstration</strong></p>
+            <p>This demo shows potential privacy risks. Always scan QR codes from trusted sources.</p>
+        </div>
+    </div>
+
+    <script>
+        let startTime = Date.now();
+        let pageViews = parseInt(localStorage.getItem('pageViews') || '0') + 1;
+        localStorage.setItem('pageViews', pageViews.toString());
+
+        function getBrowserName() {
+            const userAgent = navigator.userAgent;
+            if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) return 'Google Chrome';
+            if (userAgent.includes('Firefox')) return 'Mozilla Firefox';
+            if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) return 'Safari';
+            if (userAgent.includes('Edg')) return 'Microsoft Edge';
+            if (userAgent.includes('Opera')) return 'Opera';
+            return 'Unknown Browser';
+        }
+
+        function getConnectionType() {
+            if ('connection' in navigator) {
+                const conn = navigator.connection;
+                return conn.effectiveType || conn.type || 'Unknown';
+            }
+            return 'Not available';
+        }
+
+        function getDeviceMemory() {
+            if ('deviceMemory' in navigator) {
+                return navigator.deviceMemory + ' GB';
+            }
+            return 'Not available';
+        }
+
+        function loadDeviceInfo() {
+            document.getElementById('browser').textContent = getBrowserName();
+            document.getElementById('platform').textContent = navigator.platform || 'Unknown';
+            document.getElementById('screen').textContent = `${screen.width} x ${screen.height}`;
+            document.getElementById('language').textContent = navigator.language || 'Unknown';
+            document.getElementById('timezone').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById('cookies').textContent = navigator.cookieEnabled ? 'Yes' : 'No';
+            document.getElementById('online').textContent = navigator.onLine ? 'Online' : 'Offline';
+            document.getElementById('memory').textContent = getDeviceMemory();
+            document.getElementById('connection').textContent = getConnectionType();
+            document.getElementById('userAgent').textContent = navigator.userAgent;
+            document.getElementById('pageViews').textContent = pageViews;
+            document.getElementById('timestamp').textContent = new Date().toLocaleString();
+            document.getElementById('referrer').textContent = document.referrer || 'Direct access';
+        }
+
+        function updateSessionTime() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            document.getElementById('sessionTime').textContent = elapsed + ' seconds';
+        }
+
+        function getLocation() {
+            if ('geolocation' in navigator) {
+                const locationSection = document.getElementById('locationData');
+                const locationDetails = document.getElementById('locationDetails');
+                
+                locationDetails.innerHTML = '<div class="data-item"><span class="data-label">Status:</span><span class="data-value">Requesting permission...</span></div>';
+                locationSection.classList.remove('hidden');
+                
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude.toFixed(6);
+                        const lon = position.coords.longitude.toFixed(6);
+                        const accuracy = position.coords.accuracy;
+                        
+                        locationDetails.innerHTML = `
+                            <div class="data-item">
+                                <span class="data-label">Latitude:</span>
+                                <span class="data-value">${lat}</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Longitude:</span>
+                                <span class="data-value">${lon}</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Accuracy:</span>
+                                <span class="data-value">±${accuracy} meters</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Timestamp:</span>
+                                <span class="data-value">${new Date(position.timestamp).toLocaleString()}</span>
+                            </div>
+                        `;
+                    },
+                    function(error) {
+                        let errorMsg = 'Unknown error';
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMsg = 'Location access denied by user';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMsg = 'Location information unavailable';
+                                break;
+                            case error.TIMEOUT:
+                                errorMsg = 'Location request timed out';
+                                break;
+                        }
+                        
+                        locationDetails.innerHTML = `
+                            <div class="data-item">
+                                <span class="data-label">Status:</span>
+                                <span class="data-value" style="color: #ff6b6b;">${errorMsg}</span>
+                            </div>
+                        `;
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                const locationSection = document.getElementById('locationData');
+                const locationDetails = document.getElementById('locationDetails');
+                
+                locationDetails.innerHTML = '<div class="data-item"><span class="data-label">Status:</span><span class="data-value" style="color: #ff6b6b;">Geolocation not supported</span></div>';
+                locationSection.classList.remove('hidden');
+            }
+        }
+
+        function refreshData() {
+            loadDeviceInfo();
+            startTime = Date.now();
+            pageViews++;
+            localStorage.setItem('pageViews', pageViews.toString());
+            document.getElementById('pageViews').textContent = pageViews;
+        }
+
+        // Load initial data
+        loadDeviceInfo();
+        
+        // Update session time every second
+        setInterval(updateSessionTime, 1000);
+
+        // Track page visibility changes
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                // Page became visible again
+                updateSessionTime();
+            }
+        });
+
+        // Track online/offline status
+        window.addEventListener('online', function() {
+            document.getElementById('online').textContent = 'Online';
+        });
+
+        window.addEventListener('offline', function() {
+            document.getElementById('online').textContent = 'Offline';
+        });
+    </script>
+</body>
+</html>
