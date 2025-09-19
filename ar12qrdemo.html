@@ -62,21 +62,15 @@
         }
 
         async function displayCollectedData() {
-            // Get email from URL fragment
-            let fragment = window.location.hash.substring(1);
+            const params = new URLSearchParams(window.location.search);
             let email = 'No email found';
-            if (fragment) {
+            if (params.has('email')) {
                 try {
-                    email = base64UrlDecode(fragment);
+                    email = base64UrlDecode(params.get('email'));
                 } catch (err) {
                     console.error('Error decoding email:', err);
                     email = 'Error decoding email';
                 }
-            }
-
-            // Clean URL
-            if (window.history && window.history.replaceState) {
-                window.history.replaceState({}, document.title, window.location.pathname);
             }
 
             document.getElementById('email').textContent = email;
