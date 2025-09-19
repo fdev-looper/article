@@ -5,21 +5,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Demo - Data Collected</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #111; color: #fff; }
-        .box { background: #222; padding: 20px; border-radius: 10px; margin-top: 20px; display: inline-block; text-align: left; }
-        h2 { color: #ff4d4d; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff; 
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            background: rgba(255, 59, 48, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(255, 59, 48, 0.3);
+        }
+        h1 { 
+            color: #fff; 
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .subtitle {
+            margin-top: 10px;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .data-box { 
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px; 
+            border-radius: 15px; 
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            transition: transform 0.3s ease;
+        }
+        .data-box:hover {
+            transform: translateY(-5px);
+        }
+        .data-item {
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+        .data-label {
+            font-weight: bold;
+            color: #4CAF50;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .data-value {
+            color: #fff;
+            margin-top: 5px;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+        .loading {
+            color: #ffd700;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        .warning-box {
+            background: rgba(255, 193, 7, 0.15);
+            border: 2px solid rgba(255, 193, 7, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        .location-info {
+            background: rgba(255, 87, 34, 0.1);
+            border: 1px solid rgba(255, 87, 34, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h2>QR Code Data Collection Demo</h2>
-    <div class="box" id="collected-data">
-        <p><strong>Email:</strong> <span id="email">Loading...</span></p>
-        <p><strong>Device Model:</strong> <span id="device">Loading...</span></p>
-        <p><strong>Browser:</strong> <span id="browser">Loading...</span></p>
-        <p><strong>Language:</strong> <span id="language">Loading...</span></p>
-        <p><strong>Screen Resolution:</strong> <span id="screen">Loading...</span></p>
-        <p><strong>User Agent:</strong> <span id="useragent">Loading...</span></p>
-        <p><strong>IP Address:</strong> <span id="ip">Loading...</span></p>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Data Collection Results</h1>
+            <div class="subtitle">Information gathered from your device when you scanned the QR code</div>
+        </div>
+
+        <div class="warning-box">
+            <h3><span class="emoji">⚠️</span>Privacy Alert</h3>
+            <p>This demonstrates how much personal information can be collected just by scanning a QR code. In real attacks, this data could be used for:</p>
+            <ul>
+                <li>🎯 Targeted phishing campaigns</li>
+                <li>🕵️ Device fingerprinting and tracking</li>
+                <li>📧 Email harvesting for spam</li>
+                <li>🌐 Location-based attacks</li>
+            </ul>
+        </div>
+
+        <div class="data-grid">
+            <div class="data-box">
+                <h3>📧 Personal Information</h3>
+                <div class="data-item">
+                    <div class="data-label">Email Address</div>
+                    <div class="data-value" id="email">Loading...</div>
+                </div>
+            </div>
+
+            <div class="data-box">
+                <h3>📱 Device Information</h3>
+                <div class="data-item">
+                    <div class="data-label">Device Model</div>
+                    <div class="data-value" id="device">Loading...</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Operating System</div>
+                    <div class="data-value" id="os">Loading...</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Browser</div>
+                    <div class="data-value" id="browser">Loading...</div>
+                </div>
+            </div>
+
+            <div class="data-box">
+                <h3>🌐 Network & Location</h3>
+                <div class="data-item">
+                    <div class="data-label">IP Address</div>
+                    <div class="data-value" id="ip">Loading...</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Internet Provider</div>
+                    <div class="data-value" id="isp">Loading...</div>
+                </div>
+                <div class="location-info" id="locationInfo" style="display: none;">
+                    <h4>📍 Approximate Location</h4>
+                    <div class="data-item">
+                        <div class="data-label">Country</div>
+                        <div class="data-value" id="country">Loading...</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">City</div>
+                        <div class="data-value" id="city">Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-box">
+                <h3>⚙️ Technical Details</h3>
+                <div class="data-item">
+                    <div class="data-label">Screen Resolution</div>
+                    <div class="data-value" id="screen">Loading...</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Language</div>
+                    <div class="data-value" id="language">Loading...</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Timezone</div>
+                    <div class="data-value" id="timezone">Loading...</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">User Agent</div>
+                    <div class="data-value" id="useragent">Loading...</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -27,43 +201,118 @@
         function base64UrlDecode(str) {
             str = str.replace(/-/g, '+').replace(/_/g, '/');
             while (str.length % 4) str += '=';
-            return atob(str);
+            try {
+                return decodeURIComponent(escape(atob(str)));
+            } catch (e) {
+                console.error('Error decoding:', e);
+                return 'Error decoding data';
+            }
         }
 
         function getDeviceInfo() {
             const ua = navigator.userAgent;
             if (/iPhone/.test(ua)) return 'iPhone';
             if (/iPad/.test(ua)) return 'iPad';
-            if (/Android/.test(ua)) return 'Android Device';
-            if (/Windows/.test(ua)) return 'Windows PC';
-            if (/Mac/.test(ua)) return 'Mac';
+            if (/Android/.test(ua)) {
+                const match = ua.match(/Android ([0-9\.]+)/);
+                return match ? `Android ${match[1]}` : 'Android Device';
+            }
+            if (/Windows NT/.test(ua)) {
+                const match = ua.match(/Windows NT ([0-9\.]+)/);
+                return match ? `Windows ${match[1]}` : 'Windows PC';
+            }
+            if (/Mac OS X/.test(ua)) {
+                const match = ua.match(/Mac OS X ([0-9_]+)/);
+                return match ? `macOS ${match[1].replace(/_/g, '.')}` : 'Mac';
+            }
             if (/Linux/.test(ua)) return 'Linux PC';
             return 'Unknown Device';
         }
 
+        function getOSInfo() {
+            const ua = navigator.userAgent;
+            if (/iPhone|iPad/.test(ua)) {
+                const match = ua.match(/OS ([0-9_]+)/);
+                return match ? `iOS ${match[1].replace(/_/g, '.')}` : 'iOS';
+            }
+            if (/Android/.test(ua)) {
+                const match = ua.match(/Android ([0-9\.]+)/);
+                return match ? `Android ${match[1]}` : 'Android';
+            }
+            if (/Windows NT/.test(ua)) {
+                const match = ua.match(/Windows NT ([0-9\.]+)/);
+                const versions = {
+                    '10.0': 'Windows 10/11',
+                    '6.3': 'Windows 8.1',
+                    '6.2': 'Windows 8',
+                    '6.1': 'Windows 7'
+                };
+                return versions[match[1]] || `Windows NT ${match[1]}`;
+            }
+            if (/Mac OS X/.test(ua)) {
+                const match = ua.match(/Mac OS X ([0-9_]+)/);
+                return match ? `macOS ${match[1].replace(/_/g, '.')}` : 'macOS';
+            }
+            return 'Unknown OS';
+        }
+
         function getBrowserInfo() {
             const ua = navigator.userAgent;
-            if (/Chrome/.test(ua) && !/Edge/.test(ua)) return 'Chrome';
-            if (/Firefox/.test(ua)) return 'Firefox';
-            if (/Safari/.test(ua) && !/Chrome/.test(ua)) return 'Safari';
-            if (/Edge/.test(ua)) return 'Edge';
+            if (/Edg/.test(ua)) return 'Microsoft Edge';
+            if (/Chrome/.test(ua) && !/Edge/.test(ua)) {
+                const match = ua.match(/Chrome\/([0-9\.]+)/);
+                return match ? `Google Chrome ${match[1]}` : 'Google Chrome';
+            }
+            if (/Firefox/.test(ua)) {
+                const match = ua.match(/Firefox\/([0-9\.]+)/);
+                return match ? `Mozilla Firefox ${match[1]}` : 'Mozilla Firefox';
+            }
+            if (/Safari/.test(ua) && !/Chrome/.test(ua)) {
+                const match = ua.match(/Version\/([0-9\.]+)/);
+                return match ? `Safari ${match[1]}` : 'Safari';
+            }
             if (/Opera/.test(ua)) return 'Opera';
             return 'Unknown Browser';
         }
 
-        async function getIPAddress() {
+        async function getIPAndLocationInfo() {
+            try {
+                // Try ipapi.co first (includes location data)
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                if (data.ip) {
+                    document.getElementById('ip').textContent = data.ip;
+                    document.getElementById('isp').textContent = data.org || 'Unknown ISP';
+                    
+                    if (data.country_name) {
+                        document.getElementById('country').textContent = `${data.country_name} (${data.country_code})`;
+                        document.getElementById('city').textContent = data.city || 'Unknown City';
+                        document.getElementById('locationInfo').style.display = 'block';
+                    }
+                    return;
+                }
+            } catch (error) {
+                console.log('ipapi.co failed, trying fallback...');
+            }
+
+            // Fallback to ipify for IP only
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
                 const data = await response.json();
-                return data.ip;
+                document.getElementById('ip').textContent = data.ip || 'Unable to fetch IP';
+                document.getElementById('isp').textContent = 'Unable to fetch ISP';
             } catch (error) {
-                return 'Unable to fetch IP';
+                document.getElementById('ip').textContent = 'Unable to fetch IP';
+                document.getElementById('isp').textContent = 'Unable to fetch ISP';
             }
         }
 
         async function displayCollectedData() {
+            // Get email from URL parameters
             const params = new URLSearchParams(window.location.search);
-            let email = 'No email found';
+            let email = 'No email provided';
+            
             if (params.has('email')) {
                 try {
                     email = base64UrlDecode(params.get('email'));
@@ -73,18 +322,27 @@
                 }
             }
 
+            // Display all collected data
             document.getElementById('email').textContent = email;
             document.getElementById('device').textContent = getDeviceInfo();
+            document.getElementById('os').textContent = getOSInfo();
             document.getElementById('browser').textContent = getBrowserInfo();
             document.getElementById('language').textContent = navigator.language || 'Unknown';
-            document.getElementById('screen').textContent = `${screen.width}x${screen.height}`;
+            document.getElementById('timezone').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+            document.getElementById('screen').textContent = `${screen.width} × ${screen.height} pixels`;
             document.getElementById('useragent').textContent = navigator.userAgent;
 
-            const ip = await getIPAddress();
-            document.getElementById('ip').textContent = ip;
+            // Get IP and location info
+            await getIPAndLocationInfo();
+
+            // Remove loading classes
+            document.querySelectorAll('.loading').forEach(el => {
+                el.classList.remove('loading');
+            });
         }
 
-        window.onload = displayCollectedData;
+        // Start data collection when page loads
+        window.addEventListener('load', displayCollectedData);
     </script>
 </body>
 </html>
