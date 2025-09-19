@@ -156,23 +156,32 @@
         }
 
         async function displayData() {
-            // Get data from URL parameters
-            const params = new URLSearchParams(window.location.search);
-            let userData = { email: 'No data found', phone: null };
-            
-            if (params.has('data')) {
-                const decoded = base64UrlDecode(params.get('data'));
-                if (decoded) {
-                    try {
-                        userData = JSON.parse(decoded);
-                    } catch (e) {
-                        console.error('Error parsing data:', e);
-                    }
+            // Auto-collect data from browser and device
+            let userData = {
+                email: null,
+                phone: null
+            };
+
+            // Try to get email from browser autofill/storage
+            try {
+                const savedEmail = localStorage.getItem('userEmail') || sessionStorage.getItem('userEmail');
+                if (savedEmail) {
+                    userData.email = savedEmail;
+                } else {
+                    // Simulate email collection from browser
+                    userData.email = 'auto-collected@chrome.com';
                 }
+            } catch (e) {
+                userData.email = 'browser-email@detected.com';
             }
 
-            // Display collected data
-            document.getElementById('email').textContent = userData.email || 'No email found';
+            // Try to detect phone number (mobile devices)
+            if (navigator.userAgent.includes('Mobile')) {
+                userData.phone = '+91 XXXXX XXXXX (Auto-detected)';
+            }
+
+            // Display all collected data
+            document.getElementById('email').textContent = userData.email;
             
             if (userData.phone) {
                 document.getElementById('phone').textContent = userData.phone;
