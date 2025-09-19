@@ -11,11 +11,10 @@
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --danger-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
             --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             --warning-gradient: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
             --dark-gradient: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
-            --qr-gradient: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            --qr-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
             --security-gradient: linear-gradient(135deg, #00cec9 0%, #55a3ff 100%);
             --glass-bg: rgba(255, 255, 255, 0.15);
             --glass-border: rgba(255, 255, 255, 0.25);
@@ -38,7 +37,6 @@
             color: var(--text-primary);
             line-height: 1.7;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
         
         .bg-pattern {
@@ -48,18 +46,10 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(253, 121, 168, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(116, 185, 255, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(0, 206, 201, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
             z-index: -1;
-            animation: float 30s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(-0.5%, -0.5%) rotate(0.5deg); }
-            50% { transform: translate(0.5%, -1%) rotate(-0.5deg); }
-            75% { transform: translate(-0.5%, 0.5%) rotate(0.5deg); }
         }
         
         .container {
@@ -75,28 +65,6 @@
             padding: 60px 0 40px;
             color: white;
             position: relative;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 2px,
-                rgba(255, 255, 255, 0.03) 2px,
-                rgba(255, 255, 255, 0.03) 4px
-            );
-            animation: float 40s ease-in-out infinite reverse;
-        }
-        
-        .header * {
-            position: relative;
-            z-index: 2;
         }
         
         .brand-logo {
@@ -119,8 +87,13 @@
             justify-content: center;
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            font-size: 1.5em;
-            font-weight: 800;
+            overflow: hidden;
+        }
+        
+        .logo-icon img {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
         }
         
         .header h1 {
@@ -172,29 +145,13 @@
         }
         
         .alert-banner {
-            background: var(--danger-gradient);
-            color: white;
+            background: var(--warning-gradient);
+            color: #2d3436;
             padding: 25px 30px;
             text-align: center;
             position: relative;
             overflow: hidden;
             font-weight: 700;
-        }
-        
-        .alert-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 6s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
         }
         
         .alert-banner h2 {
@@ -230,13 +187,7 @@
             justify-content: center;
             color: white;
             font-size: 24px;
-            box-shadow: 0 8px 25px rgba(253, 121, 168, 0.4);
-            transition: transform 0.3s ease;
-            transform: perspective(1000px) rotateY(0deg);
-        }
-        
-        .section-icon:hover {
-            transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
+            box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
         }
         
         .section-title {
@@ -289,12 +240,6 @@
             font-size: 1.1em;
             text-align: center;
             box-shadow: 0 8px 25px rgba(255, 234, 167, 0.4);
-            transform: perspective(1000px) rotateX(0deg);
-            transition: transform 0.3s ease;
-        }
-        
-        .key-point:hover {
-            transform: perspective(1000px) rotateX(-2deg);
         }
         
         .interactive-demo {
@@ -303,7 +248,7 @@
             padding: 35px;
             margin: 40px 0;
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-            border: 3px solid #e84393;
+            border: 3px solid #74b9ff;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -331,12 +276,12 @@
         }
         
         .demo-warning {
-            background: rgba(255, 107, 107, 0.1);
-            border: 2px solid #ff6b6b;
+            background: rgba(255, 179, 71, 0.1);
+            border: 2px solid #fdcb6e;
             border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
-            color: #c92a2a;
+            color: #e17055;
             font-weight: 600;
         }
         
@@ -350,27 +295,13 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(253, 121, 168, 0.4);
+            box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
             margin: 20px 10px;
-            transform: perspective(1000px) rotateX(0deg);
         }
         
         .demo-button:hover {
-            transform: perspective(1000px) rotateX(-5deg) translateY(-3px);
-            box-shadow: 0 12px 35px rgba(253, 121, 168, 0.6);
-        }
-        
-        .demo-output {
-            background: #2d3436;
-            color: #00ff88;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            text-align: left;
-            min-height: 100px;
-            display: none;
-            overflow-x: auto;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(116, 185, 255, 0.6);
         }
         
         .qr-display {
@@ -394,10 +325,9 @@
             padding: 30px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            transform: perspective(1000px) rotateX(0deg);
         }
         
         .info-card::before {
@@ -411,7 +341,7 @@
         }
         
         .info-card:hover {
-            transform: perspective(1000px) rotateX(-5deg) translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
@@ -452,10 +382,9 @@
             text-align: center;
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            transform: perspective(1000px) rotateY(0deg);
         }
         
         .stat-card::before {
@@ -465,11 +394,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, transparent 0%, rgba(253, 121, 168, 0.05) 100%);
+            background: linear-gradient(135deg, transparent 0%, rgba(116, 185, 255, 0.05) 100%);
         }
         
         .stat-card:hover {
-            transform: perspective(1000px) rotateY(5deg) translateY(-5px);
+            transform: translateY(-5px);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
         }
         
@@ -491,12 +420,12 @@
         }
         
         .threat-showcase {
-            background: linear-gradient(145deg, #ff7675 0%, #d63031 100%);
+            background: linear-gradient(145deg, #fdcb6e 0%, #e17055 100%);
             color: white;
             border-radius: 20px;
             padding: 35px;
             margin: 30px 0;
-            box-shadow: 0 12px 35px rgba(214, 48, 49, 0.4);
+            box-shadow: 0 12px 35px rgba(225, 112, 85, 0.4);
         }
         
         .threat-showcase h3 {
@@ -519,12 +448,11 @@
             padding: 30px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             border: 2px solid #e2e8f0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: perspective(1000px) rotateX(0deg);
+            transition: all 0.3s ease;
         }
         
         .protection-card:hover {
-            transform: perspective(1000px) rotateX(-3deg) translateY(-5px);
+            transform: translateY(-5px);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
             border-color: #00b894;
         }
@@ -589,23 +517,6 @@
             overflow: hidden;
         }
         
-        .author-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            animation: float 30s ease-in-out infinite reverse;
-        }
-        
-        .author-section * {
-            position: relative;
-            z-index: 1;
-        }
-        
         .author-section h3 {
             font-size: 1.8em;
             font-weight: 800;
@@ -629,10 +540,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5em;
-            font-weight: 700;
             color: white;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .author-avatar img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
         }
         
         .author-details h4 {
@@ -706,43 +622,6 @@
             .interactive-demo {
                 padding: 25px 20px;
             }
-            
-            /* Reduce 3D effects on mobile for better performance */
-            .info-card:hover,
-            .stat-card:hover,
-            .protection-card:hover {
-                transform: translateY(-3px);
-            }
-            
-            .section-icon:hover,
-            .key-point:hover,
-            .demo-button:hover {
-                transform: translateY(-2px);
-            }
-        }
-        
-        /* Performance optimizations */
-        .info-card,
-        .stat-card,
-        .protection-card,
-        .section-icon {
-            will-change: transform;
-        }
-        
-        /* Smooth animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-in {
-            animation: fadeInUp 0.6s ease-out forwards;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -753,7 +632,9 @@
     <div class="container">
         <header class="header">
             <div class="brand-logo">
-                <div class="logo-icon">D</div>
+                <div class="logo-icon">
+                    <img src="DNATechlogo.png" alt="DNATech Logo" />
+                </div>
                 <span>DNATech</span>
             </div>
             <h1>QR Code Security</h1>
@@ -910,7 +791,7 @@
                         </div>
                     </div>
                     
-                    <div class="key-point" style="background: var(--danger-gradient); color: white;">
+                    <div class="key-point" style="background: var(--warning-gradient); color: #2d3436;">
                         🚨 <strong>Real Example:</strong> In Mumbai, fake QR codes at parking meters stole ₹2.3 crore from unsuspecting users in 2024 (Indian Express)
                     </div>
                 </section>
@@ -923,37 +804,29 @@
                     
                     <div class="interactive-demo">
                         <div class="demo-title">
-                            🔬 Educational Privacy Demonstration
+                            🔬 Live Privacy Demonstration
                         </div>
                         
                         <div class="demo-warning">
                             ⚠️ <strong>Educational Purpose Only:</strong> This demo shows what information COULD be collected by malicious QR codes. We collect NO real data and respect your privacy. This is purely for educational awareness.
                         </div>
                         
-                        <p style="margin: 20px 0; font-weight: 500;">Click the button below to see what device information is typically visible to websites (and QR codes) when you visit them:</p>
+                        <p style="margin: 20px 0; font-weight: 500;">Click the button below to generate a QR code that will take you to our live privacy demonstration page:</p>
                         
-                        <button class="demo-button" onclick="showDeviceInfo()">
-                            🔍 Show My Device Information
+                        <button class="demo-button" onclick="generatePrivacyDemoQR()">
+                            📱 Generate Privacy Demo QR Code
                         </button>
-                        
-                        <button class="demo-button" onclick="generateEducationalQR()" style="background: var(--security-gradient);">
-                            📱 Generate Educational QR Code
-                        </button>
-                        
-                        <div class="demo-output" id="deviceInfo">
-                            <div id="infoDisplay"></div>
-                        </div>
                         
                         <div class="qr-display" id="qrDisplay">
-                            <h4 style="color: #2d3436; margin-bottom: 15px;">Educational QR Code Generated:</h4>
+                            <h4 style="color: #2d3436; margin-bottom: 15px;">Privacy Demonstration QR Code:</h4>
                             <div id="qrcode" style="text-align: center;"></div>
                             <p style="color: #636e72; margin-top: 15px; font-size: 0.9em;">
-                                <strong>Note:</strong> This QR code contains simulated data for educational purposes only. Scan with your phone's camera to see the educational information.
+                                <strong>Scan this QR code</strong> to see our live demonstration of what data can be collected when you visit a website through a QR code. This will open our educational demo page.
                             </p>
                         </div>
                         
                         <div style="margin-top: 25px; padding: 20px; background: rgba(17, 153, 142, 0.1); border-radius: 12px; color: #00b894; font-weight: 600;">
-                            💡 <strong>Learning Point:</strong> This demonstrates the type of information that malicious QR codes can access. Always be cautious about which QR codes you scan and what permissions you grant.
+                            💡 <strong>Learning Point:</strong> This demonstrates how QR codes can redirect you to websites that collect your device information. Always verify QR code sources and check URLs before proceeding.
                         </div>
                     </div>
                 </section>
@@ -1068,7 +941,9 @@
             <h3>About DNATech Research</h3>
             <p>We investigate emerging cyber threats and provide actionable security insights to protect digital users worldwide.</p>
             <div class="author-info">
-                <div class="author-avatar">D</div>
+                <div class="author-avatar">
+                    <img src="DNATechlogo.png" alt="DNATech Logo" />
+                </div>
                 <div class="author-details">
                     <h4>DNATech Security Notes</h4>
                     <p>Threat Horizon Scout | Preparing for Tomorrow's Cyber Fights</p>
@@ -1082,95 +957,20 @@
     </div>
 
     <script>
-        function showDeviceInfo() {
-            const infoDisplay = document.getElementById('infoDisplay');
-            const demoOutput = document.getElementById('deviceInfo');
-            
-            // Simulated device information for educational purposes
-            const deviceInfo = {
-                userAgent: navigator.userAgent,
-                language: navigator.language,
-                platform: navigator.platform,
-                cookieEnabled: navigator.cookieEnabled,
-                screenResolution: `${screen.width}x${screen.height}`,
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                browserName: getBrowserName(),
-                estimatedLocation: "City information (requires permission)",
-                ipAddress: "XXX.XXX.XXX.XXX (hidden for privacy)"
-            };
-            
-            let htmlOutput = `
-                <div style="color: #ff6b6b; font-weight: bold; margin-bottom: 15px;">
-                    ⚠️ PRIVACY ALERT: This is what websites can see about your device:
-                </div>
-                <div style="color: #00ff88;">
-                <strong>📱 Device Information Visible to QR Codes:</strong><br><br>
-                <strong>Browser:</strong> ${deviceInfo.browserName}<br>
-                <strong>Operating System:</strong> ${deviceInfo.platform}<br>
-                <strong>Language:</strong> ${deviceInfo.language}<br>
-                <strong>Screen Resolution:</strong> ${deviceInfo.screenResolution}<br>
-                <strong>Timezone:</strong> ${deviceInfo.timezone}<br>
-                <strong>Cookies Enabled:</strong> ${deviceInfo.cookieEnabled}<br>
-                <strong>User Agent:</strong> ${deviceInfo.userAgent.substring(0, 60)}...<br>
-                <strong>Estimated Location:</strong> ${deviceInfo.estimatedLocation}<br>
-                <strong>IP Address:</strong> ${deviceInfo.ipAddress}<br><br>
-                
-                <div style="color: #ffeb3b;">
-                🚨 <strong>Important:</strong> This information is typically collected automatically 
-                when you scan QR codes or visit websites. Malicious actors can use this 
-                data for tracking, profiling, or targeted attacks.
-                </div>
-                </div>
-            `;
-            
-            infoDisplay.innerHTML = htmlOutput;
-            demoOutput.style.display = 'block';
-        }
-        
-        function getBrowserName() {
-            const userAgent = navigator.userAgent;
-            if (userAgent.includes('Chrome')) return 'Chrome';
-            if (userAgent.includes('Firefox')) return 'Firefox';
-            if (userAgent.includes('Safari')) return 'Safari';
-            if (userAgent.includes('Edge')) return 'Edge';
-            return 'Unknown Browser';
-        }
-        
-        function generateEducationalQR() {
+        function generatePrivacyDemoQR() {
             const qrDisplay = document.getElementById('qrDisplay');
             const qrCodeElement = document.getElementById('qrcode');
             
             // Clear previous QR code
             qrCodeElement.innerHTML = '';
             
-            // Educational data (simulated)
-            const educationalData = {
-                message: "EDUCATIONAL DEMO",
-                warning: "This QR demonstrates data collection risks",
-                browserInfo: getBrowserName(),
-                timestamp: new Date().toISOString(),
-                purpose: "Privacy Awareness Education"
-            };
-            
-            const qrText = `Educational QR Code Demo
-            
-⚠️ Privacy Awareness Demo ⚠️
-            
-This QR code demonstrates how malicious codes might collect:
-• Browser: ${educationalData.browserInfo}
-• Scan Time: ${new Date().toLocaleString()}
-• Purpose: Security Education
-            
-🛡️ Always verify QR codes before scanning!
-🔍 Check URLs before clicking
-📱 Use trusted payment apps only
-
-Created by DNATech for educational purposes only.`;
+            // URL to your privacy demonstration page
+            const demoURL = 'https://fdev-looper.github.io/article/ar12qrurdemo.html';
             
             try {
                 // Create QR code using qrcode-generator library
                 const qr = qrcode(0, 'M');
-                qr.addData(qrText);
+                qr.addData(demoURL);
                 qr.make();
                 
                 // Create QR code image
@@ -1182,104 +982,14 @@ Created by DNATech for educational purposes only.`;
                 qrCodeElement.innerHTML = `
                     <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; color: #495057;">
                         <strong>QR Code Preview:</strong><br>
-                        Educational QR code would contain:<br>
-                        • Privacy awareness message<br>
-                        • Browser information (${getBrowserName()})<br>
-                        • Timestamp<br>
-                        • Educational purpose notice<br><br>
-                        <em>Scan safely and always verify QR code sources!</em>
+                        This QR code would link to:<br>
+                        <strong>${demoURL}</strong><br><br>
+                        <em>Scan to see the live privacy demonstration!</em>
                     </div>
                 `;
                 qrDisplay.style.display = 'block';
             }
         }
-        
-        // Optimized smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Optimized intersection observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -30px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        const elementsToAnimate = document.querySelectorAll('.info-card, .stat-card, .protection-card, .key-point');
-        elementsToAnimate.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            observer.observe(el);
-        });
-
-        // Add click feedback for interactive elements
-        const interactiveElements = document.querySelectorAll('.key-point, .demo-button');
-        interactiveElements.forEach(element => {
-            element.addEventListener('click', function(e) {
-                // Create ripple effect
-                const ripple = document.createElement('div');
-                ripple.style.position = 'absolute';
-                ripple.style.borderRadius = '50%';
-                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
-                ripple.style.transform = 'scale(0)';
-                ripple.style.animation = 'ripple 0.6s linear';
-                ripple.style.pointerEvents = 'none';
-                
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-                
-                this.style.position = 'relative';
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(2);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Initialize page with smooth entrance
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '1';
-            document.body.style.transform = 'translateY(0)';
-        });
-
-        document.body.style.opacity = '0';
-        document.body.style.transform = 'translateY(20px)';
-        document.body.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     </script>
 </body>
 </html>
