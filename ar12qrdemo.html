@@ -197,7 +197,7 @@
     </div>
 
     <script>
-        // Fixed Base64 URL-safe decoding - working version
+        // Enhanced Base64 decoding for mobile compatibility
         function base64UrlDecode(str) {
             try {
                 // Handle URL-safe characters
@@ -212,8 +212,22 @@
                 const decoded = atob(base64);
                 console.log('Base64 decoded raw:', decoded);
                 
-                // Return as is - no additional UTF-8 conversion needed for simple emails
-                return decoded;
+                // Check if we need UTF-8 conversion for mobile devices
+                try {
+                    // Try to detect if it needs UTF-8 conversion
+                    const testRegex = /^[a-zA-Z0-9@._-]+$/;
+                    if (testRegex.test(decoded)) {
+                        // Simple ASCII email - return as is
+                        return decoded;
+                    } else {
+                        // Might need UTF-8 conversion for mobile
+                        return decodeURIComponent(escape(decoded));
+                    }
+                } catch (utf8Error) {
+                    // If UTF-8 conversion fails, return original
+                    console.log('UTF-8 conversion failed, using original');
+                    return decoded;
+                }
                 
             } catch (e) {
                 console.error('Base64 decode error:', e);
@@ -334,8 +348,36 @@
                 try {
                     const encodedEmail = params.get('email');
                     console.log('Encoded email from URL:', encodedEmail);
-                    email = base64UrlDecode(encodedEmail);
-                    console.log('Decoded email:', email);
+                    
+                    // Try multiple decoding methods for mobile compatibility
+                    let decodedEmail = base64UrlDecode(encodedEmail);
+                    console.log('Method 1 - Custom decode:', decodedEmail);
+                    
+                    // If still showing weird characters, try alternative method
+                    if (decodedEmail.includes('�') || decodedEmail.match(/[^\x20-\x7E]/)) {
+                        console.log('Trying alternative decoding method...');
+                        try {
+                            let base64 = encodedEmail.replace(/-/g, '+').replace(/_/g, '/');
+                            while (base64.length % 4) base64 += '=';
+                            
+                            // Alternative method: byte by byte conversion
+                            const binaryString = atob(base64);
+                            let result = '';
+                            for (let i = 0; i < binaryString.length; i++) {
+                                const char = binaryString.charCodeAt(i);
+                                // Only accept printable ASCII characters for email
+                                if (char >= 32 && char <= 126) {
+                                    result += String.fromCharCode(char);
+                                }
+                            }
+                            decodedEmail = result;
+                            console.log('Method 2 - ASCII only:', decodedEmail);
+                        } catch (altError) {
+                            console.log('Alternative method failed:', altError);
+                        }
+                    }
+                    
+                    email = decodedEmail;
                 } catch (err) {
                     console.error('Error decoding email:', err);
                     email = `Error decoding email: ${err.message}`;
