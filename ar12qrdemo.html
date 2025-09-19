@@ -323,12 +323,34 @@
             const params = new URLSearchParams(window.location.search);
             let email = 'No email provided';
             
+            // Debug: Log current URL and parameters
+            console.log('Current URL:', window.location.href);
+            console.log('Search params:', window.location.search);
+            console.log('All params:', [...params.entries()]);
+            
             if (params.has('email')) {
                 try {
-                    email = base64UrlDecode(params.get('email'));
+                    const encodedEmail = params.get('email');
+                    console.log('Encoded email from URL:', encodedEmail);
+                    email = base64UrlDecode(encodedEmail);
+                    console.log('Decoded email:', email);
                 } catch (err) {
                     console.error('Error decoding email:', err);
-                    email = 'Error decoding email';
+                    email = `Error decoding email: ${err.message}`;
+                }
+            } else {
+                console.log('No email parameter found in URL');
+                // Check if email is in hash instead
+                const hash = window.location.hash.substring(1); // Remove #
+                if (hash) {
+                    console.log('Found hash:', hash);
+                    try {
+                        email = base64UrlDecode(hash);
+                        console.log('Decoded email from hash:', email);
+                    } catch (err) {
+                        console.log('Hash is not valid base64 email');
+                        email = 'No valid email found';
+                    }
                 }
             }
 
