@@ -4,47 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Demo - Data Collected</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #111; color: #fff; }
+        .box { background: #222; padding: 20px; border-radius: 10px; margin-top: 20px; display: inline-block; text-align: left; }
+        h2 { color: #ff4d4d; }
+    </style>
 </head>
 <body>
     <h2>QR Code Data Collection Demo</h2>
-    <p><strong>Data collected silently when QR was scanned:</strong></p>
-    
-    <div id="collected-data">
+    <div class="box" id="collected-data">
         <p><strong>Email:</strong> <span id="email">Loading...</span></p>
         <p><strong>Device Model:</strong> <span id="device">Loading...</span></p>
         <p><strong>Browser:</strong> <span id="browser">Loading...</span></p>
         <p><strong>Language:</strong> <span id="language">Loading...</span></p>
-        <p><strong>IP Address:</strong> <span id="ip">Loading...</span></p>
         <p><strong>Screen Resolution:</strong> <span id="screen">Loading...</span></p>
         <p><strong>User Agent:</strong> <span id="useragent">Loading...</span></p>
+        <p><strong>IP Address:</strong> <span id="ip">Loading...</span></p>
     </div>
 
     <script>
+        // URL-safe Base64 decode
+        function base64UrlDecode(str) {
+            str = str.replace(/-/g, '+').replace(/_/g, '/');
+            while (str.length % 4) str += '=';
+            return atob(str);
+        }
+
         function getDeviceInfo() {
             const ua = navigator.userAgent;
-            let device = 'Unknown Device';
-            
-            if (/iPhone/.test(ua)) device = 'iPhone';
-            else if (/iPad/.test(ua)) device = 'iPad';
-            else if (/Android/.test(ua)) device = 'Android Device';
-            else if (/Windows/.test(ua)) device = 'Windows PC';
-            else if (/Mac/.test(ua)) device = 'Mac';
-            else if (/Linux/.test(ua)) device = 'Linux PC';
-            
-            return device;
+            if (/iPhone/.test(ua)) return 'iPhone';
+            if (/iPad/.test(ua)) return 'iPad';
+            if (/Android/.test(ua)) return 'Android Device';
+            if (/Windows/.test(ua)) return 'Windows PC';
+            if (/Mac/.test(ua)) return 'Mac';
+            if (/Linux/.test(ua)) return 'Linux PC';
+            return 'Unknown Device';
         }
 
         function getBrowserInfo() {
             const ua = navigator.userAgent;
-            let browser = 'Unknown Browser';
-            
-            if (/Chrome/.test(ua) && !/Edge/.test(ua)) browser = 'Chrome';
-            else if (/Firefox/.test(ua)) browser = 'Firefox';
-            else if (/Safari/.test(ua) && !/Chrome/.test(ua)) browser = 'Safari';
-            else if (/Edge/.test(ua)) browser = 'Edge';
-            else if (/Opera/.test(ua)) browser = 'Opera';
-            
-            return browser;
+            if (/Chrome/.test(ua) && !/Edge/.test(ua)) return 'Chrome';
+            if (/Firefox/.test(ua)) return 'Firefox';
+            if (/Safari/.test(ua) && !/Chrome/.test(ua)) return 'Safari';
+            if (/Edge/.test(ua)) return 'Edge';
+            if (/Opera/.test(ua)) return 'Opera';
+            return 'Unknown Browser';
         }
 
         async function getIPAddress() {
@@ -57,44 +61,36 @@
             }
         }
 
-        function displayCollectedData() {
-            // Get data from URL fragment (after #)
-            const fragment = window.location.hash.substring(1);
-            
+        async function displayCollectedData() {
+            // Get email from URL fragment
+            let fragment = window.location.hash.substring(1);
             let email = 'No email found';
-            
             if (fragment) {
                 try {
-                    email = atob(fragment);
-                } catch (error) {
-                    console.error('Error decoding email:', error);
+                    email = base64UrlDecode(fragment);
+                } catch (err) {
+                    console.error('Error decoding email:', err);
                     email = 'Error decoding email';
                 }
             }
-            
-            // Display all collected data
+
+            // Clean URL
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+
             document.getElementById('email').textContent = email;
             document.getElementById('device').textContent = getDeviceInfo();
             document.getElementById('browser').textContent = getBrowserInfo();
             document.getElementById('language').textContent = navigator.language || 'Unknown';
             document.getElementById('screen').textContent = `${screen.width}x${screen.height}`;
             document.getElementById('useragent').textContent = navigator.userAgent;
-            
-            // Get IP address
-            getIPAddress().then(ip => {
-                document.getElementById('ip').textContent = ip;
-            });
-            
-            // Clean URL by removing fragment after 2 seconds
-            setTimeout(() => {
-                if (window.history && window.history.replaceState) {
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                }
-            }, 2000);
+
+            const ip = await getIPAddress();
+            document.getElementById('ip').textContent = ip;
         }
 
-        // Load data when page loads
-        displayCollectedData();
+        window.onload = displayCollectedData;
     </script>
 </body>
 </html>
