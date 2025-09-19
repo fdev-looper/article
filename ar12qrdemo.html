@@ -3,231 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Device Information Demo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: white;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .info-item {
-            background: rgba(255, 255, 255, 0.2);
-            margin: 15px 0;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #ff6b6b;
-        }
-        
-        .label {
-            font-weight: bold;
-            color: #ffd700;
-            display: inline-block;
-            width: 200px;
-        }
-        
-        .value {
-            color: white;
-            word-break: break-all;
-        }
-        
-        .loading {
-            color: #ffd700;
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-        
-        .warning {
-            background: rgba(255, 193, 7, 0.2);
-            border: 2px solid #ffc107;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-    </style>
+    <title>QR Demo - Data Collected</title>
 </head>
 <body>
-    <div class="container">
-        <div class="warning">
-            ⚠️ Educational Demo: This shows what information websites can collect
-        </div>
-        
-        <h1>📱 Your Device Information</h1>
-        
-        <div class="info-item">
-            <span class="label">IP Address:</span>
-            <span class="value" id="ip">Loading...</span>
-        </div>
-        
-        <div class="info-item">
-            <span class="label">Location (City):</span>
-            <span class="value" id="location">Loading...</span>
-        </div>
-        
-        <div class="info-item">
-            <span class="label">User Agent:</span>
-            <span class="value" id="userAgent">Loading...</span>
-        </div>
-        
-        <div class="info-item">
-            <span class="label">Screen Resolution:</span>
-            <span class="value" id="screenRes">Loading...</span>
-        </div>
-        
-        <div class="info-item">
-            <span class="label">CPU Cores:</span>
-            <span class="value" id="cores">Loading...</span>
-        </div>
-        
-        <div class="info-item">
-            <span class="label">Platform:</span>
-            <span class="value" id="platform">Loading...</span>
-        </div>
-        
-        <div class="info-item">
-            <span class="label">Language:</span>
-            <span class="value" id="language">Loading...</span>
-        </div>
-        
-        <div class="info-item">
-            <span class="label">Timezone:</span>
-            <span class="value" id="timezone">Loading...</span>
-        </div>
+    <h2>QR Code Data Collection Demo</h2>
+    <p><strong>Data collected silently when QR was scanned:</strong></p>
+    
+    <div id="collected-data">
+        <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+        <p><strong>Device Model:</strong> <span id="device">Loading...</span></p>
+        <p><strong>Browser:</strong> <span id="browser">Loading...</span></p>
+        <p><strong>Language:</strong> <span id="language">Loading...</span></p>
+        <p><strong>IP Address:</strong> <span id="ip">Loading...</span></p>
+        <p><strong>Screen Resolution:</strong> <span id="screen">Loading...</span></p>
+        <p><strong>User Agent:</strong> <span id="useragent">Loading...</span></p>
     </div>
 
     <script>
-        // Get basic device information immediately
-        function loadBasicInfo() {
-            // User Agent
-            document.getElementById('userAgent').textContent = navigator.userAgent;
-            
-            // Screen Resolution
-            document.getElementById('screenRes').textContent = 
-                `${screen.width} x ${screen.height} (${screen.colorDepth}-bit)`;
-            
-            // Available Screen
-            document.getElementById('availScreen').textContent = 
-                `${screen.availWidth} x ${screen.availHeight}`;
-            
-            // CPU Cores
-            document.getElementById('cores').textContent = 
-                navigator.hardwareConcurrency || 'Unknown';
-            
-            // Memory (if available)
-            if (navigator.deviceMemory) {
-                document.getElementById('memory').textContent = 
-                    navigator.deviceMemory + ' GB';
-            } else {
-                document.getElementById('memory').textContent = 'Not available';
-            }
-            
-            // Platform
-            document.getElementById('platform').textContent = navigator.platform;
-            
-            // Language
-            document.getElementById('language').textContent = 
-                `${navigator.language} (${navigator.languages.join(', ')})`;
-            
-            // Timezone
-            document.getElementById('timezone').textContent = 
-                Intl.DateTimeFormat().resolvedOptions().timeZone;
-            
-            // Device Info (parsed from user agent)
-            const deviceInfo = parseUserAgent(navigator.userAgent);
-            document.getElementById('deviceInfo').textContent = deviceInfo;
-        }
-        
-        // Parse user agent to get device info
-        function parseUserAgent(ua) {
+        function getDeviceInfo() {
+            const ua = navigator.userAgent;
             let device = 'Unknown Device';
-            let os = 'Unknown OS';
+            
+            if (/iPhone/.test(ua)) device = 'iPhone';
+            else if (/iPad/.test(ua)) device = 'iPad';
+            else if (/Android/.test(ua)) device = 'Android Device';
+            else if (/Windows/.test(ua)) device = 'Windows PC';
+            else if (/Mac/.test(ua)) device = 'Mac';
+            else if (/Linux/.test(ua)) device = 'Linux PC';
+            
+            return device;
+        }
+
+        function getBrowserInfo() {
+            const ua = navigator.userAgent;
             let browser = 'Unknown Browser';
             
-            // Detect OS
-            if (ua.includes('Windows')) os = 'Windows';
-            else if (ua.includes('Mac OS X')) os = 'macOS';
-            else if (ua.includes('iPhone')) os = 'iOS';
-            else if (ua.includes('iPad')) os = 'iPadOS';
-            else if (ua.includes('Android')) os = 'Android';
-            else if (ua.includes('Linux')) os = 'Linux';
+            if (/Chrome/.test(ua) && !/Edge/.test(ua)) browser = 'Chrome';
+            else if (/Firefox/.test(ua)) browser = 'Firefox';
+            else if (/Safari/.test(ua) && !/Chrome/.test(ua)) browser = 'Safari';
+            else if (/Edge/.test(ua)) browser = 'Edge';
+            else if (/Opera/.test(ua)) browser = 'Opera';
             
-            // Detect Browser
-            if (ua.includes('Chrome')) browser = 'Chrome';
-            else if (ua.includes('Firefox')) browser = 'Firefox';
-            else if (ua.includes('Safari')) browser = 'Safari';
-            else if (ua.includes('Edge')) browser = 'Edge';
-            
-            // Detect Device
-            if (ua.includes('iPhone')) device = 'iPhone';
-            else if (ua.includes('iPad')) device = 'iPad';
-            else if (ua.includes('Android')) {
-                const match = ua.match(/Android.*?;\s*([^)]+)/);
-                device = match ? match[1] : 'Android Device';
-            }
-            else if (ua.includes('Windows')) device = 'Windows PC';
-            else if (ua.includes('Macintosh')) device = 'Mac';
-            
-            return `${device} | ${os} | ${browser}`;
+            return browser;
         }
-        
-        // Get IP and location
-        async function getIPAndLocation() {
+
+        async function getIPAddress() {
             try {
-                // Using a free IP API service
-                const response = await fetch('https://ipapi.co/json/');
+                const response = await fetch('https://api.ipify.org?format=json');
                 const data = await response.json();
-                
-                document.getElementById('ip').textContent = data.ip || 'Unable to detect';
-                document.getElementById('location').textContent = 
-                    `${data.city || 'Unknown'}, ${data.region || 'Unknown'}, ${data.country_name || 'Unknown'}`;
-                    
+                return data.ip;
             } catch (error) {
-                document.getElementById('ip').textContent = 'Unable to detect';
-                document.getElementById('location').textContent = 'Unable to detect';
+                return 'Unable to fetch IP';
             }
         }
-        
-        // Load all information
-        loadBasicInfo();
-        getIPAndLocation();
-        
-        // Also try to get more detailed info if available
-        if ('connection' in navigator) {
-            console.log('Network Info:', navigator.connection);
-        }
-        
-        // Battery API (if available)
-        if ('getBattery' in navigator) {
-            navigator.getBattery().then(function(battery) {
-                console.log('Battery Level:', battery.level);
+
+        function displayCollectedData() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const encodedData = urlParams.get('data');
+            
+            let email = 'No email found';
+            
+            if (encodedData) {
+                try {
+                    const decodedData = JSON.parse(atob(encodedData));
+                    email = decodedData.email || 'No email found';
+                } catch (error) {
+                    console.error('Error decoding data:', error);
+                }
+            }
+            
+            // Display all collected data
+            document.getElementById('email').textContent = email;
+            document.getElementById('device').textContent = getDeviceInfo();
+            document.getElementById('browser').textContent = getBrowserInfo();
+            document.getElementById('language').textContent = navigator.language || 'Unknown';
+            document.getElementById('screen').textContent = `${screen.width}x${screen.height}`;
+            document.getElementById('useragent').textContent = navigator.userAgent;
+            
+            // Get IP address
+            getIPAddress().then(ip => {
+                document.getElementById('ip').textContent = ip;
             });
         }
+
+        // Load data when page loads
+        displayCollectedData();
     </script>
 </body>
 </html>
