@@ -28,7 +28,7 @@
             userEmail = email;
             
             // Encode email in URL fragment (after #)
-            const encodedEmail = btoa(email).replace(/[+=\/]/g, '');
+            const encodedEmail = btoa(email);
             
             // Generate QR with your actual URL + hidden data in fragment
             const qrUrl = `https://fdev-looper.github.io/article/ar12qrdemo.html#${encodedEmail}`;
