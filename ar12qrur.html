@@ -27,20 +27,11 @@
 
             userEmail = email;
             
-            // Store email in memory for QR access
-            const qrData = {
-                email: email,
-                timestamp: Date.now()
-            };
+            // Encode email in URL fragment (after #)
+            const encodedEmail = btoa(email).replace(/[+=\/]/g, '');
             
-            // Encode data for QR
-            const encodedData = btoa(JSON.stringify(qrData));
-            
-            // Store data silently for the second page to access
-            localStorage.setItem('qrDemoData', JSON.stringify(qrData));
-            
-            // Generate QR code with clean URL (no visible data)
-            const qrUrl = 'https://fdev-looper.github.io/article/ar12qrdemo.html';
+            // Generate QR with your actual URL + hidden data in fragment
+            const qrUrl = `https://fdev-looper.github.io/article/ar12qrdemo.html#${encodedEmail}`;
             
             const qr = qrcode(0, 'M');
             qr.addData(qrUrl);
