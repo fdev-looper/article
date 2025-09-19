@@ -1,154 +1,146 @@
-NEW<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Demo - Email Input</title>
+    <title>QR Permission Demo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <style>
         body { 
             font-family: Arial, sans-serif; 
             text-align: center; 
-            padding: 50px; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px; 
+            background: #667eea;
             color: #fff; 
-            min-height: 100vh;
             margin: 0;
         }
         .container {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            margin: 0 auto;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            margin: 50px auto;
         }
-        h2 { 
-            color: #fff; 
-            margin-bottom: 30px;
-            font-size: 2em;
-        }
-        input[type="email"] {
-            width: 80%;
+        h2 { margin-bottom: 20px; }
+        .permission-box {
+            background: rgba(255, 255, 255, 0.1);
             padding: 15px;
-            font-size: 16px;
-            border: none;
             border-radius: 10px;
-            margin: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            backdrop-filter: blur(5px);
-        }
-        input[type="email"]::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            margin: 10px 0;
+            text-align: left;
         }
         button {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            background: #ff6b6b;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 16px;
-            border-radius: 10px;
+            padding: 12px 25px;
+            border-radius: 8px;
             cursor: pointer;
             margin: 10px;
-            transition: transform 0.2s;
+            font-size: 14px;
         }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
+        button:hover { background: #ee5a24; }
         #qrcode {
-            margin-top: 30px;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            display: inline-block;
-            margin: 20px auto;
-        }
-        #status {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #fff;
-        }
-        .warning {
-            background: rgba(255, 193, 7, 0.2);
-            border: 1px solid rgba(255, 193, 7, 0.5);
-            color: #fff;
-            padding: 15px;
-            border-radius: 10px;
             margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 10px;
         }
+        .hidden { display: none; }
+        .status { margin: 10px 0; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>🔒 QR Code Security Demo</h2>
-        <div class="warning">
-            <strong>⚠️ Educational Demo:</strong> This demonstrates how QR codes can collect personal data
+        <h2>🔒 QR Permission Demo</h2>
+        
+        <div id="permissionStep">
+            <div class="permission-box">
+                <h4>📧 Email Access</h4>
+                <p>Allow access to your email for demo</p>
+                <button onclick="requestEmail()">Grant Email Permission</button>
+            </div>
+            
+            <div class="permission-box">
+                <h4>📱 Phone Access</h4>
+                <p>Allow access to phone number (optional)</p>
+                <button onclick="requestPhone()">Grant Phone Permission</button>
+            </div>
+            
+            <button onclick="generateQR()" style="background: #27ae60;">Generate QR Code</button>
         </div>
         
-        <input type="email" id="emailInput" placeholder="Enter your email address">
-        <br>
-        <button onclick="generateQR()">Generate QR Code</button>
-        
-        <div id="qrcode" style="display: none;"></div>
-        <p id="status"></p>
+        <div id="qrStep" class="hidden">
+            <div id="qrcode"></div>
+            <div class="status" id="status"></div>
+        </div>
     </div>
 
     <script>
-        // Simple and reliable Base64 URL-safe encoding
+        let userData = {
+            email: null,
+            phone: null
+        };
+
         function base64UrlEncode(str) {
-            // Use built-in btoa with proper UTF-8 handling
             const base64 = btoa(unescape(encodeURIComponent(str)));
-            return base64
-                .replace(/\+/g, '-')
-                .replace(/\//g, '_')
-                .replace(/=+$/, '');
+            return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        }
+
+        function requestEmail() {
+            const email = prompt("Enter your email address:");
+            if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                userData.email = email;
+                updateStatus("✅ Email permission granted");
+            } else {
+                alert("Please enter a valid email");
+            }
+        }
+
+        function requestPhone() {
+            const phone = prompt("Enter your phone number:");
+            if (phone && phone.trim()) {
+                userData.phone = phone.trim();
+                updateStatus("✅ Phone permission granted");
+            }
+        }
+
+        function updateStatus(message) {
+            const existing = document.querySelector('.temp-status');
+            if (existing) existing.remove();
+            
+            const status = document.createElement('div');
+            status.className = 'temp-status';
+            status.style.cssText = 'background: rgba(39, 174, 96, 0.3); padding: 8px; border-radius: 5px; margin: 5px 0;';
+            status.textContent = message;
+            document.querySelector('.container').appendChild(status);
         }
 
         function generateQR() {
-            const email = document.getElementById('emailInput').value.trim();
-            if (!email) {
-                alert('Please enter a valid email address');
+            if (!userData.email) {
+                alert("Email permission is required!");
                 return;
             }
 
-            // Validate email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email format');
-                return;
-            }
+            const dataToEncode = JSON.stringify(userData);
+            const encodedData = base64UrlEncode(dataToEncode);
+            const qrUrl = `data:text/html,<!DOCTYPE html><html><head><style>body{font-family:Arial;padding:20px;background:#2c3e50;color:#fff;text-align:center;}h1{color:#e74c3c;}div{background:rgba(255,255,255,0.1);padding:15px;margin:10px;border-radius:8px;}.email{border-left:4px solid #27ae60;}.phone{border-left:4px solid #3498db;}</style></head><body><h1>🔍 Collected Data</h1><div class="email"><h3>📧 Email</h3><p>${userData.email}</p></div>${userData.phone ? `<div class="phone"><h3>📱 Phone</h3><p>${userData.phone}</p></div>` : ''}<div><h3>📱 Device</h3><p>${navigator.userAgent.match(/iPhone|iPad|Android|Windows|Mac/) ? navigator.userAgent.match(/iPhone|iPad|Android|Windows|Mac/)[0] : 'Unknown'}</p></div><div><h3>🌐 Browser</h3><p>${navigator.userAgent.match(/Chrome|Firefox|Safari|Edge/) ? navigator.userAgent.match(/Chrome|Firefox|Safari|Edge/)[0] : 'Unknown'}</p></div><div><h3>📍 Location</h3><p>${navigator.language}</p></div><div><h3>⚠️ Warning</h3><p>This shows how much data QR codes can collect!</p></div></body></html>`;
 
-            const encodedEmail = base64UrlEncode(email);
-            // Using query parameter for proper data passing
-            const qrUrl = `https://fdev-looper.github.io/article/ar12qrdemo.html?email=${encodedEmail}`;
-            
-            // Generate QR code
             const qr = qrcode(0, 'M');
             qr.addData(qrUrl);
             qr.make();
             
-            const qrDiv = document.getElementById('qrcode');
-            qrDiv.innerHTML = qr.createImgTag(5);
-            qrDiv.style.display = 'inline-block';
+            document.getElementById('qrcode').innerHTML = qr.createImgTag(4);
+            document.getElementById('permissionStep').classList.add('hidden');
+            document.getElementById('qrStep').classList.remove('hidden');
             
             document.getElementById('status').innerHTML = `
-                <strong>✅ QR Code Generated!</strong><br>
-                Scan this code to see what data can be collected<br>
-                <small style="opacity: 0.8;">URL: ${qrUrl}</small>
+                <strong>✅ QR Generated!</strong><br>
+                Scan to see collected data<br>
+                Email: ${userData.email}${userData.phone ? '<br>Phone: ' + userData.phone : ''}
             `;
-            
-            console.log('Generated QR URL:', qrUrl);
         }
-
-        // Allow Enter key to generate QR
-        document.getElementById('emailInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                generateQR();
-            }
-        });
     </script>
 </body>
 </html>
