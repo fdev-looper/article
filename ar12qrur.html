@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Demo - Email Input</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+</head>
+<body>
+    <h2>Enter Your Email for Demo</h2>
+    
+    <input type="email" id="emailInput" placeholder="Enter your email">
+    <button onclick="generateQR()">Generate QR Code</button>
+    
+    <div id="qrcode" style="margin-top: 20px;"></div>
+    <p id="status"></p>
+
+    <script>
+        let userEmail = '';
+
+        function generateQR() {
+            const email = document.getElementById('emailInput').value;
+            if (!email) {
+                alert('Please enter an email');
+                return;
+            }
+
+            userEmail = email;
+            
+            // Store email in memory for QR access
+            const qrData = {
+                email: email,
+                timestamp: Date.now()
+            };
+            
+            // Encode data for QR
+            const encodedData = btoa(JSON.stringify(qrData));
+            
+            // Generate QR code that points to demo page with encoded data
+            const qrUrl = `${window.location.origin}/ar12qrdemo.html?data=${encodedData}`;
+            
+            const qr = qrcode(0, 'M');
+            qr.addData(qrUrl);
+            qr.make();
+            
+            document.getElementById('qrcode').innerHTML = qr.createImgTag(4);
+            document.getElementById('status').innerHTML = `QR Generated! Email: ${email}`;
+            
+            console.log('QR URL:', qrUrl);
+        }
+    </script>
+</body>
+</html>
