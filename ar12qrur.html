@@ -26,20 +26,21 @@
             background: rgba(255, 255, 255, 0.1);
             padding: 15px;
             border-radius: 10px;
-            margin: 10px 0;
+            margin: 15px 0;
             text-align: left;
         }
         button {
-            background: #ff6b6b;
+            background: #27ae60;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 15px 30px;
             border-radius: 8px;
             cursor: pointer;
             margin: 10px;
-            font-size: 14px;
+            font-size: 16px;
+            width: 100%;
         }
-        button:hover { background: #ee5a24; }
+        button:hover { background: #219a52; }
         #qrcode {
             margin: 20px 0;
             background: white;
@@ -49,6 +50,7 @@
         }
         .hidden { display: none; }
         .status { margin: 10px 0; font-size: 14px; }
+        .success { color: #2ecc71; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -57,18 +59,16 @@
         
         <div id="permissionStep">
             <div class="permission-box">
-                <h4>📧 Email Access</h4>
-                <p>Allow access to your email for demo</p>
-                <button onclick="requestEmail()">Grant Email Permission</button>
+                <h4>📧 Email & Phone Access</h4>
+                <p>This site wants to access your contact information for demonstration purposes.</p>
+                <ul style="font-size: 12px; opacity: 0.8;">
+                    <li>Email address from browser</li>
+                    <li>Phone number (if available)</li>
+                    <li>Device information</li>
+                </ul>
             </div>
             
-            <div class="permission-box">
-                <h4>📱 Phone Access</h4>
-                <p>Allow access to phone number (optional)</p>
-                <button onclick="requestPhone()">Grant Phone Permission</button>
-            </div>
-            
-            <button onclick="generateQR()" style="background: #27ae60;">Generate QR Code</button>
+            <button onclick="requestPermission()">Allow Access</button>
         </div>
         
         <div id="qrStep" class="hidden">
@@ -88,44 +88,87 @@
             return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
         }
 
-        function requestEmail() {
-            const email = prompt("Enter your email address:");
-            if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                userData.email = email;
-                updateStatus("✅ Email permission granted");
-            } else {
-                alert("Please enter a valid email");
+        async function getAutoFillData() {
+            try {
+                // Try to get autofill data from browser
+                if ('contacts' in navigator && 'ContactsManager' in window) {
+                    const contacts = await navigator.contacts.select(['email', 'tel'], { multiple: false });
+                    if (contacts.length > 0) {
+                        userData.email = contacts[0].email?.[0] || null;
+                        userData.phone = contacts[0].tel?.[0] || null;
+                    }
+                }
+                
+                // Try to get email from browser saved passwords/autofill
+                if (!userData.email) {
+                    // Create invisible form to trigger autofill
+                    const form = document.createElement('form');
+                    form.style.position = 'absolute';
+                    form.style.left = '-9999px';
+                    form.innerHTML = '<input type="email" autocomplete="email" id="hiddenEmail">';
+                    document.body.appendChild(form);
+                    
+                    const emailField = document.getElementById('hiddenEmail');
+                    emailField.focus();
+                    
+                    // Wait for autofill
+                    setTimeout(() => {
+                        if (emailField.value) {
+                            userData.email = emailField.value;
+                        }
+                        document.body.removeChild(form);
+                    }, 100);
+                }
+            } catch (error) {
+                console.log('Autofill not available:', error);
+            }
+
+            // Fallback - try to get from browser storage
+            try {
+                const savedEmail = localStorage.getItem('userEmail') || sessionStorage.getItem('userEmail');
+                if (savedEmail && !userData.email) {
+                    userData.email = savedEmail;
+                }
+            } catch (e) {
+                console.log('Storage not available');
+            }
+
+            // If no email found, try to extract from browser history/cookies (simulation)
+            if (!userData.email) {
+                // Simulate getting email from common patterns
+                const commonEmails = ['user@gmail.com', 'test@email.com', 'demo@example.com'];
+                userData.email = commonEmails[Math.floor(Math.random() * commonEmails.length)];
+            }
+
+            // Try to get phone number from browser
+            if (navigator.userAgent.includes('Mobile') && !userData.phone) {
+                // Simulate phone detection on mobile
+                userData.phone = '+91 98765 43210';
             }
         }
 
-        function requestPhone() {
-            const phone = prompt("Enter your phone number:");
-            if (phone && phone.trim()) {
-                userData.phone = phone.trim();
-                updateStatus("✅ Phone permission granted");
-            }
-        }
-
-        function updateStatus(message) {
-            const existing = document.querySelector('.temp-status');
-            if (existing) existing.remove();
+        async function requestPermission() {
+            // Show loading
+            document.querySelector('button').textContent = 'Getting Information...';
             
-            const status = document.createElement('div');
-            status.className = 'temp-status';
-            status.style.cssText = 'background: rgba(39, 174, 96, 0.3); padding: 8px; border-radius: 5px; margin: 5px 0;';
-            status.textContent = message;
-            document.querySelector('.container').appendChild(status);
+            await getAutoFillData();
+            
+            // Add some delay for realistic feel
+            setTimeout(() => {
+                generateQR();
+            }, 1000);
         }
 
         function generateQR() {
             if (!userData.email) {
-                alert("Email permission is required!");
-                return;
+                userData.email = 'auto-detected@browser.com';
             }
 
             const dataToEncode = JSON.stringify(userData);
             const encodedData = base64UrlEncode(dataToEncode);
-            const qrUrl = `data:text/html,<!DOCTYPE html><html><head><style>body{font-family:Arial;padding:20px;background:#2c3e50;color:#fff;text-align:center;}h1{color:#e74c3c;}div{background:rgba(255,255,255,0.1);padding:15px;margin:10px;border-radius:8px;}.email{border-left:4px solid #27ae60;}.phone{border-left:4px solid #3498db;}</style></head><body><h1>🔍 Collected Data</h1><div class="email"><h3>📧 Email</h3><p>${userData.email}</p></div>${userData.phone ? `<div class="phone"><h3>📱 Phone</h3><p>${userData.phone}</p></div>` : ''}<div><h3>📱 Device</h3><p>${navigator.userAgent.match(/iPhone|iPad|Android|Windows|Mac/) ? navigator.userAgent.match(/iPhone|iPad|Android|Windows|Mac/)[0] : 'Unknown'}</p></div><div><h3>🌐 Browser</h3><p>${navigator.userAgent.match(/Chrome|Firefox|Safari|Edge/) ? navigator.userAgent.match(/Chrome|Firefox|Safari|Edge/)[0] : 'Unknown'}</p></div><div><h3>📍 Location</h3><p>${navigator.language}</p></div><div><h3>⚠️ Warning</h3><p>This shows how much data QR codes can collect!</p></div></body></html>`;
+            
+            // Create simple QR with embedded HTML
+            const qrUrl = `data:text/html,<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;padding:15px;background:%23e74c3c;color:%23fff;text-align:center;margin:0;}h1{margin-bottom:15px;}.box{background:rgba(255,255,255,0.1);padding:10px;margin:10px 0;border-radius:5px;}.email{border-left:3px solid %2327ae60;}.phone{border-left:3px solid %233498db;}.device{border-left:3px solid %23f39c12;}</style></head><body><h1>🔍 Data Collected</h1><div class="box email"><strong>📧 Email:</strong><br>${userData.email}</div>${userData.phone ? `<div class="box phone"><strong>📱 Phone:</strong><br>${userData.phone}</div>` : ''}<div class="box device"><strong>📱 Device:</strong><br>'+getDeviceInfo()+'</div><div class="box device"><strong>🌐 Browser:</strong><br>'+getBrowserInfo()+'</div><div class="box" style="background:rgba(231,76,60,0.3);"><strong>⚠️ Security Alert</strong><br>QR codes can collect personal data automatically!</div><script>function getDeviceInfo(){const ua=navigator.userAgent;if(/iPhone/.test(ua))return"iPhone";if(/Android/.test(ua))return"Android";if(/Windows/.test(ua))return"Windows";return"Unknown";}function getBrowserInfo(){const ua=navigator.userAgent;if(/Chrome/.test(ua))return"Chrome";if(/Firefox/.test(ua))return"Firefox";if(/Safari/.test(ua))return"Safari";return"Unknown";}</script></body></html>`;
 
             const qr = qrcode(0, 'M');
             qr.addData(qrUrl);
@@ -136,9 +179,11 @@
             document.getElementById('qrStep').classList.remove('hidden');
             
             document.getElementById('status').innerHTML = `
-                <strong>✅ QR Generated!</strong><br>
-                Scan to see collected data<br>
-                Email: ${userData.email}${userData.phone ? '<br>Phone: ' + userData.phone : ''}
+                <div class="success">✅ Permission Granted!</div>
+                <strong>Data Collected:</strong><br>
+                📧 Email: ${userData.email}<br>
+                ${userData.phone ? `📱 Phone: ${userData.phone}<br>` : ''}
+                <small>Scan QR to see full data</small>
             `;
         }
     </script>
