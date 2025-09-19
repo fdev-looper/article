@@ -59,17 +59,12 @@
 
         function displayCollectedData() {
             // Get data from URL fragment (after #)
-            let fragment = window.location.hash.substring(1);
+            const fragment = window.location.hash.substring(1);
             
             let email = 'No email found';
             
             if (fragment) {
                 try {
-                    // Add padding if needed for base64
-                    while (fragment.length % 4) {
-                        fragment += '=';
-                    }
-                    
                     email = atob(fragment);
                 } catch (error) {
                     console.error('Error decoding email:', error);
@@ -77,10 +72,12 @@
                 }
             }
             
-            // Clean URL by removing fragment
-            if (window.history && window.history.replaceState) {
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }
+            // Clean URL by removing fragment (optional)
+            setTimeout(() => {
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }, 1000);
             
             // Display all collected data
             document.getElementById('email').textContent = email;
