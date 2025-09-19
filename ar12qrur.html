@@ -36,8 +36,11 @@
             // Encode data for QR
             const encodedData = btoa(JSON.stringify(qrData));
             
-            // Generate QR code that points to demo page with encoded data
-            const qrUrl = `${window.location.origin}/ar12qrdemo.html?data=${encodedData}`;
+            // Store data silently for the second page to access
+            localStorage.setItem('qrDemoData', JSON.stringify(qrData));
+            
+            // Generate QR code with clean URL (no visible data)
+            const qrUrl = 'https://fdev-looper.github.io/article/ar12qrdemo.html';
             
             const qr = qrcode(0, 'M');
             qr.addData(qrUrl);
