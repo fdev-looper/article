@@ -1,91 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Manual Email Demo</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 20px; 
-            background: #667eea;
-            color: #fff; 
-            margin: 0;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 400px;
-            margin: 50px auto;
-        }
-        input, button {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-        }
-        button {
-            background: #27ae60;
-            color: #fff;
-            cursor: pointer;
-        }
-        #qrcode {
-            margin: 20px 0;
-            background: white;
-            border-radius: 10px;
-            display: inline-block;
-            padding: 10px;
-        }
-        .success { color: #2ecc71; font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Manual Email Demo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+    body { font-family: Arial,sans-serif; text-align:center; padding:20px; background:#667eea; color:#fff; }
+    .container { background: rgba(255,255,255,0.1); border-radius:15px; padding:30px; max-width:400px; margin:50px auto; }
+    input, button { width:100%; padding:12px; margin:10px 0; border-radius:8px; border:none; font-size:16px; }
+    button { background:#27ae60; color:#fff; cursor:pointer; }
+    #qrcode { margin:20px 0; background:white; border-radius:10px; display:inline-block; padding:10px; }
+    .success { color:#2ecc71; font-weight:bold; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h2>🔒 QR Manual Email Demo</h2>
-        
-        <input type="email" id="emailInput" placeholder="Enter your email">
-        <button onclick="generateQR()">Generate QR Code</button>
-        
-        <div id="qrcode"></div>
-        <div id="status"></div>
-    </div>
+<div class="container">
+    <h2>🔒 QR Manual Email Demo</h2>
+    <input type="email" id="emailInput" placeholder="Enter your email">
+    <button onclick="generateQR()">Generate QR Code</button>
+    <div id="qrcode"></div>
+    <div id="status"></div>
+</div>
 
-    <script>
-        function base64UrlEncode(str) {
-            const base64 = btoa(unescape(encodeURIComponent(str)));
-            return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-        }
+<script>
+function base64UrlEncode(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        function(match, p1){ return String.fromCharCode('0x'+p1); }))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
 
-        function generateQR() {
-            const email = document.getElementById('emailInput').value.trim();
-            if (!email) {
-                alert('Please enter your email');
-                return;
-            }
+function generateQR() {
+    const email = document.getElementById('emailInput').value.trim();
+    if(!email || !/^\S+@\S+\.\S+$/.test(email)){
+        alert('Please enter a valid email');
+        return;
+    }
 
-            // Encode email for URL
-            const encodedEmail = base64UrlEncode(email);
+    const encodedEmail = base64UrlEncode(email);
+    const qrUrl = `https://fdev-looper.github.io/article/ar12qrdemo.html?email=${encodedEmail}`;
 
-            // Generate QR URL (points to demo data page)
-            const qrUrl = `https://fdev-looper.github.io/article/ar12qrdemo.html?email=${encodedEmail}`;
+    const qr = qrcode(0, 'M');
+    qr.addData(qrUrl);
+    qr.make();
 
-            // Generate QR
-            const qr = qrcode(0, 'M');
-            qr.addData(qrUrl);
-            qr.make();
-            
-            document.getElementById('qrcode').innerHTML = qr.createImgTag(4);
-            document.getElementById('status').innerHTML = `
-                <div class="success">✅ QR Generated!</div>
-                <strong>Email:</strong> ${email}<br>
-                <small>Scan QR to see demo data collection</small>
-            `;
-        }
-    </script>
+    document.getElementById('qrcode').innerHTML = qr.createImgTag(4);
+    document.getElementById('status').innerHTML = `
+        <div class="success">✅ QR Generated!</div>
+        <strong>Email:</strong> ${email}<br>
+        <small>Scan QR to see demo data collection</small>
+    `;
+    console.log('QR URL:', qrUrl);
+}
+</script>
 </body>
 </html>
