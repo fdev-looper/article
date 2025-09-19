@@ -197,10 +197,10 @@
     </div>
 
     <script>
-        // Simple and reliable Base64 URL-safe decoding
+        // Fixed Base64 URL-safe decoding - working version
         function base64UrlDecode(str) {
             try {
-                // Convert URL-safe base64 back to regular base64
+                // Handle URL-safe characters
                 let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
                 
                 // Add padding if needed
@@ -208,11 +208,16 @@
                     base64 += '=';
                 }
                 
-                // Decode and handle UTF-8
-                return decodeURIComponent(escape(atob(base64)));
+                // Decode base64
+                const decoded = atob(base64);
+                console.log('Base64 decoded raw:', decoded);
+                
+                // Return as is - no additional UTF-8 conversion needed for simple emails
+                return decoded;
+                
             } catch (e) {
-                console.error('Error decoding:', e);
-                return 'Error decoding data';
+                console.error('Base64 decode error:', e);
+                return 'Invalid base64 data';
             }
         }
 
