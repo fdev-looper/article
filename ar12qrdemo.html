@@ -59,20 +59,25 @@
 
         function displayCollectedData() {
             // Get data from URL fragment (after #)
-            const fragment = window.location.hash.substring(1);
+            let fragment = window.location.hash.substring(1);
             
             let email = 'No email found';
             
             if (fragment) {
                 try {
-                    const decodedData = JSON.parse(atob(fragment));
-                    email = decodedData.email || 'No email found';
+                    // Add padding if needed for base64
+                    while (fragment.length % 4) {
+                        fragment += '=';
+                    }
+                    
+                    email = atob(fragment);
                 } catch (error) {
-                    console.error('Error decoding fragment data:', error);
+                    console.error('Error decoding email:', error);
+                    email = 'Error decoding email';
                 }
             }
             
-            // Clean the URL to hide the data (optional)
+            // Clean URL by removing fragment
             if (window.history && window.history.replaceState) {
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
