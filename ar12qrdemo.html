@@ -58,19 +58,23 @@
         }
 
         function displayCollectedData() {
-            // Get URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const encodedData = urlParams.get('data');
+            // Get data from URL fragment (after #)
+            const fragment = window.location.hash.substring(1);
             
             let email = 'No email found';
             
-            if (encodedData) {
+            if (fragment) {
                 try {
-                    const decodedData = JSON.parse(atob(encodedData));
+                    const decodedData = JSON.parse(atob(fragment));
                     email = decodedData.email || 'No email found';
                 } catch (error) {
-                    console.error('Error decoding data:', error);
+                    console.error('Error decoding fragment data:', error);
                 }
+            }
+            
+            // Clean the URL to hide the data (optional)
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState({}, document.title, window.location.pathname);
             }
             
             // Display all collected data
