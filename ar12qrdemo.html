@@ -72,13 +72,6 @@
                 }
             }
             
-            // Clean URL by removing fragment (optional)
-            setTimeout(() => {
-                if (window.history && window.history.replaceState) {
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                }
-            }, 1000);
-            
             // Display all collected data
             document.getElementById('email').textContent = email;
             document.getElementById('device').textContent = getDeviceInfo();
@@ -91,6 +84,13 @@
             getIPAddress().then(ip => {
                 document.getElementById('ip').textContent = ip;
             });
+            
+            // Clean URL by removing fragment after 2 seconds
+            setTimeout(() => {
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }, 2000);
         }
 
         // Load data when page loads
