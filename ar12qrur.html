@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+NEW<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -97,9 +97,11 @@
     </div>
 
     <script>
-        // URL-safe Base64 encode
+        // Simple and reliable Base64 URL-safe encoding
         function base64UrlEncode(str) {
-            return btoa(unescape(encodeURIComponent(str)))
+            // Use built-in btoa with proper UTF-8 handling
+            const base64 = btoa(unescape(encodeURIComponent(str)));
+            return base64
                 .replace(/\+/g, '-')
                 .replace(/\//g, '_')
                 .replace(/=+$/, '');
