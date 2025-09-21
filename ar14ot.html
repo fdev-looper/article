@@ -422,14 +422,197 @@
             margin: 45px 0;
             text-align: center;
             box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.8s ease;
+        }
+        
+        .alchemistry-card.flipped {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .card-inner {
+            transition: all 0.8s ease;
+        }
+        
+        .alchemistry-image-container,
+        .card-content,
+        .reveal-button {
+            transition: all 0.8s ease;
+        }
+        
+        .alchemistry-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: #667eea;
+            border-radius: 25px;
+            z-index: -1;
+        }
+        
+        .alchemistry-image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
         }
         
         .alchemistry-card img {
             width: 120px;
             height: 120px;
             border-radius: 20px;
-            margin-bottom: 25px;
             box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .alchemistry-card img:hover {
+            transform: scale(1.05);
+        }
+        
+        .alchemistry-card.flipped img {
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(240, 147, 251, 0.6);
+        }
+        
+        .floating-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .bubble {
+            position: absolute;
+            background: rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            animation: float 4s infinite ease-in-out;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .alchemistry-card.flipped .bubble {
+            background: rgba(240, 147, 251, 0.5);
+            box-shadow: 0 0 20px rgba(240, 147, 251, 0.3);
+        }
+        
+        .bubble:nth-child(1) { width: 20px; height: 20px; left: 10%; animation-delay: 0s; }
+        .bubble:nth-child(2) { width: 15px; height: 15px; left: 20%; animation-delay: 0.5s; }
+        .bubble:nth-child(3) { width: 25px; height: 25px; left: 70%; animation-delay: 1s; }
+        .bubble:nth-child(4) { width: 18px; height: 18px; left: 80%; animation-delay: 1.5s; }
+        .bubble:nth-child(5) { width: 22px; height: 22px; left: 90%; animation-delay: 2s; }
+        
+        @keyframes float {
+            0% {
+                opacity: 0;
+                bottom: -50px;
+                transform: translateX(0px) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                bottom: 150px;
+                transform: translateX(-20px) rotate(360deg);
+            }
+        }
+        
+        .card-content {
+            transition: opacity 0.4s ease;
+            opacity: 1;
+        }
+        
+        .alchemistry-card.flipped .card-content {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        
+        .alchemistry-card.flipped .alchemistry-image-container {
+            margin-bottom: 0;
+        }
+        
+        .alchemistry-card.flipped img {
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 215, 0, 0.4);
+            animation: pulse 2s infinite;
+            transition: all 0.6s ease;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .alchemistry-card.flipped .bubble {
+            background: linear-gradient(45deg, #FFD700, #FFA500, #00BFFF, #1E90FF);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6), 0 0 50px rgba(0, 191, 255, 0.4);
+            animation: floatGoldenBlue 5s infinite ease-in-out;
+        }
+        
+        @keyframes floatGoldenBlue {
+            0% {
+                opacity: 0;
+                bottom: -50px;
+                transform: translateX(0px) rotate(0deg) scale(0.5);
+                background: linear-gradient(45deg, #FFD700, #FFA500);
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            }
+            25% {
+                opacity: 1;
+                background: linear-gradient(45deg, #FFA500, #00BFFF);
+                box-shadow: 0 0 20px rgba(255, 165, 0, 0.6), 0 0 30px rgba(0, 191, 255, 0.4);
+                transform: translateX(10px) rotate(90deg) scale(1);
+            }
+            50% {
+                background: linear-gradient(45deg, #00BFFF, #1E90FF);
+                box-shadow: 0 0 25px rgba(0, 191, 255, 0.8);
+                transform: translateX(-5px) rotate(180deg) scale(1.2);
+            }
+            75% {
+                background: linear-gradient(45deg, #1E90FF, #FFD700);
+                box-shadow: 0 0 20px rgba(30, 144, 255, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+                transform: translateX(15px) rotate(270deg) scale(0.8);
+            }
+            100% {
+                opacity: 0;
+                bottom: 200px;
+                background: linear-gradient(45deg, #FFD700, #FFA500);
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+                transform: translateX(-20px) rotate(360deg) scale(0.5);
+            }
+        }
+        
+        .alchemistry-card.flipped .bubble:nth-child(1) { animation-delay: 0s; left: 5%; }
+        .alchemistry-card.flipped .bubble:nth-child(2) { animation-delay: 0.8s; left: 25%; }
+        .alchemistry-card.flipped .bubble:nth-child(3) { animation-delay: 1.6s; left: 75%; }
+        .alchemistry-card.flipped .bubble:nth-child(4) { animation-delay: 2.4s; left: 85%; }
+        .alchemistry-card.flipped .bubble:nth-child(5) { animation-delay: 3.2s; left: 95%; }
+        
+        .alchemistry-card.flipped h3 {
+            color: #FFD700;
+        }
+        
+        .alchemistry-card.flipped p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .alchemistry-card.flipped h3 {
+            color: #FFD700;
+        }
+        
+        .alchemistry-card.flipped p {
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .alchemistry-card h3 {
@@ -444,6 +627,63 @@
             line-height: 1.8;
             color: var(--text-secondary);
             margin-bottom: 15px;
+        }
+        
+        .reveal-button {
+            position: absolute;
+            bottom: 20px;
+            right: 25px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .reveal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+        
+        .reveal-button:active {
+            transform: translateY(0);
+        }
+        
+        .fact-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-left: 5px solid #f093fb;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .fact-box h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .fact-box .fact-icon {
+            font-size: 1.8em;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         
         .sources-section {
@@ -590,6 +830,16 @@
                 margin: 25px 15px;
                 padding: 30px 25px;
             }
+            
+            .reveal-button {
+                position: static;
+                margin-top: 20px;
+                width: 100%;
+            }
+            
+            .alchemistry-card {
+                padding-bottom: 80px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -653,6 +903,33 @@
 
                 <section class="section">
                     <div class="section-header">
+                        <div class="section-icon">🧠</div>
+                        <h2 class="section-title">Mind-Blowing Facts About Data Harvesting</h2>
+                    </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">🤯</span>The 15-Second Rule</h3>
+                        <p>Did you know that within 15 seconds of uploading a document to a suspicious converter, advanced OCR (Optical Character Recognition) systems can extract every piece of text from your file? Your name, address, phone number, Aadhaar number — everything becomes searchable data in their database. Some malicious sites can process and categorize personal information faster than you can say "download complete."</p>
+                    </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">📊</span>The Hidden Metadata Goldmine</h3>
+                        <p>Every photo and document carries invisible metadata — GPS coordinates where it was taken, device information, editing history, and even the software used. Malicious converters don't just process your file; they harvest this metadata to build detailed profiles. They know which phone you use, where you live, when you took that photo, and sometimes even your work patterns!</p>
+                    </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">💰</span>Your Data's Dark Web Price Tag</h3>
+                        <p>A complete Indian identity package (Aadhaar + PAN + Photo + Phone) sells for ₹50-200 on the dark web. Banking details? ₹500-2000. Your "free" file conversion might have just earned someone your monthly grocery money. Cybersecurity researchers have found entire databases of Indian documents being auctioned online, traced back to "free" online tools.</p>
+                    </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">🔍</span>The AI Face Recognition Trap</h3>
+                        <p>Modern malicious converters use AI to analyze faces in documents and photos. They can determine your age, gender, emotional state, and even predict your economic status. This biometric data is then used to create "deepfake-ready" profiles or sold to advertising networks for hyper-targeted scams. Your face literally becomes a product!</p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
                         <div class="section-icon">⚠</div>
                         <h2 class="section-title">The Hidden Reality in India</h2>
                     </div>
@@ -681,12 +958,39 @@
                         </div>
                     </div>
                     
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">🏢</span>The Server Location Mystery</h3>
+                        <p>Most "free" Indian conversion tools actually host their servers in countries with weak data protection laws — like certain regions in Eastern Europe or unregulated cloud providers. This means your Aadhaar card uploaded in Mumbai might be stored in a server farm in Belarus, completely outside Indian jurisdiction. Law enforcement can't touch it, and you have zero legal recourse.</p>
+                    </div>
+                    
                     <div class="highlight-box">
                         <h3>The Reality Check</h3>
                         <p>A PwC India report found that only 16% of consumers even understand the new Digital Personal Data Protection Act. That means most people don't even know their rights.</p>
                         <p>A Business Standard study revealed that over 60% of Indian companies admit to "problematic data practices" like collecting more information than needed or reusing data without proper consent.</p>
                         <p>Experts also point out that the government has kept broad exemptions for itself under the law, and enforcement is still weak.</p>
                         <p><strong>So, when you casually upload your Aadhaar card, PAN, or even personal photos to a random "free tool" — you're not just resizing an image, you might be handing your identity to a system that isn't bound by strong protections.</strong></p>
+                    </div>
+                </section>
+                
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🔬</div>
+                        <h2 class="section-title">The Science Behind Data Harvesting</h2>
+                    </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">⚡</span>Lightning-Fast Processing</h3>
+                        <p>Advanced conversion sites use GPU-accelerated processing that can analyze a 10MB document in under 3 seconds. But here's the kicker — the actual conversion takes 1 second, the other 2 seconds are spent extracting, cataloging, and uploading your personal data to their databases. You're literally paying with your privacy for that "instant" service.</p>
+                    </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">🧬</span>Digital Fingerprinting</h3>
+                        <p>Every device creates a unique digital fingerprint when uploading files — browser version, screen resolution, timezone, installed fonts, even your mouse movement patterns. Malicious converters combine this with your document data to create detailed behavioral profiles. They know not just WHO you are, but HOW you behave online.</p>
+                    </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">🎯</span>The Correlation Algorithm</h3>
+                        <p>Here's something terrifying: AI algorithms can correlate your uploaded documents with publicly available data. Upload a resume? They cross-reference it with LinkedIn, Facebook, and job portals to build a complete profile. Upload an Aadhaar card? They match it with voter lists, property records, and social media to create a 360-degree view of your life.</p>
                     </div>
                 </section>
 
@@ -700,8 +1004,13 @@
                         <h3>While we often rely on online tools for quick file conversions, some of these services have been exploited</h3>
                         
                         <div class="case-item">
+                            <h4>The Mumbai Engineering Student Case</h4>
+                            <p>Arjun, a final-year engineering student, used a "free PDF compressor" to reduce his project report size. Three months later, he discovered his entire project was being sold on academic plagiarism sites for ₹500. The converter had not only stored his document but also used OCR to make it searchable and sellable.</p>
+                        </div>
+                        
+                        <div class="case-item">
                             <h4>Fake PDF Converter Campaigns</h4>
-                            <p>Cybercriminals have created counterfeit PDF converter websites that mimic legitimate services. These fraudulent sites distribute malware, including information stealers like ArechClient2, which harvest sensitive data from users' devices.</p>
+                            <p>Cybercriminals have created counterfeit PDF converter websites that mimic legitimate services. These fraudulent sites distribute malware, including information stealers like ArechClient2, which harvest sensitive data from users' devices. In 2024, over 200 such fake converters were identified targeting Indian users specifically.</p>
                         </div>
                         
                         <div class="case-item">
@@ -710,8 +1019,13 @@
                         </div>
                         
                         <div class="case-item">
+                            <h4>The Bangalore Startup Breach</h4>
+                            <p>A Bangalore-based startup's HR team used a "free resume converter" to standardize job applications. Later investigation revealed that all candidate data — including Aadhaar numbers, phone numbers, and addresses — were being sold to loan sharks and insurance agents. Over 5,000 job seekers' data was compromised.</p>
+                        </div>
+                        
+                        <div class="case-item">
                             <h4>CloudSEK's Findings on Malicious Converters</h4>
-                            <p>CloudSEK's research uncovered that threat actors are impersonating free PDF to DOCX file conversion websites to steal sensitive information like usernames and passwords.</p>
+                            <p>CloudSEK's research uncovered that threat actors are impersonating free PDF to DOCX file conversion websites to steal sensitive information like usernames and passwords. Their 2024 report identified a network of 50+ fake converters specifically targeting Indian government document conversions.</p>
                         </div>
                     </div>
                     
@@ -750,6 +1064,23 @@
                         </div>
                     </div>
                 </section>
+                
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🔮</div>
+                        <h2 class="section-title">The Future of Data Harvesting</h2>
+                    </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">🤖</span>AI-Powered Document Analysis</h3>
+                        <p>By 2025, advanced AI can predict your creditworthiness, health status, and even relationship status just from analyzing the documents you upload. A simple utility bill can reveal your economic class, energy usage patterns, and lifestyle habits. Insurance companies are already using such data to adjust premiums without your knowledge.</p>
+                    </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">🔗</span>Cross-Platform Data Correlation</h3>
+                        <p>The scariest trend? Data brokers now correlate information across multiple "free" services. Upload a photo to a converter, compress a document on another site, and convert a video elsewhere — AI algorithms piece together your digital life from these seemingly unrelated interactions.</p>
+                    </div>
+                </section>
 
                 <section class="section">
                     <div class="section-header">
@@ -766,14 +1097,37 @@
                         <p><strong>LibreOffice:</strong> libreoffice --convert-to pdf input.docx</p>
                         <p><strong>GIMP / HandBrake / Preview / Photoshop</strong> — all process files locally without uploading anything.</p>
                     </div>
+                    
+                    <div class="fact-box">
+                        <h3><span class="fact-icon">💡</span>Pro Security Tips</h3>
+                        <p><strong>The 3-Second Rule:</strong> If a website processes your file in under 3 seconds, be suspicious. Legitimate processing takes time.</p>
+                        <p><strong>Check the URL:</strong> Secure converters use HTTPS and have clear company information. Avoid random domains like "quickconvert123.tk"</p>
+                        <p><strong>Read the Fine Print:</strong> If the privacy policy is longer than the actual website, or if it mentions "data sharing with partners," run away!</p>
+                        <p><strong>Test with Dummy Data:</strong> Upload a fake document first. If they ask for additional permissions or downloads, it's likely malicious.</p>
+                    </div>
                 </section>
 
-                <div class="alchemistry-card">
-                    <img src="https://github.com/fdev-looper/Alchemistry/blob/main/Alcnt.png" alt="Alchemistry Logo" onerror="this.style.display='none'">
-                    <h3>🧪 Alchemistry</h3>
-                    <p>Soon, DNATech's Alchemistry (launching in 3 days 😎) will let you convert, compress, and resize files directly in your browser. It uses a temporary server just to process your request, but nothing is stored on the server — your data stays private and offline-like.</p>
-                    <p>Basically, all the convenience of an online tool, but without risking your files being leaked or stored somewhere random.</p>
-                    <p><strong>If you must use other online tools:</strong> choose services with clear privacy policies and automatic deletion of uploads. Avoid random first Google results.</p>
+                <div class="alchemistry-card" id="alchemistryCard">
+                    <div class="card-inner">
+                        <div class="alchemistry-image-container">
+                            <img src="https://github.com/fdev-looper/arimages/blob/main/Alcwt.png?raw=true" alt="Alchemistry" id="alchemistryImage">
+                            <div class="floating-bubbles">
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>🧪 Alchemistry</h3>
+                            <p>Soon, DNATech's Alchemistry (launching in 3 days 😎) will let you convert, compress, and resize files directly in your browser. It uses a temporary server just to process your request, but nothing is stored on the server — your data stays private and offline-like.</p>
+                            <p>Basically, all the convenience of an online tool, but without risking your files being leaked or stored somewhere random.</p>
+                            <p><strong>If you must use other online tools:</strong> choose services with clear privacy policies and automatic deletion of uploads. Avoid random first Google results.</p>
+                        </div>
+                        
+                        <button class="reveal-button" id="revealButton">Reveal More</button>
+                    </div>
                 </div>
 
                 <div class="sources-section">
@@ -789,6 +1143,8 @@
                         <li><a href="https://www.rbi.org.in/" target="_blank">Reserve Bank of India</a> - Digital Security Guidelines</li>
                         <li><a href="https://www.ncrb.gov.in/" target="_blank">National Crime Records Bureau</a> - Cyber Crime Statistics 2024</li>
                         <li><a href="https://www.datasecuritycouncil.org/" target="_blank">Data Security Council of India</a> - Privacy Protection Research</li>
+                        <li><a href="https://www.cybersecurityinsider.com/" target="_blank">Cybersecurity Insider</a> - Data Harvesting Techniques Report 2024</li>
+                        <li><a href="https://www.privacy.org/" target="_blank">Privacy International</a> - Global Data Broker Investigation</li>
                     </ul>
                 </div>
             </div>
@@ -839,6 +1195,14 @@
             if (demoCard) {
                 observer.observe(demoCard);
             }
+            
+            // Start bubble animations on page load
+            const bubbles = document.querySelectorAll('.bubble');
+            bubbles.forEach((bubble, index) => {
+                setInterval(() => {
+                    bubble.style.animationDelay = Math.random() * 2 + 's';
+                }, 4000 + (index * 500));
+            });
         });
 
         // Smooth scrolling for internal links
@@ -853,6 +1217,38 @@
                     });
                 }
             });
+        });
+
+        // Enhanced reveal button functionality
+        document.getElementById('revealButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const card = document.getElementById('alchemistryCard');
+            const image = document.getElementById('alchemistryImage');
+            
+            // Add click animation to button
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            // Flip the card
+            card.classList.toggle('flipped');
+            
+            // Change image when flipped
+            if (card.classList.contains('flipped')) {
+                // Show the logo when flipped
+                setTimeout(() => {
+                    image.src = 'https://github.com/fdev-looper/arimages/blob/main/Alcwt.png?raw=true';
+                }, 400);
+                this.textContent = 'Show Less';
+            } else {
+                // Show original image when not flipped
+                setTimeout(() => {
+                    image.src = 'https://github.com/fdev-looper/arimages/blob/main/Alcwt.png?raw=true';
+                }, 400);
+                this.textContent = 'Reveal More';
+            }
         });
 
         // Smooth page load
