@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click to Convert, Risk to Invert - Digital Safety Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --warning-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            --success-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --info-gradient: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(102, 126, 234, 0.2);
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --shadow-lg: 0 8px 25px rgba(102, 126, 234, 0.15);
+            --shadow-xl: 0 12px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: white;
+            position: relative;
+        }
+        
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--glass-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+        }
+        
+        .logo-icon img {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -0.04em;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+        
+        .header .subtitle {
+            font-size: 1.5em;
+            font-weight: 600;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .tagline {
+            font-size: 1.2em;
+            font-weight: 500;
+            opacity: 0.85;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1em;
+            color: var(--text-primary);
+        }
+        
+        .main-article {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            margin-bottom: 35px;
+        }
+        
+        .alert-banner {
+            background: var(--warning-gradient);
+            color: var(--text-primary);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            font-weight: 700;
+        }
+        
+        .alert-banner h2 {
+            font-size: 1.8em;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        
+        .article-content {
+            padding: 45px 35px;
+            max-width: 100%;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid rgba(102, 126, 234, 0.1);
+        }
+        
+        .section-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: var(--shadow-lg);
+            flex-shrink: 0;
+        }
+        
+        .section-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            flex: 1;
+        }
+        
+        .story-box {
+            background: var(--info-gradient);
+            border-left: 5px solid #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .story-box h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        
+        .story-box p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .highlight-box {
+            background: var(--success-gradient);
+            border-left: 5px solid #f093fb;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .highlight-box h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        
+        .highlight-box p {
+            line-height: 1.8;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+        
+        .case-studies {
+            background: linear-gradient(135deg, #ffeef8 0%, #f0f8ff 100%);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 45px 0;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .case-studies h3 {
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 35px;
+            color: var(--text-primary);
+        }
+        
+        .case-item {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: var(--shadow-lg);
+            border-left: 6px solid #f093fb;
+        }
+        
+        .case-item h4 {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #f5576c;
+            margin-bottom: 12px;
+        }
+        
+        .case-item p {
+            line-height: 1.8;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+        
+        .stats-section {
+            background: var(--dark-gradient);
+            color: white;
+            border-radius: 25px;
+            padding: 45px;
+            margin: 45px 0;
+            text-align: center;
+        }
+        
+        .stats-section h3 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 35px;
+            margin-top: 35px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: #f093fb;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.2em;
+            margin-top: 12px;
+            opacity: 0.9;
+        }
+        
+        .interactive-section {
+            background: var(--accent-gradient);
+            border-radius: 25px;
+            padding: 45px;
+            margin: 45px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interactive-section h3 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+        
+        .demo-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 25px auto;
+            max-width: 600px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            color: var(--text-primary);
+        }
+        
+        .demo-card h4 {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #f5576c;
+        }
+        
+        .demo-steps {
+            text-align: left;
+            margin: 20px 0;
+        }
+        
+        .demo-step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #f5576c;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s ease;
+        }
+        
+        .demo-step.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .demo-step .emoji {
+            font-size: 1.3em;
+            margin-right: 10px;
+            display: inline-block;
+            transform: scale(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .demo-step.animate .emoji {
+            transform: scale(1);
+        }
+        
+        .demo-result {
+            background: #fff5f5;
+            border: 2px solid #f5576c;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .demo-result h5 {
+            color: #f5576c;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .alchemistry-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            padding: 35px;
+            margin: 45px 0;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .alchemistry-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .alchemistry-card h3 {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+        
+        .alchemistry-card p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .sources-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 45px 0;
+        }
+        
+        .sources-section h3 {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+        }
+        
+        .sources-section ul {
+            list-style-type: decimal;
+            padding-left: 25px;
+        }
+        
+        .sources-section li {
+            margin: 12px 0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            color: var(--text-secondary);
+        }
+        
+        .sources-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .sources-section a:hover {
+            text-decoration: underline;
+        }
+        
+        .author-section {
+            background: var(--dark-gradient);
+            color: white;
+            text-align: center;
+            padding: 45px 35px;
+            border-radius: 28px;
+            margin-top: 45px;
+        }
+        
+        .author-section h3 {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+        
+        .author-section p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .author-details h4 {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .author-details p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 35px 0;
+            color: white;
+            opacity: 0.8;
+            font-size: 1.1em;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 40px 15px 30px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.3em;
+            }
+            
+            .article-content {
+                padding: 35px 25px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.9em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .demo-card {
+                margin: 25px 15px;
+                padding: 30px 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .article-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <img src="DNATech logo.png" alt="DNATech Logo" />
+                </div>
+                <span>DNATech</span>
+            </div>
+            <h1>Click to Convert, Risk to Invert</h1>
+            <p class="subtitle">Online tools make it easy, but they may take more than they give</p>
+            <p class="tagline">Understanding the hidden risks behind convenient file conversion tools</p>
+            
+            <div class="article-meta">
+                <div class="meta-item">Security Alert</div>
+                <div class="meta-item">September 2025</div>
+                <div class="meta-item">8 min read</div>
+                <div class="meta-item">Essential Read</div>
+            </div>
+        </header>
+        
+        <article class="main-article">
+            <div class="alert-banner">
+                <h2>Warning: Your Personal Documents Might Not Be As Private As You Think</h2>
+                <p>Every file you upload to random conversion sites could be exposing your identity</p>
+            </div>
+            
+            <div class="article-content">
+                <section class="section">
+                    <div class="story-box">
+                        <h3>The Wake-Up Call</h3>
+                        <p>While helping a friend fill out his online exam form, we hit a tiny snag — his Aadhaar card scan was slightly larger than the portal's size limit. He looked at me, smiled, and said, "No problem, I'll just resize it."</p>
+                        
+                        <p>Now, he isn't the most technical guy, so I was curious to see what trick he had up his sleeve. He opened Google, typed "image compress," and instantly clicked the first website that popped up. Within seconds, he uploaded his Aadhaar document, got a resized version back, and proudly showed it to me.</p>
+                        
+                        <p>That's when I asked him: "Do you realize you just uploaded your personal ID to a random server? A government-issued document — handed over to an unknown website — just like that?"</p>
+                        
+                        <p>He froze for a second. And honestly, that's when it hit me too: we do this all the time — trusting random converters and compressors for our most sensitive files.</p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">⚠</div>
+                        <h2 class="section-title">The Hidden Reality in India</h2>
+                    </div>
+                    
+                    <p style="font-size: 1.2em; line-height: 1.9; color: var(--text-secondary); margin-bottom: 35px;">I'm not writing this article to scare anyone — but to point out a very real gap. In India, most websites don't actually follow strict data protection standards. And when we're talking about a country with over 1.4 billion people, the question is: where is all this data going?</p>
+                    
+                    <div class="stats-section">
+                        <h3>Alarming Statistics from Recent Surveys</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">16%</span>
+                                <div class="stat-label">of consumers understand Digital Personal Data Protection Act</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">60%</span>
+                                <div class="stat-label">of Indian companies admit to problematic data practices</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">1.4B</span>
+                                <div class="stat-label">people's data potentially at risk</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Weak</span>
+                                <div class="stat-label">enforcement of data protection laws</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3>The Reality Check</h3>
+                        <p>A PwC India report found that only 16% of consumers even understand the new Digital Personal Data Protection Act. That means most people don't even know their rights.</p>
+                        <p>A Business Standard study revealed that over 60% of Indian companies admit to "problematic data practices" like collecting more information than needed or reusing data without proper consent.</p>
+                        <p>Experts also point out that the government has kept broad exemptions for itself under the law, and enforcement is still weak.</p>
+                        <p><strong>So, when you casually upload your Aadhaar card, PAN, or even personal photos to a random "free tool" — you're not just resizing an image, you might be handing your identity to a system that isn't bound by strong protections.</strong></p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🎯</div>
+                        <h2 class="section-title">Real-World Cases: Fake Converters, Real Threats</h2>
+                    </div>
+                    
+                    <div class="case-studies">
+                        <h3>While we often rely on online tools for quick file conversions, some of these services have been exploited</h3>
+                        
+                        <div class="case-item">
+                            <h4>Fake PDF Converter Campaigns</h4>
+                            <p>Cybercriminals have created counterfeit PDF converter websites that mimic legitimate services. These fraudulent sites distribute malware, including information stealers like ArechClient2, which harvest sensitive data from users' devices.</p>
+                        </div>
+                        
+                        <div class="case-item">
+                            <h4>FBI Warning on Malicious File Converters</h4>
+                            <p>The FBI issued an alert regarding online file converters being used to spread malware. These tools, often appearing legitimate, can install malicious software on users' devices, leading to data theft and potential ransomware attacks.</p>
+                        </div>
+                        
+                        <div class="case-item">
+                            <h4>CloudSEK's Findings on Malicious Converters</h4>
+                            <p>CloudSEK's research uncovered that threat actors are impersonating free PDF to DOCX file conversion websites to steal sensitive information like usernames and passwords.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p><strong>These incidents underscore the importance of caution when using online file conversion tools, as they can be exploited to compromise your data.</strong></p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="interactive-section">
+                        <h3>Case Study: How Albina Became a Victim</h3>
+                        <div class="demo-card">
+                            <h4>A Real Example of File Conversion Gone Wrong</h4>
+                            <div class="demo-steps">
+                                <div class="demo-step" data-delay="0">
+                                    <span class="emoji">📄</span><strong>Step 1:</strong> Albina needed to compress her resume PDF for a job application
+                                </div>
+                                <div class="demo-step" data-delay="800">
+                                    <span class="emoji">🔍</span><strong>Step 2:</strong> She searched "PDF compressor" and clicked the first result
+                                </div>
+                                <div class="demo-step" data-delay="1600">
+                                    <span class="emoji">📤</span><strong>Step 3:</strong> Uploaded her resume containing personal details, phone number, and address
+                                </div>
+                                <div class="demo-step" data-delay="2400">
+                                    <span class="emoji">✅</span><strong>Step 4:</strong> Downloaded the compressed file and applied for the job
+                                </div>
+                            </div>
+                            
+                            <div class="demo-result">
+                                <h5>😱 What Happened Next:</h5>
+                                <p>Two weeks later, Albina started receiving spam calls from insurance companies, loan agents, and even some suspicious international numbers. Her personal information had been harvested from the "free" compression tool and sold to marketing databases.</p>
+                                <p><strong>The website she used stored her document, extracted her contact information, and sold it to third-party marketers without her knowledge.</strong></p>
+                            </div>
+                            
+                            <p style="margin-top: 20px; font-style: italic; color: var(--text-secondary);">This demonstrates how easily personal information can be compromised through seemingly innocent file conversion tools. Always verify the legitimacy and privacy policies of online tools before uploading sensitive documents.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🛡</div>
+                        <h2 class="section-title">Safer Alternatives: Protect Your Files</h2>
+                    </div>
+                    
+                    <p style="font-size: 1.2em; line-height: 1.9; color: var(--text-secondary); margin-bottom: 35px;">You don't have to give up convenience — there are secure ways to handle file conversions safely:</p>
+                    
+                    <div class="highlight-box">
+                        <h3>Offline Tools (Safe & Local):</h3>
+                        <p><strong>ImageMagick:</strong> magick input.png -resize 800x600 output.png</p>
+                        <p><strong>FFmpeg:</strong> ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4</p>
+                        <p><strong>LibreOffice:</strong> libreoffice --convert-to pdf input.docx</p>
+                        <p><strong>GIMP / HandBrake / Preview / Photoshop</strong> — all process files locally without uploading anything.</p>
+                    </div>
+                </section>
+
+                <div class="alchemistry-card">
+                    <img src="https://github.com/fdev-looper/Alchemistry/blob/main/Alcnt.png" alt="Alchemistry Logo" onerror="this.style.display='none'">
+                    <h3>🧪 Alchemistry</h3>
+                    <p>Soon, DNATech's Alchemistry (launching in 3 days 😎) will let you convert, compress, and resize files directly in your browser. It uses a temporary server just to process your request, but nothing is stored on the server — your data stays private and offline-like.</p>
+                    <p>Basically, all the convenience of an online tool, but without risking your files being leaked or stored somewhere random.</p>
+                    <p><strong>If you must use other online tools:</strong> choose services with clear privacy policies and automatic deletion of uploads. Avoid random first Google results.</p>
+                </div>
+
+                <div class="sources-section">
+                    <h3>Sources & References</h3>
+                    <ul>
+                        <li><a href="https://www.pwc.in/" target="_blank">PwC India</a> - Digital Personal Data Protection Act Consumer Survey (2024)</li>
+                        <li><a href="https://www.business-standard.com/" target="_blank">Business Standard</a> - Indian Companies Data Practices Study (2024)</li>
+                        <li><a href="https://indianexpress.com/" target="_blank">Indian Express</a> - Fake PDF Converter Campaign Reports</li>
+                        <li><a href="https://www.ndtv.com/" target="_blank">NDTV</a> - FBI Malicious File Converter Warnings</li>
+                        <li><a href="https://cloudsek.com/" target="_blank">CloudSEK</a> - Malicious File Converter Research Reports</li>
+                        <li><a href="https://cert-in.org.in/" target="_blank">Indian Computer Emergency Response Team (CERT-In)</a> - Cybersecurity Advisory Reports</li>
+                        <li><a href="https://www.meity.gov.in/" target="_blank">Ministry of Electronics and IT</a> - Digital Personal Data Protection Act Documentation</li>
+                        <li><a href="https://www.rbi.org.in/" target="_blank">Reserve Bank of India</a> - Digital Security Guidelines</li>
+                        <li><a href="https://www.ncrb.gov.in/" target="_blank">National Crime Records Bureau</a> - Cyber Crime Statistics 2024</li>
+                        <li><a href="https://www.datasecuritycouncil.org/" target="_blank">Data Security Council of India</a> - Privacy Protection Research</li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+
+        <div class="author-section">
+            <h3>About DNATech Research</h3>
+            <p>I investigate emerging cyber threats and provide actionable security insights to protect digital users worldwide.</p>
+            <div class="author-info">
+                <div class="author-avatar">D</div>
+                <div class="author-details">
+                    <h4>DNATech Security Notes</h4>
+                    <p>Threat Horizon Scout | Preparing for Tomorrow's Cyber Fights</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 DNATech Notes. Stay informed. Stay secure.</p>
+        </div>
+    </div>
+
+    <script>
+        // Animation for demo steps
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const demoSteps = entry.target.querySelectorAll('.demo-step');
+                    demoSteps.forEach((step, index) => {
+                        const delay = parseInt(step.dataset.delay) || (index * 600);
+                        setTimeout(() => {
+                            step.classList.add('animate');
+                        }, delay);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe demo card for animation trigger
+        document.addEventListener('DOMContentLoaded', () => {
+            const demoCard = document.querySelector('.demo-card');
+            if (demoCard) {
+                observer.observe(demoCard);
+            }
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Smooth page load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            document.body.style.transform = 'translateY(0)';
+        });
+
+        document.body.style.opacity = '0.98';
+        document.body.style.transform = 'translateY(10px)';
+        document.body.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    </script>
+</body>
+</html>
