@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding India's Digital Personal Data Protection Act (DPDP)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            --accent-gradient: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            --success-gradient: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            --warning-gradient: linear-gradient(135deg, #e17055 0%, #fdcb6e 100%);
+            --dark-gradient: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+            --data-gradient: linear-gradient(135deg, #00cec9 0%, #6c5ce7 100%);
+            --security-gradient: linear-gradient(135deg, #fd79a8 0%, #6c5ce7 100%);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --text-primary: #2d3436;
+            --text-secondary: #636e72;
+            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 25% 75%, rgba(253, 121, 168, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, rgba(0, 206, 201, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 0 40px;
+            color: white;
+            position: relative;
+        }
+        
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--glass-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+        }
+        
+        .logo-icon img {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -0.04em;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .main-article {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .alert-banner {
+            background: var(--data-gradient);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            font-weight: 700;
+        }
+        
+        .alert-banner h2 {
+            font-size: 1.6em;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .article-content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--data-gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4);
+        }
+        
+        .section-title {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .intro-text {
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+        
+        .story-box {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .story-box::before {
+            content: '🛡️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            opacity: 0.3;
+        }
+        
+        .story-box h3 {
+            font-size: 1.5em;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .key-point {
+            background: var(--security-gradient);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            font-weight: 700;
+            font-size: 1.1em;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(253, 121, 168, 0.4);
+        }
+        
+        .empowerment-box {
+            background: linear-gradient(145deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 12px 35px rgba(0, 184, 148, 0.4);
+            text-align: center;
+        }
+        
+        .empowerment-box h3 {
+            font-size: 1.8em;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--data-gradient);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .info-card h3 {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-card p, .info-card ul {
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .info-card ul {
+            padding-left: 20px;
+        }
+        
+        .info-card li {
+            margin: 8px 0;
+        }
+        
+        .analogy-container {
+            background: linear-gradient(145deg, #ffffff 0%, #f1f3f4 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+            border: 3px solid #fd79a8;
+        }
+        
+        .analogy-title {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: #2d3436;
+            margin-bottom: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .analogy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .analogy-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #fd79a8;
+        }
+        
+        .analogy-card h4 {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+        
+        .table-title {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: #2d3436;
+            margin-bottom: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        
+        .responsive-table th {
+            background: var(--data-gradient);
+            color: white;
+            font-weight: 700;
+            padding: 15px;
+            text-align: left;
+            border-radius: 8px 8px 0 0;
+            position: sticky;
+            top: 0;
+        }
+        
+        .responsive-table th:first-child {
+            border-radius: 8px 0 0 0;
+            background: #2d3436;
+        }
+        
+        .responsive-table th:nth-child(2) {
+            background: #00cec9;
+        }
+        
+        .responsive-table th:nth-child(3) {
+            background: #6c5ce7;
+            border-radius: 0 8px 0 0;
+        }
+        
+        .responsive-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .responsive-table tbody tr:hover {
+            background: rgba(108, 92, 231, 0.05);
+        }
+        
+        .responsive-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .objective-section {
+            background: linear-gradient(145deg, #6c5ce7 0%, #a29bfe 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0;
+            box-shadow: 0 12px 35px rgba(108, 92, 231, 0.4);
+        }
+        
+        .objective-section h3 {
+            font-size: 1.8em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .objective-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .objective-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .objective-card h4 {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .cta-section {
+            background: var(--success-gradient);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 184, 148, 0.4);
+        }
+        
+        .cta-section h3 {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+        
+        .author-section {
+            background: var(--dark-gradient);
+            color: white;
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 24px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .author-section h3 {
+            font-size: 1.8em;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .author-avatar img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+        
+        .author-details h4 {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        
+        .author-details p {
+            opacity: 0.9;
+            font-size: 1em;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        .quiz-section {
+            background: linear-gradient(145deg, #ffffff 0%, #f1f3f4 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+            border: 3px solid #6c5ce7;
+            text-align: center;
+        }
+        
+        .quiz-title {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: #2d3436;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #6c5ce7;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .question-card.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .question-header {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.1em;
+            color: #2d3436;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .options-container {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #6c5ce7;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            background: #6c5ce7;
+            color: white;
+            border-color: #6c5ce7;
+        }
+        
+        .option.correct {
+            background: #00b894;
+            color: white;
+            border-color: #00b894;
+        }
+        
+        .option.incorrect {
+            background: #e17055;
+            color: white;
+            border-color: #e17055;
+        }
+        
+        .quiz-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .quiz-btn {
+            background: var(--data-gradient);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
+        }
+        
+        .quiz-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4);
+        }
+        
+        .quiz-btn:disabled {
+            background: #636e72;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .quiz-progress {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-dot.active {
+            background: #6c5ce7;
+            transform: scale(1.2);
+        }
+        
+        .progress-dot.completed {
+            background: #00b894;
+        }
+        
+        .quiz-result {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .result-score {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .result-message {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        /* Enhanced Mobile Optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 40px 0 30px;
+            }
+            
+            .header h1 {
+                font-size: 2.8em;
+                line-height: 1.1;
+            }
+            
+            .header .subtitle {
+                font-size: 1.2em;
+                padding: 0 10px;
+            }
+            
+            .article-content {
+                padding: 30px 20px;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .meta-item {
+                font-size: 0.85em;
+                padding: 8px 16px;
+            }
+            
+            .info-grid,
+            .analogy-grid,
+            .objective-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .section-title {
+                font-size: 1.8em;
+                line-height: 1.2;
+            }
+            
+            .section-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .comparison-table {
+                padding: 20px 15px;
+                margin: 30px -5px;
+            }
+            
+            .responsive-table {
+                font-size: 0.85em;
+                min-width: 500px;
+            }
+            
+            .responsive-table th,
+            .responsive-table td {
+                padding: 12px 8px;
+                font-size: 0.9em;
+            }
+            
+            .analogy-container,
+            .empowerment-box,
+            .objective-section,
+            .quiz-section {
+                padding: 25px 20px;
+                margin: 30px 0;
+            }
+            
+            .quiz-container {
+                padding: 0;
+            }
+            
+            .question-card {
+                padding: 20px;
+            }
+            
+            .quiz-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .quiz-btn {
+                width: 100%;
+                padding: 15px;
+            }
+            
+            .intro-text {
+                font-size: 1.1em;
+                text-align: left;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 0 25px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+                line-height: 1.1;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1em;
+                padding: 0 5px;
+            }
+            
+            .article-content {
+                padding: 25px 15px;
+            }
+            
+            .section-title {
+                font-size: 1.6em;
+            }
+            
+            .responsive-table {
+                min-width: 420px;
+                font-size: 0.8em;
+            }
+            
+            .responsive-table th,
+            .responsive-table td {
+                padding: 10px 6px;
+                font-size: 0.85em;
+            }
+            
+            .comparison-table {
+                padding: 15px 10px;
+                margin: 25px -5px;
+            }
+            
+            .analogy-container,
+            .empowerment-box,
+            .objective-section,
+            .quiz-section {
+                padding: 20px 15px;
+            }
+            
+            .quiz-title {
+                font-size: 1.5em;
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .question-header {
+                font-size: 1.1em;
+            }
+            
+            .question-text {
+                font-size: 1em;
+            }
+            
+            .option {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+            
+            .brand-logo {
+                font-size: 1.3em;
+            }
+            
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-icon img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .responsive-table {
+                min-width: 350px;
+                font-size: 0.75em;
+            }
+            
+            .responsive-table th,
+            .responsive-table td {
+                padding: 8px 4px;
+                font-size: 0.8em;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .section-title {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <img src="DNATech logo.png" alt="DNATech Logo" />
+                </div>
+                <span>DNATech</span>
+            </div>
+            <h1>DPDP ACT</h1>
+            <p class="subtitle">Understanding India's Digital Personal Data Protection Act - Your Legal Shield in the Digital World</p>
+            
+            <div class="article-meta">
+                <div class="meta-item">🛡️ Data Protection</div>
+                <div class="meta-item">📅 September 2025</div>
+                <div class="meta-item">⏱️ 10 min read</div>
+            </div>
+        </header>
+        
+        <article class="main-article">
+            <div class="alert-banner">
+                <h2>🚨 Lots of Threats, Get Some Acts</h2>
+                <p>Understanding India's Digital Personal Data Protection Act (DPDP)</p>
+            </div>
+            
+            <div class="article-content">
+                <section class="section">
+                    <p class="intro-text">
+                        I am writing this article to educate readers on the Data Protection Act in India so they can be knowledgeable and fight back by knowing their rights, at the right time, with the right action.
+                    </p>
+                    
+                    <div class="empowerment-box">
+                        <h3>🎯 From Fear to Empowerment</h3>
+                        <p>In my previous articles, I highlighted the many digital threats we face every day, from data leaks to identity theft. Today, I want to move from fear to empowerment. Instead of only pointing out risks, I'm showing you the law that protects you. The DPDP Act is India's way of giving citizens control over their personal data, ensuring companies are accountable, and providing the tools to defend yourself. This is your legal shield in the digital world.</p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🧠</div>
+                        <h2 class="section-title">Test Your DPDP Knowledge</h2>
+                    </div>
+                    
+                    <div class="quiz-section">
+                        <div class="quiz-title">
+                            🎯 Interactive DPDP Quiz
+                        </div>
+                        
+                        <p style="margin: 20px 0; font-weight: 500; color: #636e72;">
+                            Test your understanding of India's Digital Personal Data Protection Act with these 4 questions based on the article above:
+                        </p>
+                        
+                        <div class="quiz-progress">
+                            <div class="progress-dot active" id="dot1"></div>
+                            <div class="progress-dot" id="dot2"></div>
+                            <div class="progress-dot" id="dot3"></div>
+                            <div class="progress-dot" id="dot4"></div>
+                        </div>
+                        
+                        <div class="quiz-container">
+                            <!-- Question 1 -->
+                            <div class="question-card active" id="question1">
+                                <div class="question-header">
+                                    📅 Question 1 of 4
+                                </div>
+                                <div class="question-text">
+                                    When was the Digital Personal Data Protection (DPDP) Act passed in India?
+                                </div>
+                                <div class="options-container">
+                                    <div class="option" data-answer="incorrect">January 2023</div>
+                                    <div class="option" data-answer="correct">August 2023</div>
+                                    <div class="option" data-answer="incorrect">December 2022</div>
+                                    <div class="option" data-answer="incorrect">March 2024</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Question 2 -->
+                            <div class="question-card" id="question2">
+                                <div class="question-header">
+                                    💰 Question 2 of 4
+                                </div>
+                                <div class="question-text">
+                                    What is the maximum penalty for data misuse under DPDP Act?
+                                </div>
+                                <div class="options-container">
+                                    <div class="option" data-answer="incorrect">₹100 crore</div>
+                                    <div class="option" data-answer="incorrect">₹150 crore</div>
+                                    <div class="option" data-answer="correct">₹250 crore</div>
+                                    <div class="option" data-answer="incorrect">₹500 crore</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Question 3 -->
+                            <div class="question-card" id="question3">
+                                <div class="question-header">
+                                    👶 Question 3 of 4
+                                </div>
+                                <div class="question-text">
+                                    Under DPDP Act, children under what age are specially protected from profiling and targeted ads?
+                                </div>
+                                <div class="options-container">
+                                    <div class="option" data-answer="incorrect">16 years</div>
+                                    <div class="option" data-answer="incorrect">21 years</div>
+                                    <div class="option" data-answer="correct">18 years</div>
+                                    <div class="option" data-answer="incorrect">14 years</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Question 4 -->
+                            <div class="question-card" id="question4">
+                                <div class="question-header">
+                                    🌍 Question 4 of 4
+                                </div>
+                                <div class="question-text">
+                                    What is the main difference between DPDP and GDPR in terms of data coverage?
+                                </div>
+                                <div class="options-container">
+                                    <div class="option" data-answer="incorrect">DPDP covers more data types than GDPR</div>
+                                    <div class="option" data-answer="correct">DPDP covers only digital data, while GDPR covers both online and offline data</div>
+                                    <div class="option" data-answer="incorrect">DPDP has no coverage limitations</div>
+                                    <div class="option" data-answer="incorrect">Both cover exactly the same data types</div>
+                                </div>
+                            </div>
+                            
+                            <div class="quiz-result" id="quizResult">
+                                <div class="result-score" id="resultScore"></div>
+                                <div class="result-message" id="resultMessage"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-buttons">
+                            <button class="quiz-btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+                            <button class="quiz-btn" id="startBtn" onclick="startQuiz()" style="display: none;">Start Quiz</button>
+                            <button class="quiz-btn" id="restartBtn" onclick="restartQuiz()" style="display: none;">Restart Quiz</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🇮🇳</div>
+                        <h2 class="section-title">Why We Need DPDP</h2>
+                    </div>
+                    
+                    <p class="intro-text">
+                        India has exploded into one of the largest digital populations in the world. Millions of users interact online daily:
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>💳 Daily Digital Activities</h3>
+                            <ul>
+                                <li>Logging into apps for banking, shopping, and messaging</li>
+                                <li>Sharing Aadhaar, PAN, phone numbers, and personal documents</li>
+                                <li>Browsing and interacting across hundreds of websites</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>⚠️ Without Clear Regulation</h3>
+                            <ul>
+                                <li>Scammers and fraudsters can steal identities</li>
+                                <li>Companies may sell or misuse your data</li>
+                                <li>Sensitive information like medical history or financial details can be leaked</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>🛡️ DPDP Protection</h3>
+                            <p>DPDP was introduced to protect citizens, ensure accountability for organizations, and empower individuals to take control of their own data.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">📋</div>
+                        <h2 class="section-title">What DPDP Says – Key Provisions</h2>
+                    </div>
+                    
+                    <p class="intro-text">
+                        Passed in August 2023, the Act focuses on digital personal data and establishes clear rules:
+                    </p>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>✅ Consent is Mandatory</h3>
+                            <p>Companies must get your explicit, informed permission before collecting your data.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>👁️ Right to Access & Correction</h3>
+                            <p>You can see what data is held about you and request corrections if needed.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>🗑️ Right to Erasure</h3>
+                            <p>Demand deletion of data no longer required.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>👶 Children's Protection</h3>
+                            <p>Users under 18 are specially safeguarded from profiling or targeted ads.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>💰 Penalties</h3>
+                            <p>Misuse of data can lead to fines up to ₹250 crore.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>🏛️ Data Protection Board</h3>
+                            <p>A government-appointed body to oversee compliance and address grievances.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🏠</div>
+                        <h2 class="section-title">DPDP Simplified – Real-Life Analogies</h2>
+                    </div>
+                    
+                    <div class="analogy-container">
+                        <div class="analogy-title">
+                            🏠 Think of DPDP like house rules for your digital life:
+                        </div>
+                        
+                        <div class="analogy-grid">
+                            <div class="analogy-card">
+                                <h4>🔐 Consent = Your door lock</h4>
+                                <p>Apps need your permission before entering.</p>
+                            </div>
+                            
+                            <div class="analogy-card">
+                                <h4>📖 Right to Access = Bank passbook</h4>
+                                <p>You can see exactly what they know about you.</p>
+                            </div>
+                            
+                            <div class="analogy-card">
+                                <h4>✏️ Right to Correction = Fixing typos</h4>
+                                <p>Errors in your stored info must be corrected.</p>
+                            </div>
+                            
+                            <div class="analogy-card">
+                                <h4>🗑️ Right to Erasure = Paper shredder</h4>
+                                <p>You can tell companies to delete your old data.</p>
+                            </div>
+                            
+                            <div class="analogy-card">
+                                <h4>💸 Fines = Traffic challans</h4>
+                                <p>Break the rules, pay a heavy price.</p>
+                            </div>
+                            
+                            <div class="analogy-card">
+                                <h4>📄 Children's Data = Permission slips</h4>
+                                <p>Kids' data is extra protected, just like school trips need parental consent.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="key-point" style="margin-top: 30px; background: var(--data-gradient);">
+                            🔑 <strong>In short:</strong> You own the keys, companies are just tenants. If they misuse, DPDP can throw the fine hammer at them.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🌍</div>
+                        <h2 class="section-title">DPDP vs GDPR – India vs Europe</h2>
+                    </div>
+                    
+                    <p class="intro-text">How does India's new law compare with Europe's famous GDPR?</p>
+                    
+                    <div class="comparison-table">
+                        <div class="table-title">
+                            ⚖️ DPDP vs GDPR Comparison
+                        </div>
+                        
+                        <div style="overflow-x: auto;">
+                            <table class="responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th>Aspect</th>
+                                        <th>GDPR Europe</th>
+                                        <th>DPDP India</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Introduced</strong></td>
+                                        <td>2018</td>
+                                        <td>2023</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Coverage</strong></td>
+                                        <td>Online + Offline data</td>
+                                        <td>Only Digital data</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Scope</strong></td>
+                                        <td>Global (EU citizens' data anywhere)</td>
+                                        <td>Indian citizens' digital data</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Rights</strong></td>
+                                        <td>Access, Erasure, Portability, Objection, Automated decision rights</td>
+                                        <td>Access, Correction, Erasure, Nominate post-death, Withdraw consent</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Children's Data</strong></td>
+                                        <td>Consent rules under 16</td>
+                                        <td>Special protection under 18</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Penalties</strong></td>
+                                        <td>€20M or 4% of global turnover</td>
+                                        <td>Up to ₹250 crore</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Enforcement</strong></td>
+                                        <td>Independent data authorities</td>
+                                        <td>Data Protection Board (Government-appointed)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="key-point" style="margin-top: 25px; background: var(--security-gradient);">
+                            🌟 <strong>Key Insight:</strong> GDPR is stricter and global, while DPDP is simpler, India-focused, and practical for citizens and businesses.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">🎯</div>
+                        <h2 class="section-title">The Objective of DPDP</h2>
+                    </div>
+                    
+                    <div class="objective-section">
+                        <h3>🚀 Building Digital Trust</h3>
+                        <p style="font-size: 1.1em; opacity: 0.95; margin-bottom: 25px;">
+                            The goal isn't just to punish companies, but to empower citizens. DPDP wants Indians to:
+                        </p>
+                        
+                        <div class="objective-grid">
+                            <div class="objective-card">
+                                <h4>🧠 Understand Rights</h4>
+                                <p>Know your rights over personal data</p>
+                            </div>
+                            
+                            <div class="objective-card">
+                                <h4>⚖️ Hold Accountable</h4>
+                                <p>Make companies responsible</p>
+                            </div>
+                            
+                            <div class="objective-card">
+                                <h4>💪 Build Trust</h4>
+                                <p>Create confidence in digital economy</p>
+                            </div>
+                        </div>
+                        
+                        <p style="font-size: 1.1em; opacity: 0.95; margin-top: 25px; text-align: center;">
+                            It's India's first real attempt to balance innovation and privacy.
+                        </p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="section-header">
+                        <div class="section-icon">💭</div>
+                        <h2 class="section-title">Final Thoughts</h2>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>🛡️ Your Legal Shield</h3>
+                            <p>DPDP may not be as iron-clad as GDPR, but it's a solid starting shield. It gives users a legal weapon to question, challenge, and demand accountability.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>💎 Data is More Valuable Than Money</h3>
+                            <p>In the end, your data is more valuable than money. Companies can replace profits, but once your privacy is gone, you can't buy it back.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>⚡ Use Your Power</h3>
+                            <p>Next time an app asks for permissions, remember, the law is on your side. Use it.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="cta-section">
+                    <h3>🛡️ Know Your Rights, Protect Your Data</h3>
+                    <p>DPDP Act 2023 gives you the power to control your digital footprint. From consent to correction, from access to erasure - you now have legal backing to demand transparency and accountability from every company handling your personal data. The digital world is yours to navigate safely.</p>
+                </div>
+            </div>
+        </article>
+
+        <div class="author-section">
+            <h3>About DNATech Research</h3>
+            <p>I investigate emerging cyber threats and provide actionable security insights to protect digital users worldwide.</p>
+            <div class="author-info">
+                <div class="author-avatar">
+                    <img src="DNATech logo.png" alt="DNATech Logo" />
+                </div>
+                <div class="author-details">
+                    <h4>DNATech Security Notes</h4>
+                    <p>Threat Horizon Scout | Preparing for Tomorrow's Cyber Fights</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 DNATech Notes. Stay informed. Stay secure.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        let score = 0;
+        let answered = false;
+        const totalQuestions = 4;
+
+        function startQuiz() {
+            currentQuestion = 1;
+            score = 0;
+            answered = false;
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            document.getElementById('restartBtn').style.display = 'none';
+            document.getElementById('quizResult').style.display = 'none';
+            
+            // Reset all questions and dots
+            for (let i = 1; i <= totalQuestions; i++) {
+                document.getElementById(`question${i}`).classList.remove('active');
+                document.getElementById(`dot${i}`).classList.remove('active', 'completed');
+                
+                // Reset options
+                const options = document.getElementById(`question${i}`).querySelectorAll('.option');
+                options.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                    option.onclick = () => selectOption(option);
+                });
+            }
+            
+            // Show first question
+            document.getElementById('question1').classList.add('active');
+            document.getElementById('dot1').classList.add('active');
+            document.getElementById('nextBtn').textContent = 'Next Question';
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        function selectOption(selectedOption) {
+            if (answered) return;
+            
+            answered = true;
+            const currentQuestionElement = document.getElementById(`question${currentQuestion}`);
+            const options = currentQuestionElement.querySelectorAll('.option');
+            
+            // Remove click handlers and show results
+            options.forEach(option => {
+                option.onclick = null;
+                if (option.dataset.answer === 'correct') {
+                    option.classList.add('correct');
+                    if (option === selectedOption) {
+                        score++;
+                    }
+                } else {
+                    if (option === selectedOption) {
+                        option.classList.add('incorrect');
+                    }
+                }
+            });
+            
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+            
+            // Update progress
+            document.getElementById(`dot${currentQuestion}`).classList.remove('active');
+            document.getElementById(`dot${currentQuestion}`).classList.add('completed');
+        }
+
+        function nextQuestion() {
+            if (!answered) return;
+            
+            // Hide current question
+            document.getElementById(`question${currentQuestion}`).classList.remove('active');
+            
+            currentQuestion++;
+            answered = false;
+            
+            if (currentQuestion <= totalQuestions) {
+                // Show next question
+                document.getElementById(`question${currentQuestion}`).classList.add('active');
+                document.getElementById(`dot${currentQuestion}`).classList.add('active');
+                document.getElementById('nextBtn').disabled = true;
+                
+                if (currentQuestion === totalQuestions) {
+                    document.getElementById('nextBtn').textContent = 'Show Results';
+                }
+            } else {
+                // Show results
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('restartBtn').style.display = 'inline-block';
+            
+            const resultElement = document.getElementById('quizResult');
+            const scoreElement = document.getElementById('resultScore');
+            const messageElement = document.getElementById('resultMessage');
+            
+            scoreElement.textContent = `${score}/${totalQuestions}`;
+            
+            let message = '';
+            let resultClass = '';
+            
+            if (score === 4) {
+                message = '🏆 Excellent! You have mastered the DPDP Act concepts!';
+                resultClass = 'perfect';
+            } else if (score === 3) {
+                message = '🌟 Great job! You understand most DPDP concepts very well!';
+                resultClass = 'good';
+            } else if (score === 2) {
+                message = '👍 Good effort! You might want to review some DPDP provisions.';
+                resultClass = 'average';
+            } else {
+                message = '📚 Keep learning! Review the article to better understand DPDP Act.';
+                resultClass = 'needs-improvement';
+            }
+            
+            messageElement.textContent = message;
+            resultElement.style.display = 'block';
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        // Initialize quiz on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up initial option click handlers
+            for (let i = 1; i <= totalQuestions; i++) {
+                const options = document.getElementById(`question${i}`).querySelectorAll('.option');
+                options.forEach(option => {
+                    option.onclick = () => selectOption(option);
+                });
+            }
+            
+            // Disable next button initially
+            document.getElementById('nextBtn').disabled = true;
+        });
+    </script>
+</body>
+</html>
