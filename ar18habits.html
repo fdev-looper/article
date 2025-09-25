@@ -237,74 +237,29 @@
             text-align: justify;
         }
         
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-        }
-        
-        .stat-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-            backdrop-filter: blur(20px);
+        .personal-note {
+            background: linear-gradient(135deg, rgba(255, 236, 210, 0.8) 0%, rgba(252, 182, 159, 0.8) 100%);
             border-radius: 25px;
-            padding: 40px 30px;
-            text-align: center;
+            padding: 40px;
+            margin: 40px 0;
             box-shadow: var(--shadow-lg);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            border-left: 6px solid #d35400;
+            font-style: italic;
         }
         
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
-            animation: shimmer 4s ease-in-out infinite;
+        .personal-note h4 {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: #d35400;
+            margin-bottom: 20px;
+            font-style: normal;
         }
         
-        @keyframes shimmer {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .stat-number {
-            font-size: 3.5em;
-            font-weight: 900;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .stat-label {
-            font-size: 1.1em;
-            font-weight: 600;
+        .personal-note p {
             color: var(--text-primary);
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .stat-description {
-            font-size: 0.95em;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            position: relative;
-            z-index: 2;
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 15px;
         }
         
         .section {
@@ -372,136 +327,24 @@
             margin-bottom: 15px;
         }
         
-        .evaluation-framework {
+        .habit-example strong {
+            color: var(--text-primary);
+        }
+        
+        .highlight-box {
             background: var(--aurora-gradient);
             color: white;
-            border-radius: 30px;
-            padding: 60px 40px;
-            margin: 60px 0;
-            text-align: center;
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .evaluation-framework h3 {
-            font-size: 2.5em;
-            font-weight: 900;
-            margin-bottom: 30px;
-        }
-        
-        .evaluation-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .evaluation-step {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 20px;
-            padding: 30px 25px;
-            transition: all 0.3s ease;
-        }
-        
-        .evaluation-step:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.25);
-        }
-        
-        .step-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin: 0 auto 20px;
-        }
-        
-        .step-title {
-            font-size: 1.3em;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        .step-description {
-            font-size: 1em;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-        
-        .ripple-effect {
-            background: var(--forest-gradient);
-            color: white;
-            border-radius: 30px;
-            padding: 60px 40px;
-            margin: 60px 0;
+            padding: 30px;
+            margin: 30px 0;
             text-align: center;
-            box-shadow: var(--shadow-xl);
-            position: relative;
-            overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
         
-        .ripple-effect::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            animation: ripple 3s ease-in-out infinite;
-        }
-        
-        @keyframes ripple {
-            0% { width: 100px; height: 100px; opacity: 1; }
-            100% { width: 400px; height: 400px; opacity: 0; }
-        }
-        
-        .ripple-effect h3 {
-            font-size: 2.5em;
-            font-weight: 900;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .ripple-effect p {
+        .highlight-box p {
             font-size: 1.2em;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .takeaway-section {
-            background: var(--sunset-gradient);
-            color: white;
-            padding: 60px 40px;
-            border-radius: 30px;
-            text-align: center;
-            margin: 60px 0;
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .takeaway-section h3 {
-            font-size: 2.5em;
-            font-weight: 900;
-            margin-bottom: 30px;
-        }
-        
-        .takeaway-section p {
-            font-size: 1.2em;
-            line-height: 1.8;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto;
+            font-weight: 600;
+            margin: 0;
         }
         
         .author-section {
@@ -577,18 +420,8 @@
                 padding: 60px 25px;
             }
             
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
             .section-title {
                 font-size: 2.2em;
-            }
-            
-            .evaluation-steps {
-                grid-template-columns: 1fr;
-                gap: 20px;
             }
             
             .author-info {
@@ -611,11 +444,7 @@
                 padding: 40px 20px;
             }
             
-            .stat-card {
-                padding: 30px 20px;
-            }
-            
-            .habit-example {
+            .habit-example, .personal-note {
                 padding: 30px 25px;
             }
         }
@@ -645,7 +474,7 @@
         <article class="main-article">
             <div class="hero-banner">
                 <h2>Every Choice Shapes Your Tomorrow</h2>
-                <p>Research shows that 40% of your daily actions are habits, not conscious decisions. Understanding this power can transform your life completely.</p>
+                <p>My personal journey of understanding what habits really mean and how they impact our lives</p>
             </div>
             
             <div class="article-content">
@@ -656,215 +485,165 @@
                     </p>
                 </div>
                 
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">40%</div>
-                        <div class="stat-label">Daily Actions Are Habits</div>
-                        <div class="stat-description">Duke University research shows nearly half of our daily behaviors are performed automatically</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">66</div>
-                        <div class="stat-label">Days to Form a Habit</div>
-                        <div class="stat-description">University College London study reveals it takes an average of 66 days for a new behavior to become automatic</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">21</div>
-                        <div class="stat-label">Days Minimum</div>
-                        <div class="stat-description">Simple habits can form in as little as 21 days, while complex ones may take up to 254 days</div>
-                    </div>
-                </div>
-                
                 <div class="section">
                     <div class="section-header">
-                        <h2 class="section-title">The Truth About "Good" Habits</h2>
-                        <p class="section-subtitle">Not all habits labeled as good are truly beneficial for everyone</p>
+                        <h2 class="section-title">The "Good" Habits That Weren't So Good</h2>
+                        <p class="section-subtitle">Sometimes what society calls good can actually harm you</p>
+                    </div>
+                    
+                    <div class="personal-note">
+                        <h4>My Experience with Early Rising</h4>
+                        <p>I tried the whole "successful people wake up at 5 AM" thing for months. I'd go to bed at midnight, wake up at 5, feel like zombie all day, and crash by 8 PM. Everyone said it was a "good habit" but I felt terrible. Turns out, forcing yourself to wake early without enough sleep isn't productive - it's just suffering with good PR.</p>
                     </div>
                     
                     <div class="habit-example">
                         <h4>The Early Bird Myth</h4>
                         <p>Some people go to bed at 12 AM and wake up at 4 AM thinking it's productive because society praises waking up early. But medically that's not healthy. Your body and mind need proper rest. Just because it's considered good socially doesn't mean it really is.</p>
-                        <p><strong>Research insight:</strong> Studies show that sleep duration matters more than timing. Adults need 7-9 hours of quality sleep regardless of when they sleep.</p>
+                        <p><strong>My reality:</strong> I need 7-8 hours of sleep to function. Period. Whether that's 11 PM to 7 AM or 1 AM to 9 AM doesn't matter to my productivity.</p>
+                    </div>
+                    
+                    <div class="personal-note">
+                        <h4>The Perfectionist Trap I Fell Into</h4>
+                        <p>I used to eat "perfectly healthy" all the time - no sugar, no processed food, measuring every calorie. Sounds good, right? But I was constantly hungry, irritable, and obsessed with food. I'd skip meals if they didn't fit my perfect plan. Same with exercise - I'd work out for 2 hours daily, even when my body was screaming for rest.</p>
                     </div>
                     
                     <div class="habit-example">
                         <h4>The Perfectionist Trap</h4>
                         <p>Eating healthy all the time but skipping meals or over-restricting can harm your energy. Exercising too rigorously without listening to your body can lead to injuries. Even productivity hacks like working nonstop for 12 hours might look good on paper but can mentally burn you out.</p>
-                        <p><strong>Key finding:</strong> The American Psychological Association found that perfectionist tendencies can increase stress hormones by up to 45%.</p>
+                        <p><strong>What I learned:</strong> Even good habits can become harmful when taken to extremes or done for wrong reasons.</p>
                     </div>
                 </div>
                 
                 <div class="section">
                     <div class="section-header">
-                        <h2 class="section-title">Rethinking "Bad" Habits</h2>
+                        <h2 class="section-title">When "Bad" Habits Actually Help</h2>
                         <p class="section-subtitle">Sometimes what seems harmful might serve a purpose</p>
+                    </div>
+                    
+                    <div class="personal-note">
+                        <h4>My Late-Night Phone Scrolling</h4>
+                        <p>Everyone says scrolling your phone before bed is terrible. And yes, I know the blue light thing. But after a 12-hour workday dealing with people and problems, those 30 minutes of mindless scrolling is my decompression time. It's not ideal, but it's better than lying in bed with my mind racing about tomorrow's deadlines.</p>
                     </div>
                     
                     <div class="habit-example">
                         <h4>The Relaxation Paradox</h4>
                         <p>Staying up late scrolling on your phone might seem unhealthy but if it's your only time to relax after a hectic day, it can help you unwind and recharge. Enjoying a slice of cake or a cheat meal isn't bad. It's a way to treat yourself and maintain balance.</p>
-                        <p><strong>Psychology insight:</strong> Mental health professionals recognize that "guilty pleasures" can serve as important stress relief mechanisms when used mindfully.</p>
+                        <p><strong>Context matters:</strong> Mental health professionals recognize that "guilty pleasures" can serve as important stress relief mechanisms when used mindfully.</p>
+                    </div>
+                    
+                    <div class="personal-note">
+                        <h4>Procrastination Saved My Project</h4>
+                        <p>Last month, I had a big presentation to prepare. Instead of starting immediately, I procrastinated for days. I felt guilty, but during that time, I kept thinking about it subconsciously. When I finally sat down to work, the ideas flowed perfectly. I had a much clearer vision than if I'd rushed into it.</p>
                     </div>
                     
                     <div class="habit-example">
                         <h4>Productive Procrastination</h4>
-                        <p>Even procrastination has a silver lining sometimes. Waiting until later to tackle a task might give your mind time to process ideas, leading to better solutions. Research from the University of Pennsylvania shows that moderate procrastination can boost creativity by 16%.</p>
+                        <p>Even procrastination has a silver lining sometimes. Waiting until later to tackle a task might give your mind time to process ideas, leading to better solutions. Sometimes waiting gives your brain time to process and come up with better solutions.</p>
                     </div>
                 </div>
                 
-                <div class="evaluation-framework">
-                    <h3>How to Evaluate Your Habits</h3>
-                    <p>Here's a science-backed framework to judge whether your habits truly serve you</p>
-                    
-                    <div class="evaluation-steps">
-                        <div class="evaluation-step">
-                            <div class="step-icon">🎯</div>
-                            <div class="step-title">Check the Outcome</div>
-                            <div class="step-description">Does it make you feel energized, focused, or happy? Or drained, stressed, or frustrated?</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">⚖️</div>
-                            <div class="step-title">Consider Balance</div>
-                            <div class="step-description">One cheat meal is fine. Constant overindulgence is harmful. Consistency matters.</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">🎭</div>
-                            <div class="step-title">Think About Purpose</div>
-                            <div class="step-description">Is it helping you achieve something meaningful or just filling time?</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">🧘</div>
-                            <div class="step-title">Listen to Your Body</div>
-                            <div class="step-description">If a habit causes stress, discomfort, or guilt, rethink it.</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">🏠</div>
-                            <div class="step-title">Context Matters</div>
-                            <div class="step-description">A habit isn't inherently good or bad. It depends on your lifestyle and goals.</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">👥</div>
-                            <div class="step-title">Seek Feedback</div>
-                            <div class="step-description">Check with trusted people. Sometimes they spot blind spots you miss.</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="ripple-effect">
-                    <h3>The Compound Effect of Small Actions</h3>
-                    <p>Every small habit you practice daily adds up. Reading 10 pages, taking a walk, journaling. Tiny consistent actions create a ripple effect that transforms your entire life. Research from Stanford shows that people who make small, consistent changes are 37% more likely to achieve their long-term goals than those who attempt dramatic transformations.</p>
-                </div>
-                
-                <div class="habit-example">
-                    <h4>Personal Success Story</h4>
-                    <p>I write daily articles. Some people might consider it a waste of time thinking no one reads them. But for me it's a beneficial habit. It keeps me engaged for hours, improves my typing speed, and helps me learn new topics every day. The beauty is you're in control. You can tweak, replace, or completely change habits whenever you want.</p>
-                </div>
-                
-                <div class="takeaway-section">
-                    <h3>The Power Is in Your Hands</h3>
-                    <p>At the end of the day, habits are your allies, not your enemies. Every small step, every little routine shapes the life you're living and the person you're becoming. Don't get caught up in labeling them strictly as good or bad. Focus on how they make you feel, what they help you achieve, and how they fit into your life. Start small, stay consistent, and be mindful. Celebrate the habits that energize you, tweak the ones that drain you, and never underestimate the power of tiny intentional actions.</p>
+                <div class="highlight-box">
+                    <p><strong>My biggest realization:</strong> Habits aren't about willpower. They're about making the right choice easier than the wrong one.</p>
                 </div>
                 
                 <div class="section">
                     <div class="section-header">
-                        <h2 class="section-title">Scientific Backing</h2>
-                        <p class="section-subtitle">What neuroscience tells us about habit formation</p>
+                        <h2 class="section-title">How I Actually Judge My Habits Now</h2>
+                        <p class="section-subtitle">After years of trying to fit into other people's definitions</p>
                     </div>
                     
                     <div class="habit-example">
-                        <h4>The Habit Loop</h4>
-                        <p>MIT researchers discovered that habits operate through a three-step neurological loop: cue (trigger), routine (behavior), and reward (benefit). Understanding this loop helps you identify why certain habits stick and others don't.</p>
-                        <p><strong>Practical application:</strong> To change a habit, keep the same cue and reward, but change the routine. Want to stop checking social media? Keep the cue (boredom) and reward (entertainment) but change the routine to reading instead.</p>
+                        <h4>1. How Does It Make Me Feel?</h4>
+                        <p>Not immediately after, but hours later. My morning coffee makes me feel great for 30 minutes, then jittery for 3 hours. That's useful information.</p>
                     </div>
                     
                     <div class="habit-example">
-                        <h4>Neuroplasticity and Change</h4>
-                        <p>Your brain physically changes when you develop new habits. Repeated behaviors strengthen neural pathways, making actions more automatic over time. Studies show that meditation habits can increase gray matter density in areas associated with learning and memory within just 8 weeks.</p>
+                        <h4>2. What's the Real Cost?</h4>
+                        <p>Watching Netflix for 2 hours costs me sleep time and makes me tired tomorrow. But once a week? That's fine. Every night? Problem.</p>
+                    </div>
+                    
+                    <div class="personal-note">
+                        <h4>My Habit Experiment</h4>
+                        <p>I tracked my energy levels and mood for a month while doing different habits. Waking up at 7 AM (not 5) and having a 20-minute walk gave me more energy than an hour at the gym and 5 AM wake-ups. Your mileage may vary, but data beats assumptions.</p>
+                    </div>
+                    
+                    <div class="habit-example">
+                        <h4>3. Does It Fit My Real Life?</h4>
+                        <p>Meditation sounds amazing, but 20 minutes of sitting quietly doesn't work with my restless personality. But mindful walking while listening to music? That I can do daily.</p>
+                    </div>
+                    
+                    <div class="habit-example">
+                        <h4>4. Am I Doing It for Me or for Show?</h4>
+                        <p>Posting gym selfies daily felt good for my ego but made working out feel like performance. When I stopped sharing every workout, exercise became enjoyable again.</p>
                     </div>
                 </div>
                 
                 <div class="section">
                     <div class="section-header">
-                        <h2 class="section-title">Common Habit Myths Debunked</h2>
-                        <p class="section-subtitle">Separating fact from fiction in popular habit advice</p>
+                        <h2 class="section-title">What I've Learned About Habit Formation</h2>
+                        <p class="section-subtitle">The real truth from personal experience</p>
                     </div>
                     
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">❌</div>
-                            <div class="stat-label">21-Day Myth</div>
-                            <div class="stat-description">The popular "21 days to form a habit" is oversimplified. Real habits take 18-254 days depending on complexity and individual differences.</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">✅</div>
-                            <div class="stat-label">Missing Days Is OK</div>
-                            <div class="stat-description">Research shows missing one day doesn't significantly impact habit formation. Consistency matters more than perfection.</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">🧠</div>
-                            <div class="stat-label">Willpower Is Limited</div>
-                            <div class="stat-description">Studies prove willpower is finite. Successful habit formation relies on environmental design, not just mental strength.</div>
-                        </div>
+                    <div class="habit-example">
+                        <h4>Forget the 21-Day Myth</h4>
+                        <p>The internet loves to say "21 days to form a habit" but that's nonsense. Some of my habits took 3 months to stick, others clicked in a week. It depends on complexity, your current life situation, and honestly, how much you actually want to do it.</p>
+                    </div>
+                    
+                    <div class="personal-note">
+                        <h4>My Current Approach</h4>
+                        <p><strong>Start stupidly small.</strong> Want to read more? Start with one page, not one hour. Want to exercise? Do 5 push-ups, not a full workout.</p>
+                        <p><strong>Link to existing habits.</strong> I write these articles after my morning coffee. The coffee routine was already there, so writing just attached to it.</p>
+                        <p><strong>Don't aim for perfect.</strong> I missed writing for 4 days last week because life happened. Instead of giving up, I just started again. Consistency beats perfection.</p>
                     </div>
                 </div>
                 
-                <div class="evaluation-framework">
-                    <h3>The Habit Stack Method</h3>
-                    <p>Stanford behavior scientist BJ Fogg's research shows that linking new habits to existing ones increases success rates by 65%</p>
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">The Compound Effect is Real (But Slow)</h2>
+                        <p class="section-subtitle">Results take time, but they do come</p>
+                    </div>
                     
-                    <div class="evaluation-steps">
-                        <div class="evaluation-step">
-                            <div class="step-icon">🔗</div>
-                            <div class="step-title">Link to Existing Habits</div>
-                            <div class="step-description">"After I pour my morning coffee, I will write one sentence in my journal"</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">📏</div>
-                            <div class="step-title">Start Tiny</div>
-                            <div class="step-description">Begin with actions so small they feel almost silly - like doing one push-up or reading one page</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">🎉</div>
-                            <div class="step-title">Celebrate Immediately</div>
-                            <div class="step-description">Give yourself a mental high-five or say "Great job!" right after completing the habit</div>
-                        </div>
+                    <div class="habit-example">
+                        <h4>Personal Success Story</h4>
+                        <p>I write daily articles. Some people might consider it a waste of time thinking no one reads them. But for me it's been transformative. My typing speed improved, I learn something new every day, and my thinking became clearer. The beauty is you're in control. You can tweak, replace, or completely change habits whenever you want.</p>
+                    </div>
+                    
+                    <div class="personal-note">
+                        <h4>Patience is Hard but Necessary</h4>
+                        <p>I wanted to see results in weeks. Reality? Most meaningful changes took 3-6 months to become noticeable. The habit might form in weeks, but the life impact takes longer. That's normal, not failure.</p>
                     </div>
                 </div>
                 
-                <div class="evaluation-framework">
-                    <h3>A Personal Note on Perspective</h3>
-                    <p>Before diving into research and frameworks, I want to address something important. This article combines my personal observations and experiences with scientific research I've studied, along with additional insights researched and supported by AI to ensure comprehensive coverage of the topic.</p>
-                    
-                    <div class="evaluation-steps">
-                        <div class="evaluation-step">
-                            <div class="step-icon">🤔</div>
-                            <div class="step-title">My Approach</div>
-                            <div class="step-description">I combine personal experimentation with peer-reviewed research to find practical solutions</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">📚</div>
-                            <div class="step-title">Research-Based</div>
-                            <div class="step-description">Claims are backed by studies from reputable institutions, with AI assistance in research compilation</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">⚖️</div>
-                            <div class="step-title">Balanced View</div>
-                            <div class="step-description">Multiple perspectives are presented because habit formation is highly individual</div>
-                        </div>
-                        <div class="evaluation-step">
-                            <div class="step-icon">🎯</div>
-                            <div class="step-title">Practical Focus</div>
-                            <div class="step-description">The goal is to provide actionable insights you can actually implement</div>
-                        </div>
+                <div class="highlight-box">
+                    <p><strong>Remember:</strong> The best habit is the one you'll actually do consistently, even if it's not perfect.</p>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">My Current Habit Philosophy</h2>
+                        <p class="section-subtitle">What works for me might not work for you, and that's okay</p>
                     </div>
                     
-                    <p>If you're dealing with serious behavioral challenges, addiction, or mental health concerns, please consider consulting with qualified professionals. This article is meant to complement, not replace, professional guidance.</p>
+                    <div class="habit-example">
+                        <h4>Some Habits I've Embraced (Despite Being "Bad")</h4>
+                        <p>• Taking 20-minute "thinking breaks" that look like staring into space<br>
+                        • Having dessert when I want it instead of restricting everything<br>
+                        • Saying no to social events when I need alone time<br>
+                        • Working in bursts rather than steady 8-hour stretches</p>
+                    </div>
+                    
+                    <div class="habit-example">
+                        <h4>Some "Good" Habits I've Dropped</h4>
+                        <p>• Waking up at 5 AM when it didn't match my natural rhythm<br>
+                        • Reading self-help books I wasn't actually enjoying "for growth"<br>
+                        • Drinking excessive water just because "8 glasses a day" is the rule - I was constantly uncomfortable and it interfered with my sleep. After years of this, I learned to drink when thirsty and stop when satisfied<br>
+                        • Meal prepping everything (I like some cooking spontaneity)<br>
+                        • Taking cold showers daily - it just made me miserable, not motivated</p>
+                    </div>
                 </div>
-
-                <div class="habit-example">
-                    <h4>Real-World Success Framework</h4>
-                    <p>Based on research from James Clear's "Atomic Habits" and tracking data from habit-building apps monitoring over 40,000 people, the most successful habit builders follow this pattern: they start with 2-minute versions of their desired habits, focus on consistency over intensity, and use environmental cues rather than relying on motivation.</p>
-                    <p><strong>Example:</strong> Instead of "exercise for an hour daily," successful people start with "put on workout clothes" and build from there. The average person who uses this method maintains their new habit for over 6 months compared to 3 weeks for traditional approaches.</p>
-                    <p><em>Source: Clear, J. (2018). Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones. Avery Publishing.</em></p>
+                
+                <div class="highlight-box">
+                    <p>At the end of the day, habits are your allies, not your enemies. Every small step, every little routine shapes the life you're living and the person you're becoming. Don't get caught up in labeling them strictly as good or bad. Focus on how they make you feel, what they help you achieve, and how they fit into your life. Start small, stay consistent, and be mindful. Trust your experience over everyone else's advice - including mine.</p>
                 </div>
             </div>
         </article>
