@@ -112,6 +112,14 @@
             font-size: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: pulse 3s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
         }
 
         @keyframes pulse {
@@ -261,7 +269,7 @@
             font-weight: 700;
         }
 
-        .logo-icon {
+        .section-logo-icon {
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -397,6 +405,45 @@
             font-size: 0.95rem;
         }
 
+        /* Disclaimer Section */
+        .disclaimer-section {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 50%, #6c5ce7 100%);
+            color: white;
+            padding: 60px 40px;
+            margin: 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .disclaimer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%);
+            z-index: -1;
+        }
+
+        .disclaimer-section h3 {
+            font-size: 2.2em;
+            font-weight: 900;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .disclaimer-section p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            line-height: 1.6;
+        }
+
         /* Author Section from DNATech */
         .author-section {
             background: var(--ocean-gradient);
@@ -493,6 +540,18 @@
             .dictionary-grid {
                 grid-template-columns: 1fr;
             }
+
+            .disclaimer-section {
+                padding: 40px 25px;
+            }
+
+            .disclaimer-section h3 {
+                font-size: 1.8em;
+            }
+
+            .disclaimer-section p {
+                font-size: 1.1em;
+            }
         }
 
         @media (max-width: 480px) {
@@ -547,8 +606,9 @@
         <!-- DNATech Header -->
         <header class="header">
             <div class="brand-logo">
-                <div class="logo-icon"></div>
-
+                <div class="logo-icon">
+                    <img src="DNATech logo.png" alt="DNATech Logo">
+                </div>
                 <span>DNATech</span>
             </div>
             <h1 class="floating">Bluetooth Bliss, Data Abyss</h1>
@@ -706,6 +766,12 @@
                 </div>
             </div>
         </article>
+
+        <!-- Disclaimer Section -->
+        <div class="disclaimer-section">
+            <h3>📝 Knowledge Disclaimer</h3>
+            <p>This article is based on my current understanding and research. Technology and security landscapes evolve rapidly. If you have additional information, corrections, or updates, please feel free to share. Stay informed, stay vigilant, and always verify information from multiple sources when making security decisions.</p>
+        </div>
 
         <!-- DNATech Author Section -->
         <div class="author-section">
