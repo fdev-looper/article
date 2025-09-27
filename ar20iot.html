@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room to Web: When Smart Things Start to Spread</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #2c3e50 0%, #4a4a4a 100%);
+            --secondary-gradient: linear-gradient(135deg, #1a1a1a 0%, #3a3a3a 100%);
+            --accent-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            --success-gradient: linear-gradient(135deg, #343a40 0%, #495057 100%);
+            --warning-gradient: linear-gradient(135deg, #212529 0%, #343a40 100%);
+            --ocean-gradient: linear-gradient(135deg, #667db6 0%, #0082c8 100%);
+            --sunset-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --forest-gradient: linear-gradient(135deg, #134e5e 0%, #71b280 100%);
+            --aurora-gradient: linear-gradient(135deg, #2c3e50 0%, #4a4a4a 100%);
+            --neon-gradient: linear-gradient(135deg, #212529 0%, #495057 100%);
+            --cosmic-gradient: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 46%, #4a4a4a 100%);
+            --metallic-gradient: linear-gradient(135deg, #000000 0%, #1a1a1a 25%, #333333 50%, #1a1a1a 75%, #000000 100%);
+            --silver-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 25%, #ffffff 50%, #e9ecef 75%, #f8f9fa 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #adb5bd;
+            --text-light: rgba(255, 255, 255, 0.9);
+            --text-dark: #212529;
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.7);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--metallic-gradient);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+        
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+            z-index: -1;
+            animation: floatBackground 20s ease-in-out infinite;
+        }
+        
+        @keyframes floatBackground {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-30px, -30px) rotate(1deg); }
+            66% { transform: translate(30px, -20px) rotate(-1deg); }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            color: white;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: -1;
+        }
+        
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            font-weight: 800;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffffff 0%, #e9ecef 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 30px;
+            color: #000;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .header h1 {
+            font-size: 4.2em;
+            font-weight: 900;
+            margin-bottom: 25px;
+            background: var(--silver-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .header .subtitle {
+            font-size: 1.4em;
+            font-weight: 400;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1em;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .meta-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+        }
+        
+        .main-article {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(52, 52, 52, 0.95) 100%);
+            backdrop-filter: blur(30px);
+            margin: 0;
+            min-height: calc(100vh - 200px);
+            box-shadow: var(--shadow-xl);
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-banner {
+            background: var(--metallic-gradient);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+        }
+        
+        .hero-banner h2 {
+            font-size: 2.8em;
+            font-weight: 900;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+            background: var(--silver-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-banner p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .article-content {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.9) 0%, rgba(40, 40, 40, 0.9) 100%);
+        }
+        
+        .intro-section {
+            text-align: center;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .intro-section h3 {
+            font-size: 2.4em;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            background: var(--silver-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .intro-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+        
+        .section {
+            margin: 80px 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 2.8em;
+            font-weight: 900;
+            background: var(--silver-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3em;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content-box {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--silver-gradient);
+        }
+        
+        .content-box h4 {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+        
+        .content-box p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        
+        .content-box strong {
+            color: var(--text-primary);
+        }
+        
+        .tips-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .tips-container h3 {
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-align: center;
+            background: var(--silver-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tip-item {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tip-item strong {
+            color: var(--text-primary);
+            font-size: 1.1em;
+        }
+        
+        .highlight-box {
+            background: var(--metallic-gradient);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .highlight-box p {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .dictionary-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--metallic-gradient);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .dictionary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.2);
+            background: var(--silver-gradient);
+            color: #000;
+        }
+        
+        .dictionary-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .dictionary-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--metallic-gradient);
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .word-entry {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .word-entry h4 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .word-entry p {
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        
+        /* Keep original styles for header, footer and author section */
+        .author-section {
+            background: var(--ocean-gradient);
+            color: white;
+            text-align: center;
+            padding: 80px 40px;
+            margin: 0;
+        }
+        
+        .author-section h3 {
+            font-size: 2.4em;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+        
+        .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .author-details h4 {
+            font-size: 1.4em;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .author-details p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            opacity: 0.9;
+            background: var(--cosmic-gradient);
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header {
+                padding: 60px 20px 40px;
+            }
+            
+            .header h1 {
+                font-size: 3.2em;
+            }
+            
+            .article-content {
+                padding: 60px 25px;
+            }
+            
+            .section-title {
+                font-size: 2.2em;
+            }
+            
+            .author-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .meta-item {
+                padding: 12px 24px;
+                font-size: 0.9em;
+            }
+            
+            .dictionary-btn {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2.8em;
+            }
+            
+            .article-content {
+                padding: 40px 20px;
+            }
+            
+            .content-box, .tips-container {
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <!-- HEADER SECTION - KEEPING EXACTLY AS PROVIDED -->
+        <header class="header">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <img src="DNATech logo.png" alt="DNATech Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+                </div>
+                <span>DNATech</span>
+            </div>
+            <h1>Room to Web: When Smart Things Start to Spread</h1>
+            <p class="subtitle">Every device in your home is quietly reaching out—connecting, syncing, and sharing with the world more than you think.</p>
+            
+            <div class="article-meta">
+                <div class="meta-item">IoT Guide</div>
+                <div class="meta-item">September 2025</div>
+                <div class="meta-item">8 min read</div>
+            </div>
+        </header>
+        
+        <article class="main-article">
+            <div class="hero-banner">
+                <h2>Smart Homes, Hidden Networks</h2>
+                <p>The convenience of connected living and the privacy trade-offs we rarely think about</p>
+            </div>
+            
+            <div class="article-content">
+                <div class="intro-section">
+                    <h3>The Invisible Web in Your Living Room</h3>
+                    <p class="intro-text">
+                        I'm writing today's article about how IoT gadgets are transforming our homes into smart spaces—where a simple flick of a switch turns on a light, or a casual voice command to an AI device plays your favorite song, adjusts the thermostat, or even reads you the morning news. It's amazing how these small devices quietly weave themselves into our routines, learning our preferences, anticipating our needs, and making everyday life a little smoother.
+                    </p>
+                </div>
+                
+                <div class="content-box">
+                    <h4>The Human Side of Smart Technology</h4>
+                    <p>But beyond the convenience, there's something deeply human about this shift. The way your smart speaker greets you with a cheerful "Good morning!" or the way your lights dim automatically when you're winding down—it's like the house itself is responding to your moods, your energy, and your lifestyle. These gadgets don't just save time; they touch our emotions, making our homes feel more alive, attentive, and in sync with who we are.</p>
+                    <p><strong>The delicate balance:</strong> It's easy to forget that while we celebrate the comfort and charm of smart homes, each device is silently connecting to a larger network—a public digital world far beyond our cozy rooms. And that delicate balance between intimacy and connectivity is what makes this era of smart living both fascinating and thought-provoking.</p>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">The Magic and Reality of Smart Living</h2>
+                        <p class="section-subtitle">Understanding both the convenience and the hidden connections</p>
+                    </div>
+                    
+                    <div class="content-box">
+                        <h4>The Effortless Experience</h4>
+                        <p>The magic of IoT gadgets is undeniable. From smart lights that brighten automatically when you enter a room, to voice-controlled assistants that play your favorite song the moment you wake up, these devices make life feel effortless. Your home seems to understand you, responding to your moods and routines in ways that were once the stuff of science fiction. Even simple things—like having your coffee machine start brewing as your alarm rings—turn mundane mornings into moments of delight.</p>
+                    </div>
+                    
+                    <div class="content-box">
+                        <h4>The Quiet Side We Overlook</h4>
+                        <p>But this convenience comes with a quiet side we often overlook. Every device, from your smart speaker to your connected fridge, is constantly communicating over the internet. While this allows them to learn your habits and serve you better, it also means a part of your life is visible outside the walls of your home.</p>
+                        
+                        <p><strong>Real-life incidents show this clearly:</strong></p>
+                        <p>• In 2018, a Portland family discovered that their Amazon Echo had secretly recorded a private conversation and sent it to a random contact in their phone</p>
+                        <p>• In 2017, Google's Home Mini had a hardware flaw causing it to continuously record conversations without users saying "OK Google"</p>
+                        <p>• Apple's Siri was found to unintentionally record private conversations that were later reviewed by contractors for quality control, leading to a $95 million settlement in 2025</p>
+                    </div>
+                </div>
+                
+                <div class="tips-container">
+                    <h3>3 Practical Tips to Use IoT Safely</h3>
+                    <div class="tip-item">
+                        <strong>Change Default Passwords & Enable Multi-Factor Authentication</strong> – Avoid easy-to-guess passwords and add extra layers of security where possible.
+                    </div>
+                    <div class="tip-item">
+                        <strong>Regularly Update Firmware</strong> – Keep devices updated to patch security flaws and minimize vulnerabilities.
+                    </div>
+                    <div class="tip-item">
+                        <strong>Segment Your Network</strong> – Isolate IoT devices on a separate Wi-Fi network from computers and phones to reduce risks if a device is compromised.
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">IoT in India: Convenience vs. Compromise</h2>
+                        <p class="section-subtitle">The rapid adoption and evolving landscape</p>
+                    </div>
+                    
+                    <div class="content-box">
+                        <h4>Rapid Adoption</h4>
+                        <p>India is rapidly adopting smart devices, from AI speakers to wearable health trackers. The convenience is undeniable: smart homes, automated appliances, and telemedicine make life simpler and more efficient.</p>
+                    </div>
+                    
+                    <div class="content-box">
+                        <h4>The Compromise</h4>
+                        <p>Yet, there's a compromise. IoT devices collect personal data, standards vary across manufacturers, and many users remain unaware of potential privacy risks. The government is stepping in: privacy rights and IoT security guidelines are evolving, aiming to protect users while still allowing the benefits of smart living.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>Key takeaway:</strong> These examples highlight the delicate balance between the convenience IoT devices provide and the privacy risks they carry. While smart gadgets make life easier and more connected, they also silently link parts of our personal lives to the wider digital world, making awareness and precaution essential.</p>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Finding Your Balance</h2>
+                        <p class="section-subtitle">Creating a smart home that respects your privacy</p>
+                    </div>
+                    
+                    <div class="content-box">
+                        <h4>The Path Forward</h4>
+                        <p>IoT devices have transformed our homes into intuitive, responsive spaces, blending technology seamlessly with our daily lives. They make mornings brighter, chores simpler, and entertainment effortless. But with great convenience comes responsibility. Understanding the risks, adopting simple safety measures, and staying aware of the evolving landscape in India allows us to enjoy the magic of smart homes without compromising our privacy.</p>
+                        
+                        <p><strong>In the end, it's about creating a balance</strong>—where your home listens just enough to make life easier, but never more than you're comfortable sharing with the world.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+        <!-- AUTHOR SECTION - KEEPING EXACTLY AS PROVIDED -->
+        <div class="author-section">
+            <h3>About DNATech Research</h3>
+            <p>I investigate emerging technologies, behavioral science, and provide actionable insights to help users make informed decisions about digital adoption, personal development, and security.</p>
+            <div class="author-info">
+                <div class="author-avatar">D</div>
+                <div class="author-details">
+                    <h4>DNATech Security Notes</h4>
+                    <p>Threat Horizon Scout | Preparing for Tomorrow's Cyber Fights</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER SECTION - KEEPING EXACTLY AS PROVIDED -->
+        <div class="footer">
+            <p>© 2025 DNATech Notes. Stay informed. Stay connected. Stay secure.</p>
+        </div>
+    </div>
+
+    <button class="dictionary-btn" onclick="openDictionary()">Today's Dictionary</button>
+
+    <div class="dictionary-modal" id="dictionaryModal">
+        <div class="dictionary-content">
+            <button class="close-btn" onclick="closeDictionary()">&times;</button>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #ffffff; background: var(--silver-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Today's Dictionary</h2>
+            
+            <div class="word-entry">
+                <h4>IoT (Internet of Things)</h4>
+                <p>A network of physical objects embedded with sensors, software, and other technologies to connect and exchange data with other devices over the internet.</p>
+            </div>
+
+            <div class="word-entry">
+                <h4>Thermostat</h4>
+                <p>A device that automatically regulates temperature by controlling heating or cooling systems to maintain a desired temperature.</p>
+            </div>
+
+            <div class="word-entry">
+                <h4>Firmware</h4>
+                <p>Low-level software stored in hardware that provides basic operational instructions for a device's specific hardware components.</p>
+            </div>
+
+            <div class="word-entry">
+                <h4>Multi-Factor Authentication</h4>
+                <p>A security method requiring users to provide two or more verification factors to gain access to an account or system.</p>
+            </div>
+
+            <div class="word-entry">
+                <h4>Network Segmentation</h4>
+                <p>The practice of dividing a computer network into smaller parts to improve security and performance by isolating different types of devices.</p>
+            </div>
+
+            <div class="word-entry">
+                <h4>Backdrop Filter</h4>
+                <p>A CSS property that applies graphical effects like blur or color shifting to the area behind an element.</p>
+            </div>
+
+            <div class="word-entry">
+                <h4>Telemedicine</h4>
+                <p>The remote diagnosis and treatment of patients using telecommunications technology, especially useful for healthcare in distant locations.</p>
+            </div>
+
+            <div class="word-entry">
+                <h4>Intuitive</h4>
+                <p>Easy to understand or operate without needing explanation; working in a way that feels natural and effortless to users.</p>
+            </div>
+
+            <div class="word-entry">
+                <h4>Compromise (in context)</h4>
+                <p>A trade-off or middle ground where you accept some negative aspects in exchange for positive benefits.</p>
+            </div>
+
+            <div class="word-entry">
+                <h4>Seamlessly</h4>
+                <p>In a smooth and continuous way, without any obvious transitions or interruptions; naturally integrated.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.bg-pattern');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '2px';
+                particle.style.height = '2px';
+                particle.style.background = 'rgba(255, 255, 255, 0.3)';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animation = `float ${Math.random() * 10 + 15}s infinite linear`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function openDictionary() {
+            document.getElementById('dictionaryModal').style.display = 'block';
+        }
+
+        function closeDictionary() {
+            document.getElementById('dictionaryModal').style.display = 'none';
+        }
+
+        // Close dictionary when clicking outside
+        document.getElementById('dictionaryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDictionary();
+            }
+        });
+
+        // Initialize particles when page loads
+        window.addEventListener('load', createParticles);
+
+        // Close dictionary with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeDictionary();
+            }
+        });
+
+        // Add floating animation for particles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { transform: translateY(-100vh) translateX(50px) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
