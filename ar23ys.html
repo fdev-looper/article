@@ -25,7 +25,8 @@
             --gradient-focus: linear-gradient(135deg, #DBEAFE 0%, #E0E7FF 100%);
             --ocean-gradient: linear-gradient(135deg, #667db6 0%, #0082c8 100%);
             --cosmic-gradient: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 46%, #4a4a4a 100%);
-            --metallic-gradient: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330a0a 50%, #1a0000 75%, #000000 100%);
+            --metallic-violet: linear-gradient(135deg, #0a0015 0%, #1a0033 25%, #2d0052 50%, #1a0033 75%, #0a0015 100%);
+            --metallic-green: linear-gradient(135deg, #001a0a 0%, #003320 25%, #00523d 50%, #003320 75%, #001a0a 100%);
         }
         
         * {
@@ -47,8 +48,8 @@
             padding: 80px 20px 60px;
             color: white;
             position: relative;
-            background: var(--metallic-gradient);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            background: var(--metallic-violet);
+            box-shadow: 0 10px 40px rgba(45, 0, 82, 0.6);
         }
         
         .header::before {
@@ -58,7 +59,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+            background: linear-gradient(135deg, rgba(42, 0, 75, 0.4) 0%, rgba(10, 0, 21, 0.6) 100%);
             z-index: 1;
         }
         
@@ -111,7 +112,7 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             font-size: 30px;
             color: #000;
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(200, 150, 255, 0.4);
             animation: pulse 3s ease-in-out infinite;
         }
         
@@ -128,7 +129,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.1);
+            text-shadow: 2px 2px 8px rgba(200, 150, 255, 0.3);
             animation: fadeInUp 1s ease-out 0.2s both;
         }
         
@@ -153,25 +154,25 @@
         }
         
         .meta-item {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(200, 150, 255, 0.15) 0%, rgba(150, 100, 255, 0.1) 100%);
             backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(200, 150, 255, 0.3);
             padding: 15px 30px;
             border-radius: 30px;
             font-weight: 700;
             font-size: 1em;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(45, 0, 82, 0.4);
             transition: all 0.3s ease;
         }
         
         .meta-item:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.1);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
+            box-shadow: 0 12px 35px rgba(200, 150, 255, 0.3);
+            background: linear-gradient(135deg, rgba(200, 150, 255, 0.2) 0%, rgba(150, 100, 255, 0.15) 100%);
         }
 
         .podcast-btn {
-            background: linear-gradient(135deg, var(--accent-peach) 0%, var(--accent-lavender) 100%);
+            background: var(--metallic-green);
             color: white;
             border: none;
             padding: 18px 40px;
@@ -179,15 +180,17 @@
             font-size: 1.2em;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 184, 140, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 82, 61, 0.6);
             transition: all 0.3s ease;
             margin-top: 20px;
             animation: fadeInUp 1s ease-out 0.8s both;
+            border: 2px solid rgba(0, 255, 150, 0.3);
         }
 
         .podcast-btn:hover {
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(255, 184, 140, 0.6);
+            box-shadow: 0 12px 35px rgba(0, 255, 150, 0.5);
+            border-color: rgba(0, 255, 150, 0.5);
         }
 
         .podcast-modal {
@@ -229,14 +232,14 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             padding: 50px;
             border-radius: 30px;
             width: 90%;
-            max-width: 700px;
+            max-width: 800px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             animation: modalSlideIn 0.4s ease-out;
         }
         
@@ -310,16 +313,19 @@
             font-size: 2em;
             color: white;
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .podcast-image {
             width: 100%;
+            max-width: 600px;
+            height: auto;
             border-radius: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 0 auto 30px;
+            display: block;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .audio-player-wrapper {
@@ -738,14 +744,14 @@
         <main class="main-content">
             <div class="hero-section">
                 <h2>The Invisible Power of Your Environment</h2>
-                <p class="hook">I still remember the first time I thought about publishing an article. I was terrified — scared of judgment, scared my ideas wouldn't matter, scared that my environment wasn't supportive enough. But I took a deep breath and published anyway. That small step changed everything.</p>
+                <p class="hook">I still remember the first time I thought about publishing an article. I was terrified, scared of judgment, scared my ideas wouldn't matter, scared that my environment wasn't supportive enough. But I took a deep breath and published anyway. That small step changed everything.</p>
             </div>
 
             <div class="article-body">
                 <div class="section-card">
                     <h3 class="section-title">The Journey Begins</h3>
                     <div class="section-content">
-                        <p>Today, I've completed 23 articles and 4–5 personal projects. The reach isn't massive, but the few people who support me — maybe just a handful — are worth more than thousands to me. Their encouragement, though small in number, has made all the difference.</p>
+                        <p>Today, I've completed 23 articles and 4 to 5 personal projects. The reach isn't massive, but the few people who support me, maybe just a handful, are worth more than thousands to me. Their encouragement, though small in number, has made all the difference.</p>
                         <p>These supporters, my family and close friends, they used my projects even when they had flaws. They gave honest feedback, and I trusted the process. I kept developing, kept improving, and I'm still learning. Those few people became pillars. They didn't just encourage me with words; they engaged with my work, and that made all the difference between giving up and continuing to grow.</p>
                     </div>
                 </div>
@@ -754,14 +760,14 @@
                     <h3 class="section-title">Understanding Our Surroundings</h3>
                     <div class="section-content">
                         <p>Our surroundings influence our thoughts, confidence, creativity, and the risks we're willing to take more than we often realize. The people we interact with, the spaces we occupy, and even the online communities we join quietly shape who we are.</p>
-                        <p>This applies to every aspect of life. Surroundings — offline and online — shape behavior, habits, and mindset. Positive environments foster learning, motivation, and confidence. Negative or toxic environments can drain energy, reinforce self-doubt, and limit potential. That's why consciously choosing your surroundings is critical: your environment can either lift you or quietly hold you back.</p>
+                        <p>This applies to every aspect of life. Surroundings, offline and online, shape behavior, habits, and mindset. Positive environments foster learning, motivation, and confidence. Negative or toxic environments can drain energy, reinforce self-doubt, and limit potential. That's why consciously choosing your surroundings is critical: your environment can either lift you or quietly hold you back.</p>
                     </div>
                 </div>
 
                 <div class="section-card">
                     <h3 class="section-title">The First Surrounding: You</h3>
                     <div class="section-content">
-                        <p>Before we talk about external surroundings, here's something crucial: your first and most important surrounding is yourself. The way you talk to yourself, the thoughts you entertain, the standards you set — these form your internal environment.</p>
+                        <p>Before we talk about external surroundings, here's something crucial: your first and most important surrounding is yourself. The way you talk to yourself, the thoughts you entertain, the standards you set, these form your internal environment.</p>
                         <p>If your inner dialogue is filled with self-doubt, harsh criticism, or negativity, even the best external surroundings won't help much. This is my personal experience, and I encourage you to try it yourself: work on your internal surrounding first. Cultivate self-belief, practice self-compassion, and challenge negative thoughts. When your internal environment is strong and supportive, you become resilient enough to thrive in any external situation.</p>
                     </div>
                 </div>
@@ -782,9 +788,9 @@
                     <h3 class="section-title">The Power of the Right Circle</h3>
                     <div class="section-content">
                         <p>Not all surroundings are equal. Some environments, even if they are challenging or push us hard, create a positive impact by motivating us to grow, take risks, and step out of our comfort zone. These spaces or people might not always be "nice," but they encourage progress and resilience.</p>
-                        <p>Consider someone who was selected as a goalkeeper at the last moment for an important tournament. Excitement turned to disappointment when, right before the match, trust wavered and they were substituted — they didn't get to play at all. It stung.</p>
-                        <p>But the next year, something changed. The people around them — their circle — pushed them to be better. They believed in them when doubt crept in. That year, they weren't just selected; they were demanded by the team. The difference wasn't just improved skill; it was the surrounding that had shifted. A positive circle can transform doubt into confidence.</p>
-                        <p>On the other hand, some surroundings actively hold us back — discouraging our efforts, fostering doubt, or creating unnecessary conflict. These negative environments can stunt growth, reduce motivation, and even harm our mental well-being. Recognizing the difference between these two types of surroundings is crucial: one drives us forward, while the other subtly or overtly stops us from reaching our potential.</p>
+                        <p>Consider someone who was selected as a goalkeeper at the last moment for an important tournament. Excitement turned to disappointment when, right before the match, trust wavered and they were substituted. They didn't get to play at all. It stung.</p>
+                        <p>But the next year, something changed. The people around them, their circle, pushed them to be better. They believed in them when doubt crept in. That year, they weren't just selected; they were demanded by the team. The difference wasn't just improved skill; it was the surrounding that had shifted. A positive circle can transform doubt into confidence.</p>
+                        <p>On the other hand, some surroundings actively hold us back, discouraging our efforts, fostering doubt, or creating unnecessary conflict. These negative environments can stunt growth, reduce motivation, and even harm our mental well-being. Recognizing the difference between these two types of surroundings is crucial: one drives us forward, while the other subtly or overtly stops us from reaching our potential.</p>
                     </div>
                 </div>
 
@@ -798,7 +804,7 @@
 
                 <div class="conclusion-box">
                     <h3>Curate Your World</h3>
-                    <p>The key is conscious curation. Seek communities and environments that inspire, challenge, and uplift you — online or offline. Set boundaries to avoid negativity or comparison. Surroundings influence not just what we do, but also what we dare to imagine.</p>
+                    <p>The key is conscious curation. Seek communities and environments that inspire, challenge, and uplift you, online or offline. Set boundaries to avoid negativity or comparison. Surroundings influence not just what we do, but also what we dare to imagine.</p>
                     <p>Even a handful of genuinely supportive people can feel like a million, giving you confidence to pursue your goals. Ultimately, your surroundings are the silent architects of your life. They shape your habits, mindset, and growth.</p>
                     <p>But remember, it all starts from within. Cultivate a positive internal surrounding first, then curate your external environment wisely. Embrace supportive spaces, and watch as your potential unfolds.</p>
                 </div>
@@ -826,7 +832,7 @@
         <div class="podcast-content">
             <button class="podcast-close" onclick="closePodcast()">&times;</button>
             <h2>🎙️ Article 23 Podcast</h2>
-            <img src="https://raw.githubusercontent.com/fdev-looper/arimages/main/ar23.png" alt="Article 23 Cover" class="podcast-image">
+            <img src="https://fdev-looper.github.io/arimages/ar23ys.png" alt="Article 23 Cover" class="podcast-image">
             
             <div class="audio-player-wrapper">
                 <div class="custom-audio-player">
