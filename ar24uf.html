@@ -802,7 +802,8 @@
                     <h3 class="section-title">The Hidden Danger</h3>
                     <div class="section-content">
                         <p>Look, we've all done it. Signed up for something years back and completely forgot about it. Maybe it was some random app in 2015, a forum you joined for one question, or an online store where you bought something once and never returned. They feel harmless enough, right? Wrong. These abandoned accounts are actually ticking time bombs.</p>
-                        <p>Here's the thing: hackers don't always need fancy techniques to break in. They just hunt for old accounts sitting there with terrible passwords, outdated security, or permissions still turned on. Once they get into one, they can gather enough details to crack into your email, social media, maybe even your bank. Your forgotten past becomes an open door to your current digital life.</p>
+                        <p>Here's a real example: In 2019, security researchers documented a case where someone's old MyFitnessPal account from 2014 got breached. The person had reused the same password for their email. Hackers used the leaked password to access the email, then systematically reset passwords for banking apps, PayPal, and Amazon. Total damage: over $12,000 before it was caught. All because of one forgotten fitness app account with a reused password.</p>
+                        <p>Hackers don't always need fancy techniques to break in. They just hunt for old accounts sitting there with terrible passwords, outdated security, or permissions still turned on. Once they crack one account with a reused password, they can access your email, social media, maybe even your bank.</p>
                     </div>
                 </div>
 
@@ -815,8 +816,10 @@
                             <li>Old photos with location data</li>
                             <li>Email addresses and usernames you still use</li>
                             <li>Weak passwords or ones you've reused elsewhere</li>
+                            <li>OAuth connections letting them access your Google, Facebook, or Twitter accounts</li>
                         </ul>
-                        <p>If any of these got breached (and let's be honest, plenty have been), your info is probably already sitting in some hacker database. And because people reuse passwords, one breach can unlock multiple accounts. Even accounts that seem totally unimportant can give hackers breadcrumbs leading to your other profiles.</p>
+                        <p>If any of these got breached (and plenty have been), your info is probably already sitting in some hacker database. And here's the critical part: if you reused that password anywhere else, one breach can unlock multiple accounts. Even accounts that seem totally unimportant can give hackers breadcrumbs leading to your other profiles.</p>
+                        <p>There's also a sneaky risk most people don't consider: when companies go bankrupt or get acquired, your account data sometimes gets sold off to third parties. That obscure shopping site from 2016? It might have changed ownership twice, and who knows who has access to your old account now.</p>
                     </div>
                 </div>
 
@@ -825,7 +828,7 @@
                     <div class="section-content">
                         <p>There's this free tool called Have I Been Pwned that's actually pretty useful. Just go to <a href="https://haveibeenpwned.com" target="_blank">haveibeenpwned.com</a> and type in your email. It'll show you every breach your email's been caught up in.</p>
                         <p>If something pops up, make a note of which sites got hit and when. That's your starting point for cleaning things up.</p>
-                        <p>You can also try Googling your email in quotes, like "yourname@email.com", to see what personal stuff is still floating around online.</p>
+                        <p>You can also search for your email address in quotes on Google (like "yourname@email.com") to find old forum posts, account registrations, or data dumps that might reveal which forgotten accounts are still out there with your information exposed.</p>
                     </div>
                 </div>
 
@@ -838,13 +841,14 @@
                             <li><strong>Email takeover:</strong> Get into your email and they can reset passwords for basically everything</li>
                             <li><strong>Money problems:</strong> Old accounts might still have payment details or subscriptions auto-renewing</li>
                             <li><strong>Social engineering:</strong> Public info from dead profiles gets used to scam you or people you know</li>
+                            <li><strong>OAuth backdoors:</strong> That "Sign in with Google" button you clicked years ago? The app still has access to read your contacts, emails, or calendar unless you manually revoked it</li>
                         </ul>
                         <p>Even tiny, seemingly worthless accounts can be puzzle pieces hackers need.</p>
                     </div>
                 </div>
 
                 <div class="highlight-quote">
-                    "One leaked password on a forgotten forum account from 2014 can be the key that unlocks your entire digital life today."
+                    "If you reused a password from a forgotten 2014 forum account on other sites, that one leaked password can become the key that unlocks your entire digital life today."
                 </div>
 
                 <div class="section-card">
@@ -852,11 +856,11 @@
                     <div class="section-content">
                         <p>Here's how to actually fix this:</p>
                         <p><strong>Update your important passwords first.</strong> Email, banking, shopping sites, social media. Make each one different and strong. Get a password manager like Bitwarden or 1Password to make life easier.</p>
-                        <p><strong>Turn on two-factor authentication.</strong> Use an authenticator app like Google Authenticator or Authy. Way more secure than SMS codes.</p>
-                        <p><strong>Actually delete unused accounts.</strong> Go to those old sites and delete your accounts. If deleting is complicated, at least wipe your personal info or disconnect your email.</p>
-                        <p><strong>Check what apps can access your accounts.</strong> Look through your Google, Facebook, and Twitter settings for apps you haven't used in years. Remove them.</p>
-                        <p><strong>Clean up subscriptions and payment methods.</strong> Delete old cards and cancel subscriptions you forgot existed.</p>
-                        <p><strong>Sign out from old devices.</strong> Check your Google, Apple, or Microsoft accounts for logged-in devices you don't recognize anymore.</p>
+                        <p><strong>Turn on two-factor authentication.</strong> Use an authenticator app like Google Authenticator or Authy instead of SMS codes. Why? SMS can be intercepted through SIM swapping attacks where hackers convince your phone carrier to transfer your number to their device. Authenticator apps generate codes locally on your phone, making them far more secure.</p>
+                        <p><strong>Actually delete unused accounts.</strong> Go to those old sites and delete your accounts. If deleting is complicated, at least wipe your personal info or disconnect your email. Sites like JustDeleteMe can help you find the deletion pages.</p>
+                        <p><strong>Check what apps can access your accounts.</strong> Look through your Google, Facebook, and Twitter settings for apps you haven't used in years. Go to Google Account > Security > Third-party apps with account access, and remove anything suspicious or unused. Do the same for Facebook and other platforms.</p>
+                        <p><strong>Clean up subscriptions and payment methods.</strong> Delete old cards and cancel subscriptions you forgot existed. Check your bank statements for recurring charges you don't recognize.</p>
+                        <p><strong>Sign out from old devices.</strong> Check your Google, Apple, or Microsoft accounts for logged-in devices you don't recognize anymore. Remote sign-outs prevent access from devices you've lost or sold.</p>
                         <p><strong>Make this a regular thing.</strong> Every six months or so, run your email through Have I Been Pwned again, check app permissions, and update passwords where needed.</p>
                     </div>
                 </div>
@@ -866,7 +870,7 @@
                     <div class="section-content">
                         <p>Many of us have the habit of simply uninstalling apps or logging out of websites when we're done with them. But here's the problem: when a service is no longer useful to you, make sure to clean your account by actually deleting it, not just uninstalling the app.</p>
                         <p>Uninstalling removes the app from your device, but your account, with all your personal data, still exists on their servers. It's still vulnerable to breaches, still collecting dust with that weak password you used years ago, and still a potential entry point for hackers.</p>
-                        <p>The right approach: when you're done with a service, go into the account settings and delete your account completely. It takes an extra two minutes, but it's worth it.</p>
+                        <p>The right approach: when you're done with a service, go into the account settings and delete your account completely. It takes an extra two minutes, but it's worth it. Make this your new habit starting today.</p>
                     </div>
                 </div>
 
