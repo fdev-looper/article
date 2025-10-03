@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone in Danger, Hear the Stranger - DNATech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --oceanic-green: linear-gradient(135deg, #0a4d3c 0%, #1a7a5e 25%, #2ea67c 50%, #1a7a5e 75%, #0a4d3c 100%);
+            --marine-orange: linear-gradient(135deg, #b8461a 0%, #d95f2e 25%, #ff7847 50%, #d95f2e 75%, #b8461a 100%);
+            --cream-bg: #fef9f3;
+            --card-white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --accent-teal: #16a085;
+            --accent-coral: #e74c3c;
+            --accent-purple: #9b59b6;
+            --shadow-soft: 0 6px 25px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream-bg);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 90px 20px 70px;
+            color: white;
+            position: relative;
+            background: var(--oceanic-green);
+            box-shadow: 0 15px 50px rgba(10, 77, 60, 0.7);
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .header > * {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 35px;
+            font-size: 1.9em;
+            font-weight: 900;
+            animation: slideInTop 0.9s ease-out;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes slideInTop {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            font-size: 32px;
+            color: #0a4d3c;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.5);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 8px 25px rgba(255, 255, 255, 0.5);
+            }
+            50% { 
+                transform: scale(1.06);
+                box-shadow: 0 10px 35px rgba(255, 255, 255, 0.7);
+            }
+        }
+        
+        .header h1 {
+            font-size: 3.8em;
+            font-weight: 900;
+            margin-bottom: 28px;
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #e8f5f2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.2);
+            animation: fadeSlideUp 1.1s ease-out 0.2s both;
+            line-height: 1.2;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+        }
+        
+        .header .subtitle {
+            font-size: 1.45em;
+            font-weight: 400;
+            opacity: 0.96;
+            max-width: 850px;
+            margin: 0 auto 45px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+            animation: fadeSlideUp 1.1s ease-out 0.4s both;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+            animation: fadeSlideUp 1.1s ease-out 0.6s both;
+        }
+        
+        .meta-item {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 14px 28px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1em;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+        
+        .meta-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .podcast-btn {
+            background: var(--marine-orange);
+            color: white;
+            border: none;
+            padding: 20px 45px;
+            border-radius: 50px;
+            font-size: 1.25em;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(184, 70, 26, 0.7);
+            transition: all 0.35s ease;
+            margin-top: 25px;
+            animation: fadeSlideUp 1.1s ease-out 0.8s both;
+            border: 3px solid rgba(255, 120, 71, 0.5);
+        }
+
+        .podcast-btn:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 15px 45px rgba(255, 120, 71, 0.8);
+            border-color: rgba(255, 120, 71, 0.7);
+        }
+
+        .podcast-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.96);
+            z-index: 3000;
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+            animation: modalAppear 0.35s ease-out;
+        }
+        
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes modalContentSlide {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .podcast-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #0f0f0f 0%, #1f1f1f 100%);
+            padding: 25px;
+            border-radius: 35px;
+            width: 92%;
+            max-width: 850px;
+            max-height: 92vh;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: modalContentSlide 0.45s ease-out;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .podcast-scroll-container {
+            overflow-y: auto;
+            padding: 25px;
+            max-height: calc(92vh - 90px);
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            filter: blur(2px);
+        }
+        
+        .bubble.neon-green {
+            background: radial-gradient(circle, rgba(22, 160, 133, 0.85) 0%, rgba(10, 100, 80, 0) 70%);
+            box-shadow: 0 0 25px rgba(22, 160, 133, 0.7);
+        }
+        
+        .bubble.neon-orange {
+            background: radial-gradient(circle, rgba(255, 120, 71, 0.85) 0%, rgba(200, 80, 50, 0) 70%);
+            box-shadow: 0 0 25px rgba(255, 120, 71, 0.7);
+        }
+        
+        .bubble.neon-purple {
+            background: radial-gradient(circle, rgba(155, 89, 182, 0.85) 0%, rgba(100, 50, 120, 0) 70%);
+            box-shadow: 0 0 25px rgba(155, 89, 182, 0.7);
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.85;
+            }
+            90% {
+                opacity: 0.85;
+            }
+            100% {
+                transform: translateY(-125vh) scale(1.6);
+                opacity: 0;
+            }
+        }
+        
+        .podcast-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.35s ease;
+            backdrop-filter: blur(12px);
+            z-index: 10;
+        }
+
+        .podcast-close:hover {
+            background: rgba(231, 76, 60, 0.35);
+            border-color: rgba(231, 76, 60, 0.6);
+            transform: rotate(95deg);
+            box-shadow: 0 0 25px rgba(231, 76, 60, 0.6);
+        }
+
+        .podcast-content h2 {
+            font-size: 2.1em;
+            color: white;
+            text-align: center;
+            margin-bottom: 35px;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.35);
+        }
+
+        .podcast-image {
+            width: 100%;
+            max-width: 650px;
+            height: auto;
+            border-radius: 25px;
+            margin: 0 auto 35px;
+            display: block;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .audio-player-wrapper {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1d1d1d 100%);
+            padding: 28px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.6),
+                        0 0 35px rgba(22, 160, 133, 0.25);
+        }
+
+        .custom-audio-player {
+            width: 100%;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .play-pause-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(22, 160, 133, 0.35), rgba(155, 89, 182, 0.35));
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.35s ease;
+            box-shadow: 0 0 25px rgba(22, 160, 133, 0.5);
+        }
+
+        .play-pause-btn:hover {
+            transform: scale(1.12);
+            box-shadow: 0 0 35px rgba(22, 160, 133, 0.7);
+        }
+
+        .time-display {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 15px;
+            font-weight: 600;
+            min-width: 110px;
+        }
+
+        .progress-container {
+            flex: 1;
+            height: 7px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #16a085, #9b59b6);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.12s linear;
+            box-shadow: 0 0 12px rgba(22, 160, 133, 0.6);
+        }
+
+        .volume-speed-controls {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .volume-control, .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .volume-control label, .speed-control label {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .volume-slider {
+            width: 85px;
+            height: 5px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #16a085, #9b59b6);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(22, 160, 133, 0.6);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #16a085, #9b59b6);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 12px rgba(22, 160, 133, 0.6);
+        }
+
+        .speed-select {
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 6px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .speed-select option {
+            background: #1d1d1d;
+            color: white;
+        }
+
+        .container {
+            max-width: 1450px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            background: var(--cream-bg);
+            padding: 0;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #d4edda 0%, #fff3cd 100%);
+            padding: 90px 45px;
+            text-align: center;
+            margin-bottom: 70px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .intro-section h2 {
+            font-size: 3.2em;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            line-height: 1.25;
+        }
+
+        .intro-section .hook {
+            font-size: 1.35em;
+            color: var(--text-medium);
+            max-width: 950px;
+            margin: 0 auto;
+            line-height: 1.85;
+        }
+
+        .article-body {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 0 45px 90px;
+        }
+
+        .content-card {
+            background: var(--card-white);
+            border-radius: 35px;
+            padding: 55px;
+            margin-bottom: 45px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.35s ease;
+            border: 1px solid rgba(22, 160, 133, 0.08);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-6px);
+        }
+
+        .section-heading {
+            font-size: 2.4em;
+            font-weight: 900;
+            color: var(--accent-teal);
+            margin-bottom: 28px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70px;
+            height: 5px;
+            background: var(--accent-coral);
+            border-radius: 3px;
+        }
+
+        .section-text {
+            font-size: 1.18em;
+            color: var(--text-medium);
+            line-height: 1.95;
+        }
+
+        .section-text p {
+            margin-bottom: 22px;
+        }
+
+        .section-text strong {
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        .sign-list {
+            margin: 25px 0;
+        }
+
+        .sign-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-teal);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sign-number {
+            font-size: 1.4em;
+            font-weight: 900;
+            color: var(--accent-teal);
+            margin-bottom: 10px;
+        }
+
+        .emphasis-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%);
+            border-left: 6px solid var(--accent-coral);
+            padding: 35px 45px;
+            margin: 45px 0;
+            border-radius: 25px;
+            font-size: 1.25em;
+            color: var(--text-dark);
+            font-style: italic;
+            box-shadow: var(--shadow-soft);
+            font-weight: 500;
+        }
+
+        .final-box {
+            background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-purple) 100%);
+            color: white;
+            padding: 70px;
+            border-radius: 35px;
+            text-align: center;
+            margin: 70px 0;
+            box-shadow: 0 12px 45px rgba(22, 160, 133, 0.35);
+        }
+
+        .final-box h3 {
+            font-size: 2.7em;
+            margin-bottom: 25px;
+            font-weight: 900;
+        }
+
+        .final-box p {
+            font-size: 1.35em;
+            line-height: 1.85;
+            max-width: 950px;
+            margin: 0 auto 25px;
+        }
+
+        .author-section {
+            background: linear-gradient(135deg, #667db6 0%, #0082c8 100%);
+            color: white;
+            text-align: center;
+            padding: 90px 45px;
+            margin: 0;
+        }
+        
+        .author-section h3 {
+            font-size: 2.6em;
+            font-weight: 900;
+            margin-bottom: 28px;
+        }
+        
+        .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 35px;
+            margin-top: 45px;
+            flex-wrap: wrap;
+        }
+        
+        .author-avatar {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a4a4a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 34px;
+            font-weight: bold;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+        }
+        
+        .author-details h4 {
+            font-size: 1.5em;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+        
+        .author-details p {
+            opacity: 0.92;
+            font-size: 1.15em;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 45px 0;
+            color: white;
+            opacity: 0.92;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 46%, #4a4a4a 100%);
+            margin: 0;
+            font-size: 1.15em;
+            font-weight: 600;
+        }
+
+        .dictionary-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b0000 0%, #b22222 25%, #dc143c 50%, #b22222 75%, #8b0000 100%);
+            color: #ff00ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(139, 0, 0, 0.6), 0 0 30px rgba(255, 0, 255, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: 2px solid #8b0000;
+        }
+
+        .dictionary-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(220, 20, 60, 0.8), 0 0 40px rgba(255, 0, 255, 0.6);
+            background: linear-gradient(135deg, #dc143c 0%, #b22222 50%, #8b0000 100%);
+        }
+
+        .dictionary-modal {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 320px;
+            max-height: 400px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            overflow: hidden;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dictionary-header {
+            background: var(--accent-teal);
+            color: white;
+            padding: 20px;
+            font-weight: 700;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dictionary-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dictionary-content {
+            padding: 20px;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .dictionary-term {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dictionary-term:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .dictionary-term strong {
+            color: var(--accent-teal);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .dictionary-definition {
+            color: var(--text-medium);
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 50px 18px 40px;
+            }
+            
+            .header h1 {
+                font-size: 2.7em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.15em;
+            }
+
+            .intro-section {
+                padding: 60px 28px;
+            }
+
+            .intro-section h2 {
+                font-size: 2.4em;
+            }
+
+            .article-body {
+                padding: 0 22px 60px;
+            }
+
+            .content-card {
+                padding: 35px 28px;
+            }
+
+            .section-heading {
+                font-size: 2em;
+            }
+
+            .final-box {
+                padding: 50px 28px;
+            }
+
+            .author-section {
+                padding: 70px 22px;
+            }
+
+            .podcast-content {
+                padding: 18px;
+                width: 96%;
+            }
+            
+            .podcast-scroll-container {
+                padding: 18px;
+                max-height: calc(92vh - 70px);
+            }
+            
+            .audio-controls {
+                flex-direction: column;
+                gap: 18px;
+            }
+            
+            .volume-speed-controls {
+                flex-direction: column;
+                width: 100%;
+                gap: 18px;
+            }
+            
+            .volume-control, .speed-control {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .dictionary-modal {
+                width: 280px;
+                right: 20px;
+            }
+            
+            .dictionary-btn {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .sign-item {
+                padding: 20px;
+            }
+
+            .sign-number {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .intro-section h2 {
+                font-size: 2em;
+            }
+
+            .content-card {
+                padding: 28px 22px;
+            }
+            
+            .podcast-content h2 {
+                font-size: 1.7em;
+            }
+            
+            .dictionary-modal {
+                width: 250px;
+                right: 15px;
+            }
+
+            .sign-number {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <img src="DNATech logo.png" alt="DNATech Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 14px;">
+                </div>
+                <span>DNATech</span>
+            </div>
+            <h1>Phone in Danger, Hear the Stranger</h1>
+            <p class="subtitle">From sudden lags to data drags, here's how to spot if your smartphone has fallen into the wrong hands.</p>
+            
+            <div class="article-meta">
+                <div class="meta-item">Mobile Security</div>
+                <div class="meta-item">October 2025</div>
+                <div class="meta-item"><span id="readTime">7 min read</span></div>
+            </div>
+
+            <button class="podcast-btn" onclick="openPodcast()">🎙️ Listen to Article Podcast</button>
+        </header>
+
+        <main class="main-content">
+            <div class="intro-section">
+                <h2>Your Device Shows Symptoms Too</h2>
+                <p class="hook">I write about cybersecurity often, but let's be real. As smart users, we must also learn the signs. Just as the human body shows symptoms when ill, our devices do the same. This article explores the symptoms your Android device might display if it has been compromised.</p>
+                <p class="hook" style="margin-top: 20px;">You may not be facing these issues right now, but remember: prevention is always better than cure. By staying aware, you can keep your device safe, secure, and pure.</p>
+            </div>
+
+            <div class="article-body">
+                <div class="content-card">
+                    <h3 class="section-heading">10 Signs Your Android Phone Might Be Compromised</h3>
+                    <div class="section-text">
+                        <p>Your phone doesn't just slow down or heat up randomly. When something malicious enters, it often leaves small hints. Maybe it feels warm in your pocket, or apps start acting strangely. These little things matter more than you might think.</p>
+                    </div>
+                    
+                    <div class="sign-list">
+                        <div class="sign-item">
+                            <div class="sign-number">1. Rapid Battery Drain (Even When Idle)</div>
+                            <p>You know that feeling when your battery drops from 80% to 50% in an hour, even though you barely used your phone? That's not normal. Malware often runs quietly in the background, consuming battery while you're doing nothing. If this happens regularly, something is definitely wrong.</p>
+                        </div>
+
+                        <div class="sign-item">
+                            <div class="sign-number">2. Phone Gets Hot Without Heavy Use</div>
+                            <p>It makes sense for your phone to get warm during gaming or video calls. But if it feels hot while sitting idle on your desk, that's sketchy. Hidden processes like spyware or crypto miners could be running without your knowledge.</p>
+                        </div>
+
+                        <div class="sign-item">
+                            <div class="sign-number">3. Sudden, Unexplained Spike in Data Usage</div>
+                            <p>Check your data usage. If you notice a random spike and you haven't been streaming or downloading anything, that's a problem. Malicious apps often send your contacts, messages, and photos to remote servers. Keep an eye on those numbers.</p>
+                        </div>
+
+                        <div class="sign-item">
+                            <div class="sign-number">4. Random Pop-Ups, Redirects, or Full-Screen Ads</div>
+                            <p>Are ads popping up when you're not even in a browser? That's adware at work. These aren't typical banner ads. I'm talking about full-screen interruptions that appear out of nowhere, even on your home screen.</p>
+                        </div>
+
+                        <div class="sign-item">
+                            <div class="sign-number">5. Unknown Apps You Don't Remember Installing</div>
+                            <p>Go through your app list right now. Seriously. If you see something you don't recognize or never downloaded, get rid of it. Some malware installs itself through sketchy links or when you sideload apps from unknown sources.</p>
+                        </div>
+
+                        <div class="sign-item">
+                            <div class="sign-number">6. Strange Behavior: Apps Opening or Settings Changing on Their Own</div>
+                            <p>Have you ever had an app open by itself? Or seen settings change without your input? That's not your phone being haunted. Some malware gives hackers remote access, allowing them to control things from their end. It's terrifying when you think about it.</p>
+                        </div>
+
+                        <div class="sign-item">
+                            <div class="sign-number">7. Unusual Outgoing Messages or Calls</div>
+                            <p>If friends ask why you sent them weird links, take it seriously. Your phone might be hijacked to spam others. Check your sent messages and call logs. Sometimes malware uses your number to spread itself or run scams.</p>
+                        </div>
+
+                        <div class="sign-item">
+                            <div class="sign-number">8. Microphone or Camera Activating Unexpectedly</div>
+                            <p>On newer Android versions (12 and above), a green dot appears when your camera or mic is active. If that dot shows up randomly when you're not using any app, someone might be watching or listening. That green dot is your friend—pay attention to it.</p>
+                        </div>
+
+                        <div class="sign-item">
+                            <div class="sign-number">9. Frequent Crashes and Lag</div>
+                            <p>Are all your apps crashing constantly? That's exhausting and suspicious. While phones can slow down over time, if multiple apps freeze or close randomly after you installed something new, that "something new" is likely the problem.</p>
+                        </div>
+
+                        <div class="sign-item">
+                            <div class="sign-number">10. Security Apps Disabled or Strange Permission Requests</div>
+                            <p>If your antivirus app keeps turning off by itself, that's a major red flag. Advanced malware often tries to disable security tools so it can operate freely. Also, if random apps request device admin or accessibility permissions, think twice. Most apps don't need that level of access.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">Are These Signs Always a Hack?</h3>
+                    <div class="section-text">
+                        <p>Not every weird thing means you're hacked. Sometimes your phone is just being a phone. Here are some legitimate reasons for similar issues:</p>
+                        <p><strong>Storage is full or RAM is maxed out</strong> - Your device struggles when it's packed with files and apps.</p>
+                        <p><strong>Too many Chrome tabs open</strong> - We've all been there, keeping dozens of tabs active drains resources.</p>
+                        <p><strong>Heavy apps running in the background</strong> - Some legitimate apps consume significant power.</p>
+                        <p><strong>Normal apps needing legitimate permissions</strong> - Not all permission requests are malicious.</p>
+                        <p>The difference? Normal issues usually improve after you clear the cache, close apps, or restart your device. But if problems keep coming back even after cleaning everything up, you might have a real problem.</p>
+                    </div>
+                </div>
+
+                <div class="emphasis-box">
+                    Your Android is more than just a device. It's your personal assistant, diary, and sometimes even your wallet. Battery drain, overheating, weird data usage, apps misbehaving, or that little green dot appearing randomly are your phone's way of telling you something is wrong.
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">How to Really Verify if It's Compromised</h3>
+                    <div class="section-text">
+                        <p><strong>Check App Usage & Battery Stats</strong> - Go to Settings > Battery or App Usage. See which apps are draining power. If something unfamiliar is at the top, investigate.</p>
+                        <p><strong>Monitor Data Consumption</strong> - Navigate to Settings > Network > Data Usage. Look for unusual spikes or unknown apps consuming data.</p>
+                        <p><strong>Permissions Audit</strong> - Review which apps have access to your camera, microphone, location, and messages. Revoke permissions from anything suspicious.</p>
+                        <p><strong>Run Security Scan</strong> - Use trusted apps like Malwarebytes, Bitdefender, or Kaspersky Mobile Security to scan your device.</p>
+                        <p><strong>Check Device Admin & Accessibility</strong> - Malware often hides here. Go through these settings and disable anything you don't recognize.</p>
+                        <p><strong>Safe Mode Boot</strong> - Restart your phone in Safe Mode. If the problems disappear, one of your installed apps is definitely the culprit.</p>
+                        <p><strong>Accounts & Activity Logs</strong> - Check your Google Account for login history. If you see unknown locations or devices, change your passwords immediately.</p>
+                        <p><strong>Physical Sensor Checks</strong> - Watch for that green dot and notification panel indicators. They show real-time sensor usage.</p>
+                        <p><strong>Factory Reset (Last Resort)</strong> - Back up your important stuff manually (not through the cloud if you suspect compromise) and reset everything. It's annoying but effective.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">Android's Own Warning Signals</h3>
+                    <div class="section-text">
+                        <p>Android has become smarter about privacy. That green dot I mentioned earlier exists specifically to alert you. The notification panel also shows exactly which app is using your camera, mic, or GPS at any moment. If you see an unknown app accessing these sensors, don't ignore it. Your phone is literally trying to warn you.</p>
+                    </div>
+                </div>
+
+                <div class="final-box">
+                    <h3>Stay Alert, Keep Your Phone Pure</h3>
+                    <p>Prevention beats dealing with hacks any day. Keep your apps updated, review permissions regularly, check for unknown apps, and actually pay attention when your phone tries to warn you. A little awareness goes a long way in protecting your data and privacy.</p>
+                    <p>Your device deserves care, just like you do. Stay alert, stay smart, and keep your phone pure.</p>
+                </div>
+            </div>
+        </main>
+
+        <div class="author-section">
+            <h3>About DNATech Research</h3>
+            <p>I investigate emerging technologies, behavioral science, and provide actionable insights to help users make informed decisions about digital adoption, personal development, and security.</p>
+            <div class="author-info">
+                <div class="author-avatar">D</div>
+                <div class="author-details">
+                    <h4>DNATech Security Notes</h4>
+                    <p>Threat Horizon Scout | Preparing for Tomorrow's Cyber Fights</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 DNATech Notes. Stay informed. Stay connected. Stay secure.</p>
+        </div>
+    </div>
+
+    <button class="dictionary-btn" onclick="toggleDictionary()">📚</button>
+
+    <div class="dictionary-modal" id="dictionaryModal">
+        <div class="dictionary-header">
+            <span>Tech Dictionary</span>
+            <button class="dictionary-close" onclick="toggleDictionary()">&times;</button>
+        </div>
+        <div class="dictionary-content">
+            <div class="dictionary-term">
+                <strong>Adware</strong>
+                <div class="dictionary-definition"><em>noun</em> - Software that automatically displays or downloads unwanted advertisements, often appearing as pop-ups or full-screen ads without user consent.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Android</strong>
+                <div class="dictionary-definition"><em>noun</em> - A mobile operating system developed by Google, used by billions of smartphones and tablets worldwide.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Antivirus</strong>
+                <div class="dictionary-definition"><em>noun</em> - Software designed to detect, prevent, and remove malicious programs from computers and mobile devices.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Battery Drain</strong>
+                <div class="dictionary-definition"><em>noun</em> - The rapid depletion of battery power, often caused by resource-intensive processes or malware running in the background.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Cache</strong>
+                <div class="dictionary-definition"><em>noun</em> - Temporary storage area where frequently accessed data is kept for quick retrieval, helping apps load faster.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Compromised</strong>
+                <div class="dictionary-definition"><em>adjective</em> - A state where a device's security has been breached, allowing unauthorized access or control by malicious actors.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Crypto Miner</strong>
+                <div class="dictionary-definition"><em>noun</em> - Malicious software that uses your device's processing power to mine cryptocurrency without your permission, causing overheating and battery drain.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Data Usage</strong>
+                <div class="dictionary-definition"><em>noun</em> - The amount of internet data consumed by apps and services on your device, measured in megabytes (MB) or gigabytes (GB).</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Device Admin</strong>
+                <div class="dictionary-definition"><em>noun</em> - Special permissions that give apps elevated control over device settings and security features, often exploited by malware.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Factory Reset</strong>
+                <div class="dictionary-definition"><em>noun</em> - The process of restoring a device to its original state by erasing all data, settings, and installed apps.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Green Dot Indicator</strong>
+                <div class="dictionary-definition"><em>noun</em> - A privacy feature in Android 12+ that displays a green dot when an app is actively using your camera or microphone.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Malware</strong>
+                <div class="dictionary-definition"><em>noun</em> - Malicious software designed to damage, disrupt, or gain unauthorized access to computer systems and mobile devices.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Permissions</strong>
+                <div class="dictionary-definition"><em>noun</em> - Access rights that apps request to use device features like camera, microphone, location, contacts, or storage.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>RAM (Random Access Memory)</strong>
+                <div class="dictionary-definition"><em>noun</em> - RAM stands for Random Access Memory. Temporary memory that stores data for active apps and processes, affecting device performance and multitasking ability.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Remote Access</strong>
+                <div class="dictionary-definition"><em>noun</em> - The ability to control a device from a different location, which can be exploited by hackers to manipulate your phone without physical access.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Safe Mode</strong>
+                <div class="dictionary-definition"><em>noun</em> - A diagnostic mode that starts Android with only essential system apps, helping identify if third-party apps are causing problems.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Sideload</strong>
+                <div class="dictionary-definition"><em>verb</em> - To install apps from sources other than the official Google Play Store, often increasing security risks.</div>
+            </div>
+            <div class="dictionary-term">
+                <strong>Spyware</strong>
+                <div class="dictionary-definition"><em>noun</em> - Malicious software that secretly monitors and collects information about your activities, messages, and personal data without consent.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="podcast-modal" id="podcastModal">
+        <div class="podcast-content">
+            <button class="podcast-close" onclick="closePodcast()">&times;</button>
+            <div class="podcast-scroll-container">
+                <h2>🎙️ Article 26 Podcast</h2>
+                <img src="https://fdev-looper.github.io/arimages/ar26hts.png" alt="Article 26 Cover" class="podcast-image">
+                
+                <div class="audio-player-wrapper">
+                    <div class="custom-audio-player">
+                        <audio id="audioElement" preload="metadata">
+                            <source src="https://fdev-looper.github.io/araudio/ar26.mp3" type="audio/mpeg">
+                        </audio>
+                        
+                        <div class="audio-controls">
+                            <button class="play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">▶</button>
+                            <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+                            <div class="progress-container" id="progressContainer" onclick="seekAudio(event)">
+                                <div class="progress-bar" id="progressBar"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="volume-speed-controls">
+                            <div class="volume-control">
+                                <label for="volumeSlider">🔊</label>
+                                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="100" oninput="changeVolume(this.value)">
+                            </div>
+                            <div class="speed-control">
+                                <label for="speedSelect">Speed:</label>
+                                <select id="speedSelect" class="speed-select" onchange="changeSpeed(this.value)">
+                                    <option value="0.5">0.5x</option>
+                                    <option value="0.75">0.75x</option>
+                                    <option value="1" selected>1x</option>
+                                    <option value="1.25">1.25x</option>
+                                    <option value="1.5">1.5x</option>
+                                    <option value="2">2x</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audioElement');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const timeDisplay = document.getElementById('timeDisplay');
+        let bubbleInterval;
+
+        function toggleDictionary() {
+            const dictionaryModal = document.getElementById('dictionaryModal');
+            if (dictionaryModal.style.display === 'block') {
+                dictionaryModal.style.display = 'none';
+            } else {
+                dictionaryModal.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('click', function(event) {
+            const dictionaryModal = document.getElementById('dictionaryModal');
+            const dictionaryBtn = document.querySelector('.dictionary-btn');
+            
+            if (dictionaryModal.style.display === 'block' && 
+                !dictionaryModal.contains(event.target) && 
+                !dictionaryBtn.contains(event.target)) {
+                dictionaryModal.style.display = 'none';
+            }
+        });
+
+        function createBubble() {
+            const modal = document.getElementById('podcastModal');
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            
+            const colors = ['neon-green', 'neon-orange', 'neon-purple'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            bubble.classList.add(randomColor);
+            
+            const size = Math.random() * 65 + 35;
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            
+            bubble.style.left = Math.random() * 100 + '%';
+            bubble.style.bottom = '-110px';
+            
+            const duration = Math.random() * 4.5 + 4.5;
+            bubble.style.animation = `float-up ${duration}s ease-out forwards`;
+            
+            modal.appendChild(bubble);
+            
+            setTimeout(() => {
+                bubble.remove();
+            }, duration * 1000);
+        }
+
+        function openPodcast() {
+            document.getElementById('podcastModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            bubbleInterval = setInterval(createBubble, 280);
+        }
+
+        function closePodcast() {
+            document.getElementById('podcastModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            clearInterval(bubbleInterval);
+            const bubbles = document.querySelectorAll('.bubble');
+            bubbles.forEach(b => b.remove());
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+                playPauseBtn.textContent = '▶';
+                progressBar.style.width = '0%';
+            }
+        }
+
+        function togglePlayPause() {
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.textContent = '⏸';
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = '▶';
+            }
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        audio.addEventListener('loadedmetadata', function() {
+            timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
+        });
+
+        audio.addEventListener('timeupdate', function() {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = progress + '%';
+            timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+        });
+
+        audio.addEventListener('ended', function() {
+            playPauseBtn.textContent = '▶';
+            progressBar.style.width = '0%';
+            audio.currentTime = 0;
+        });
+
+        function seekAudio(event) {
+            const rect = progressContainer.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const width = rect.width;
+            const percentage = clickX / width;
+            audio.currentTime = percentage * audio.duration;
+        }
+
+        function changeVolume(value) {
+            audio.volume = value / 100;
+        }
+
+        function changeSpeed(value) {
+            audio.playbackRate = parseFloat(value);
+        }
+
+        document.getElementById('podcastModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePodcast();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePodcast();
+                const dictionaryModal = document.getElementById('dictionaryModal');
+                dictionaryModal.style.display = 'none';
+            }
+            const modal = document.getElementById('podcastModal');
+            if (modal.style.display === 'block') {
+                if (e.key === ' ' || e.code === 'Space') {
+                    e.preventDefault();
+                    togglePlayPause();
+                }
+            }
+        });
+
+        window.addEventListener('load', function() {
+            audio.load();
+        });
+    </script>
+</body>
+</html>
