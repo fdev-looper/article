@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps Shape Your Focus, Not Just Your Data - DNATech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --metallic-black: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
+            --metallic-silver: linear-gradient(135deg, #2c2c2c 0%, #3d3d3d 25%, #525252 50%, #3d3d3d 75%, #2c2c2c 100%);
+            --cream-bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --card-white: #212121;
+            --text-dark: #e8e8e8;
+            --text-medium: #b0b0b0;
+            --accent-teal: #00b7b3; /* Aurora Teal */
+            --accent-purple: #8b00ff; /* Stellar Purple */
+            --accent-yellow: #ffb300; /* Solar Flare Yellow */
+            --accent-white: #f0f6ff; /* Frost White */
+            --accent-crimson: #d81b60; /* Crimson Nebula */
+            --shadow-soft: 0 6px 25px rgba(0, 0, 0, 0.6);
+            --shadow-hover: 0 10px 40px rgba(0, 183, 179, 0.3); /* Matches accent-teal */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 100px 30px 80px;
+            color: var(--accent-white);
+            position: relative;
+            background: var(--metallic-black);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 40% 40%, rgba(139, 0, 255, 0.2) 0%, transparent 60%);
+            z-index: 1;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -15%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(139, 0, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .header > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 40px;
+            font-size: 2.2em;
+            font-weight: 900;
+            animation: slideInTop 1s ease-out;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes slideInTop {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #f0f6ff 0%, #d9e2ec 100%);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+            border: 4px solid rgba(240, 246, 255, 0.7);
+            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.5);
+            animation: glowPulse 3.5s ease-in-out infinite;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 25px;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(139, 0, 255, 0.5); }
+            50% { transform: scale(1.08); box-shadow: 0 12px 40px rgba(139, 0, 255, 0.7); }
+        }
+
+        .header h1 {
+            font-size: 4.2em;
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #f0f6ff 0%, #d9e2ec 50%, #f0f6ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeSlideUp 1.2s ease-out 0.3s both;
+            line-height: 1.1;
+        }
+
+        .header .subtitle {
+            font-size: 1.6em;
+            font-weight: 500;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            animation: fadeSlideUp 1.2s ease-out 0.5s both;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            animation: fadeSlideUp 1.2s ease-out 0.7s both;
+        }
+
+        .meta-item {
+            background: rgba(240, 246, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(240, 246, 255, 0.5);
+            padding: 16px 32px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1em;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.35s ease;
+        }
+
+        .meta-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 183, 179, 0.4);
+            background: rgba(240, 246, 255, 0.35);
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            background: var(--cream-bg);
+            padding: 0;
+        }
+
+        .intro-section {
+            background: var(--metallic-silver);
+            padding: 100px 50px;
+            text-align: center;
+            margin-bottom: 80px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 60% 20%, rgba(139, 0, 255, 0.15) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .intro-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-section h2 {
+            font-size: 3.6em;
+            font-weight: 900;
+            color: var(--accent-white);
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: 0 0 25px rgba(139, 0, 255, 0.4);
+        }
+
+        .intro-section .hook {
+            font-size: 1.5em;
+            color: var(--text-medium);
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .article-body {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 50px 100px;
+        }
+
+        .content-card {
+            background: var(--card-white);
+            border-radius: 40px;
+            padding: 60px;
+            margin-bottom: 50px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(139, 0, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 15% 15%, rgba(139, 0, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+            border-color: rgba(139, 0, 255, 0.4);
+        }
+
+        .section-heading {
+            font-size: 2.6em;
+            font-weight: 900;
+            color: var(--accent-purple);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(139, 0, 255, 0.5);
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 80px;
+            height: 6px;
+            background: var(--accent-teal);
+            border-radius: 4px;
+            box-shadow: 0 0 12px rgba(0, 183, 179, 0.7);
+        }
+
+        .section-text {
+            font-size: 1.25em;
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+
+        .section-text p {
+            margin-bottom: 25px;
+        }
+
+        .section-text ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 30px 0;
+        }
+
+        .section-text ul li {
+            padding: 20px 0 20px 50px;
+            position: relative;
+            margin-bottom: 20px;
+            background: rgba(139, 0, 255, 0.1);
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-purple);
+        }
+
+        .section-text ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 25px;
+            color: var(--accent-purple);
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .section-text strong {
+            color: var(--accent-teal);
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: var(--metallic-black);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid rgba(139, 0, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(139, 0, 255, 0.3);
+        }
+
+        .highlight-box h4 {
+            color: var(--accent-yellow);
+            font-size: 1.8em;
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px rgba(255, 179, 0, 0.4);
+        }
+
+        .author-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: var(--accent-white);
+            text-align: center;
+            padding: 100px 50px;
+            margin: 0;
+        }
+
+        .author-section h3 {
+            font-size: 2.8em;
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .author-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #2d2d2d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-white);
+            font-size: 36px;
+            font-weight: bold;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .author-details h4 {
+            font-size: 1.6em;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .author-details p {
+            opacity: 0.95;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--accent-white);
+            opacity: 0.95;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d2d2d 100%);
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 60px 20px 50px; }
+            .header h1 { font-size: 2.8em; }
+            .header .subtitle { font-size: 1.2em; }
+            .intro-section { padding: 70px 30px; }
+            .intro-section h2 { font-size: 2.6em; }
+            .article-body { padding: 0 25px 70px; }
+            .content-card, .highlight-box { padding: 40px 30px; }
+            .section-heading { font-size: 2.2em; }
+            .author-section { padding: 80px 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <img src="DNATech logo.png" alt="DNATech Logo">
+                </div>
+                <span>DNATech</span>
+            </div>
+            <h1>Apps Shape Your Focus, Not Just Your Data</h1>
+            <p class="subtitle">Exploring how technology influences habits, desires, and attention. Empower yourself with informed choices to leverage technology for a better life.</p>
+            
+            <div class="article-meta">
+                <div class="meta-item">Cyber Awareness</div>
+                <div class="meta-item">October 2025</div>
+                <div class="meta-item">6 min read</div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="intro-section">
+                <h2>Welcome to Digital Awareness</h2>
+                <p class="hook">Greetings, I am ASH, your guide in this cyber awareness journey. Today, we delve into how technology shapes not only our devices but also our behaviors and aspirations. Designed to captivate, apps often drive constant engagement. Yet, with awareness and strategic decisions, we can safeguard our privacy and harness technology to enrich our lives.</p>
+            </div>
+
+            <div class="article-body">
+                <div class="content-card">
+                    <h3 class="section-heading">🎯 How Apps Engage Users</h3>
+                    <div class="section-text">
+                        <p>It begins with a subtle notification. A quick glance at your phone to check a message can evolve into extended scrolling sessions. Apps leverage our innate curiosity and social instincts, fostering habits like frequent updates or online sharing.</p>
+                        <p>Gradually, these actions may divert focus from meaningful pursuits to chasing digital validation, such as likes or comments. The silver lining? Recognizing this empowers intentional technology use.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">🧠 The Influence of Digital Habits</h3>
+                    <div class="section-text">
+                        <p>Have you observed how trends go viral overnight or how you check for likes post-sharing? These moments release dopamine, the brain’s reward chemical, offering pleasure that encourages repeat engagement.</p>
+                        <p>This cycle can redirect time from real-world priorities. Awareness of these patterns allows us to choose engagement wisely, aligning digital habits with personal goals.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">⚠️ Real-World Data Vulnerabilities</h3>
+                    <div class="section-text">
+                        <p>Beyond habits, apps can compromise personal data if not managed diligently. Recent incidents include:</p>
+                        <ul>
+                            <li><strong>Fitify App (CyberNews, 2025):</strong> Exposure of 138,000 progress photos and 6,000 3D scans due to an unsecured Google Cloud bucket.</li>
+                            <li><strong>Karafs Health App (CyberNews, 2024):</strong> Leak of phone numbers, emails, and weight data for 5 million users from a misconfigured database.</li>
+                            <li><strong>Sleep Journey App (DailySecurityReview, 2025):</strong> Compromise of 25,000 users’ names, alcohol habits, and sleep data via a misconfigured Firebase server.</li>
+                            <li><strong>General Fitness Apps (Surfshark, 2023):</strong> 80% of top apps share up to 21 data types, including location and biometrics, with third parties.</li>
+                        </ul>
+                        <p>These examples underscore the need to review app permissions and share selectively.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">🛡️ Mastering Your Digital Presence</h3>
+                    <div class="section-text">
+                        <p>Control lies in our hands. Each post, check-in, or photo is a deliberate choice. By managing digital habits, we protect privacy and attention. Consider these steps:</p>
+                        <div class="highlight-box">
+                            <h4>🎯 Strategies for Digital Wellness</h4>
+                            <ul>
+                                <li><strong>Evaluate Before Sharing:</strong> Reflect, “Is this post necessary?” Share with purpose.</li>
+                                <li><strong>Curate Notifications:</strong> Disable non-essential alerts to minimize distractions.</li>
+                                <li><strong>Intentional Scrolling:</strong> Define objectives for app use to avoid mindless browsing.</li>
+                                <li><strong>Protect Your Data:</strong> Assess permissions and disable unnecessary tracking.</li>
+                                <li><strong>Foster Offline Connections:</strong> Engage friends through calls or meetups.</li>
+                                <li><strong>Embrace Digital Detoxes:</strong> Schedule device-free periods to rejuvenate.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">✨ Conclusion</h3>
+                    <div class="section-text">
+                        <p>Technology is a potent tool, its value determined by our usage. Understanding app influences and securing data enables us to enjoy digital benefits without relinquishing control.</p>
+                        <p>Your attention is a precious asset—protect it, nurture it, and align it with your aspirations. Let’s ensure technology serves us, not the reverse.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="author-section">
+            <h3>About DNATech Research</h3>
+            <p>I explore cutting-edge technologies, behavioral science, and deliver actionable insights to guide users in digital adoption, personal growth, and security.</p>
+            <div class="author-info">
+                <div class="author-avatar">D</div>
+                <div class="author-details">
+                    <h4>DNATech Security Notes</h4>
+                    <p>Threat Horizon Scout | Anticipating Future Cyber Challenges</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 DNATech Notes. Stay Informed. Stay Connected. Stay Secure.</p>
+        </div>
+    </div>
+</body>
+</html>
