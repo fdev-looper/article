@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maybe the Internet Isn't Addictive — Maybe We're Just Lonely - DNATech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --metallic-black: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
+            --metallic-silver: linear-gradient(135deg, #2c2c2c 0%, #3d3d3d 25%, #525252 50%, #3d3d3d 75%, #2c2c2c 100%);
+            --metallic-gold: linear-gradient(135deg, #d4af37 0%, #f7dc6f 50%, #d4af37 100%);
+            --cream-bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --card-white: #212121;
+            --text-dark: #e8e8e8;
+            --text-medium: #b0b0b0;
+            --accent-teal: #00b7b3;
+            --accent-purple: #8b00ff;
+            --accent-yellow: #ffb300;
+            --accent-white: #f0f6ff;
+            --accent-crimson: #d81b60;
+            --party-pink: #ff006e;
+            --party-cyan: #00f5ff;
+            --party-gold: #ffd700;
+            --shadow-soft: 0 6px 25px rgba(0, 0, 0, 0.6);
+            --shadow-hover: 0 10px 40px rgba(0, 183, 179, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Celebration Banner */
+        .celebration-banner {
+            background: linear-gradient(135deg, #ffd700 0%, #ff006e 50%, #00f5ff 100%);
+            text-align: center;
+            padding: 25px 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+            animation: shimmer-special 4s ease-in-out infinite;
+            z-index: 1000;
+        }
+
+        @keyframes shimmer-special {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .celebration-banner::before {
+            content: '🎉';
+            position: absolute;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .celebration-banner::after {
+            content: '🎊';
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            animation: bounce 2s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-60%) scale(1.2); }
+        }
+
+        .celebration-banner h2 {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .celebration-banner p {
+            font-size: 1.5em;
+            color: #ffffff;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: var(--party-pink);
+            position: absolute;
+            animation: confetti-fall 3.5s linear infinite;
+            z-index: 9999;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Popper Effect */
+        .popper-particle {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: var(--party-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            animation: popper-fall 5s linear forwards;
+            z-index: 10000;
+        }
+
+        @keyframes popper-fall {
+            0% {
+                transform: translateY(-20vh) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Ribbon Decoration */
+        .ribbon-left, .ribbon-right {
+            position: fixed;
+            width: 80px;
+            height: 100vh;
+            top: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .ribbon-left {
+            left: 0;
+            background: linear-gradient(90deg, var(--party-pink) 0%, transparent 100%);
+            opacity: 0.3;
+            animation: wave-left 3s ease-in-out infinite;
+        }
+
+        .ribbon-right {
+            right: 0;
+            background: linear-gradient(-90deg, var(--party-cyan) 0%, transparent 100%);
+            opacity: 0.3;
+            animation: wave-right 3s ease-in-out infinite;
+        }
+
+        @keyframes wave-left {
+            0%, 100% { transform: translateX(-20px); }
+            50% { transform: translateX(0px); }
+        }
+
+        @keyframes wave-right {
+            0%, 100% { transform: translateX(20px); }
+            50% { transform: translateX(0px); }
+        }
+
+        .header {
+            text-align: center;
+            padding: 100px 30px 80px;
+            color: var(--accent-white);
+            position: relative;
+            background: var(--metallic-black);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 40% 40%, rgba(255, 0, 110, 0.2) 0%, transparent 60%);
+            z-index: 1;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -15%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(0, 245, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .header > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 40px;
+            font-size: 2.2em;
+            font-weight: 900;
+            animation: slideInTop 1s ease-out;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes slideInTop {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: glowPulse 3.5s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6); }
+            50% { transform: scale(1.08); box-shadow: 0 12px 40px rgba(255, 215, 0, 0.8); }
+        }
+
+        .header h1 {
+            font-size: 4.2em;
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #f0f6ff 0%, #ffd700 50%, #f0f6ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeSlideUp 1.2s ease-out 0.3s both;
+            line-height: 1.1;
+        }
+
+        .header .subtitle {
+            font-size: 1.6em;
+            font-weight: 500;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            animation: fadeSlideUp 1.2s ease-out 0.5s both;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            animation: fadeSlideUp 1.2s ease-out 0.7s both;
+        }
+
+        .meta-item {
+            background: rgba(255, 215, 0, 0.25);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            padding: 16px 32px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1em;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.35s ease;
+        }
+
+        .meta-item:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.5);
+            background: rgba(255, 215, 0, 0.35);
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            background: var(--cream-bg);
+            padding: 0;
+            flex: 1; /* Ensure main content takes available space */
+        }
+
+        .intro-section {
+            background: var(--metallic-silver);
+            padding: 100px 50px;
+            text-align: center;
+            margin-bottom: 80px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 60% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .intro-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-section h2 {
+            font-size: 3.6em;
+            font-weight: 900;
+            color: var(--accent-white);
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .intro-section .hook {
+            font-size: 1.5em;
+            color: var(--text-medium);
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .article-body {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 50px 100px;
+        }
+
+        .content-card {
+            background: var(--card-white);
+            border-radius: 40px;
+            padding: 60px;
+            margin-bottom: 50px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 15% 15%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .content-card:hover {
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
+            transform: translateY(-8px);
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+
+        .section-heading {
+            font-size: 2.6em;
+            font-weight: 900;
+            color: var(--party-gold);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 80px;
+            height: 6px;
+            background: var(--accent-teal);
+            border-radius: 4px;
+            box-shadow: 0 0 12px rgba(0, 183, 179, 0.7);
+        }
+
+        .section-text {
+            font-size: 1.25em;
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+
+        .section-text p {
+            margin-bottom: 25px;
+        }
+
+        .section-text strong {
+            color: var(--accent-teal);
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background: var(--metallic-black);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .highlight-box h4 {
+            color: var(--party-gold);
+            font-size: 1.8em;
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .author-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: var(--accent-white);
+            text-align: center;
+            padding: 100px 50px;
+            margin: 0;
+        }
+
+        .author-section h3 {
+            font-size: 2.8em;
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .author-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #2d2d2d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-white);
+            font-size: 36px;
+            font-weight: bold;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .author-details h4 {
+            font-size: 1.6em;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .author-details p {
+            opacity: 0.95;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--accent-white);
+            opacity: 0.95;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d2d2d 100%);
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        /* Remove extra space after footer */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .container {
+            margin-bottom: 0;
+        }
+
+        .footer {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* Optimized for mobile */
+        @media (max-width: 768px) {
+            .celebration-banner h2 { font-size: 1.6em; }
+            .celebration-banner p { font-size: 1em; }
+            .header { padding: 60px 20px 50px; }
+            .header h1 { font-size: 2.8em; }
+            .header .subtitle { font-size: 1.2em; }
+            .intro-section { padding: 70px 30px; }
+            .intro-section h2 { font-size: 2.6em; }
+            .article-body { padding: 0 25px 70px; }
+            .content-card, .highlight-box { padding: 40px 30px; }
+            .section-heading { font-size: 2.2em; }
+            .author-section { padding: 80px 25px; }
+            .ribbon-left, .ribbon-right { width: 40px; }
+            .popper-particle { width: 10px; height: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Celebration Ribbons -->
+    <div class="ribbon-left"></div>
+    <div class="ribbon-right"></div>
+
+    <!-- Celebration Banner -->
+    <div class="celebration-banner special">
+        <h2>🎉 DNATech Celebrates 30 Special Articles! 🎉</h2>
+        <p>Join us in celebrating this milestone of insightful content!</p>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="brand-logo">
+                <img src="DNATech_logo.png" alt="DNATech Logo" class="logo-icon">
+                <span>DNATech</span>
+            </div>
+            <h1>Maybe the Internet Isn't Addictive — Maybe We're Just Lonely</h1>
+            <p class="subtitle">Discover how our digital habits may be less about addiction and more about filling the quiet spaces we're afraid to face, and how small mindful practices can help.</p>
+            
+            <div class="article-meta">
+                <div class="meta-item">Digital Wellness</div>
+                <div class="meta-item">October 2025</div>
+                <div class="meta-item">8 min read</div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="intro-section">
+                <h2>The Question That Started Everything</h2>
+                <p class="hook">A question in a writer's mind can often turn into a book of thoughts. And today, mine begins with one: do people really need the internet to feel emotionally fulfilled? Are we truly using the web to connect, or are we just trying to patch the silence we no longer know how to sit with?</p>
+            </div>
+
+            <div class="article-body">
+                <div class="content-card">
+                    <h3 class="section-heading">When I First Noticed It</h3>
+                    <div class="section-text">
+                        <p>The last time I caught myself doing this was when I lived alone for my studies. And honestly, like most people, when there's nothing to do, you end up scrolling, not because it's fun, but because it fills the empty silence in the room.</p>
+                        <p>I've always been someone who enjoys solitude. Not antisocial, just someone who prefers peace over noise. That's completely fine. But what I noticed back then was something deeper: I wasn't just using the internet; I was depending on it to fill an emotional gap.</p>
+                        <p>In one of my earlier articles, I talked about how our minds get hijacked by hormones. This was the same thing, just quieter. Every time I sat still, I'd unlock my phone, again and again, without a reason. And when I asked myself why, the answer wasn't boredom. It was loneliness.</p>
+                        <p>I wasn't overcoming it. I was overriding it, using the internet as my emotional noise-canceller.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">The Pattern I Couldn't Ignore</h3>
+                    <div class="section-text">
+                        <p>I used to think the internet was helping me fill an emotional gap. But over time, I started noticing patterns. When I kept myself engaged in real activities like studying, cooking, reading, or even just sitting with my thoughts, I felt lighter. I wasn't really "alone"; it was me and myself, and that was enough.</p>
+                        <p>But whenever I sat still with nothing to do, my hand reached for the phone automatically. That's when it hit me: the internet wasn't a cure for my loneliness; it was a way to suppress it.</p>
+                        <p>Now, before you think I'm about to tell you to "delete all apps and touch grass," I'm not. Because here's what I've actually learned: the internet itself isn't the villain. As humans, we're wired to prefer the easy escape. Sitting quietly with yourself is harder than scrolling. Talking to yourself feels uncomfortable at first. But over time, it becomes not just bearable, it becomes enjoyable.</p>
+                        <p>The shift happened when I stopped running from the discomfort.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">Try This: The Mirror Experiment</h3>
+                    <div class="section-text">
+                        <p>Before trying the small exercise I'm about to share, here's something I want you to experience. Yes, it's a little uncomfortable, but trust me, it works.</p>
+                        <p>Stand in front of a mirror for five minutes and look at yourself. Just you, no phone, no distractions. Say a few things out loud, even something simple like, "I'm here" or "I'm okay."</p>
+                        <p>Chances are, at first, you'll feel awkward. Maybe your eyes won't meet your own gaze, maybe you'll fidget or look away. That's the point. Most of us have spent so long avoiding ourselves, scrolling, tapping, watching, that facing our own reflection can feel like a genuine experiment in bravery.</p>
+                        <p>This tiny, honest practice forces you to meet yourself, to feel yourself, and notice what's really going on behind the screen. Once you do this, the next exercise, pausing before reaching for your phone, suddenly makes sense.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">A Small Exercise That Changed Everything</h3>
+                    <div class="section-text">
+                        <p>Here's what I started doing, and you can try this too:</p>
+                        <div class="highlight-box">
+                            <h4>The Pause Practice</h4>
+                            <p><strong>Before reaching for your phone, pause.</strong> Just for 2 to 3 minutes. Breathe. Sit still.</p>
+                            <p><strong>Notice your thoughts.</strong> Name the feelings: loneliness, restlessness, boredom, curiosity.</p>
+                            <p><strong>Then ask yourself:</strong> "Do I really need the internet right now, or am I just trying to override this feeling?"</p>
+                            <p>Sometimes I'd jot one thought down. No judgment, just observation.</p>
+                        </div>
+                        <p>Doing this taught me three things:</p>
+                        <p><strong>How to face my own company without fear.</strong> The silence became less threatening and more peaceful.</p>
+                        <p><strong>How to recognize my emotional triggers.</strong> I could identify when I was reaching for my phone out of genuine need versus emotional escape.</p>
+                        <p><strong>How to slowly rely less on digital distractions for comfort.</strong> Real fulfillment came from within, not from screens.</p>
+                        <p>It's not about quitting the internet. It's about learning when you're using it versus when it's using your loneliness.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="section-heading">Final Thoughts</h3>
+                    <div class="section-text">
+                        <p>The internet is a tool, neutral, silent, and incredibly powerful. But when we reach for it to fill emotional gaps we're uncomfortable facing ourselves, it stops being a tool and becomes a crutch.</p>
+                        <p>Loneliness isn't something to escape; it's something to meet, understand, and sometimes even enjoy. When we learn to sit with ourselves, to talk to ourselves, and to truly see ourselves in the mirror, we stop relying on digital noise to patch the gaps in our emotional world.</p>
+                        <p>Maybe the internet isn't addictive after all. Maybe we're just learning how to be human again.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="author-section">
+            <h3>About DNATech Research</h3>
+            <p>I explore cutting-edge technologies, behavioral science, and deliver actionable insights to guide users in digital adoption, personal growth, and security.</p>
+            <div class="author-info">
+                <div class="author-avatar">D</div>
+                <div class="author-details">
+                    <h4>DNATech Security Notes</h4>
+                    <p>Digital Wellness Explorer | Understanding Human Connection in the Digital Age</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 DNATech Notes. Stay Informed. Stay Connected. Stay Secure.</p>
+        </div>
+    </div>
+
+    <script>
+        // Create popper effect on page load
+        function createPopperEffect() {
+            const colors = ['#ff006e', '#00f5ff', '#ffd700', '#8b00ff', '#00b7b3'];
+            const particleCount = 100;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'popper-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = Math.random() * 1 + 's';
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 5000);
+            }
+        }
+
+        // Create confetti effect for celebration banner
+        function createConfetti() {
+            const colors = ['#ff006e', '#00f5ff', '#ffd700', '#8b00ff', '#00b7b3'];
+            const confettiCount = 50;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 4 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 8000);
+            }
+        }
+        
+        // Trigger effects on load
+        window.addEventListener('load', () => {
+            createPopperEffect();
+            createConfetti();
+            setInterval(createConfetti, 8000);
+        });
+
+        // Prevent screen shake on scroll
+        window.addEventListener('scroll', () => {
+            document.body.style.transform = 'none';
+        });
+    </script>
+</body>
+</html>
