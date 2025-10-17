@@ -9,27 +9,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #2c3e50 0%, #4a4a4a 100%);
-            --secondary-gradient: linear-gradient(135deg, #1a1a1a 0%, #3a3a3a 100%);
-            --accent-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            --success-gradient: linear-gradient(135deg, #343a40 0%, #495057 100%);
-            --warning-gradient: linear-gradient(135deg, #212529 0%, #343a40 100%);
-            --ocean-gradient: linear-gradient(135deg, #667db6 0%, #0082c8 100%);
-            --sunset-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            --forest-gradient: linear-gradient(135deg, #134e5e 0%, #71b280 100%);
-            --aurora-gradient: linear-gradient(135deg, #2c3e50 0%, #4a4a4a 100%);
-            --neon-gradient: linear-gradient(135deg, #212529 0%, #495057 100%);
-            --cosmic-gradient: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 46%, #4a4a4a 100%);
-            --metallic-gradient: linear-gradient(135deg, #000000 0%, #1a0000 25%, #330a0a 50%, #1a0000 75%, #000000 100%);
-            --metallic-teal-gradient: linear-gradient(135deg, #004d4d 0%, #008080 25%, #00b3b3 50%, #008080 75%, #004d4d 100%);
-            --silver-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 25%, #ffffff 50%, #e9ecef 75%, #f8f9fa 100%);
-            --red-silver-gradient: linear-gradient(135deg, #ccffff 0%, #99cccc 25%, #ffffff 50%, #99cccc 75%, #ccffff 100%);
+            --primary-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --secondary-gradient: linear-gradient(135deg, #0f0c29 0%, #24243e 100%);
+            --accent-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --success-gradient: linear-gradient(135deg, #2d1b69 0%, #4b0082 100%);
+            --warning-gradient: linear-gradient(135deg, #1a0d2e 0%, #2d1b69 100%);
+            --ocean-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --sunset-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            --forest-gradient: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+            --aurora-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+            --neon-gradient: linear-gradient(135deg, #1a0d2e 0%, #2d1b69 100%);
+            --cosmic-gradient: linear-gradient(135deg, #0f0c29 0%, #1a0d2e 46%, #302b63 100%);
+            --metallic-gradient: linear-gradient(135deg, #000000 0%, #2a0a4a 25%, #4b0082 50%, #2a0a4a 75%, #000000 100%);
+            --metallic-teal-gradient: linear-gradient(135deg, #4b0082 0%, #8a2be2 25%, #9370db 50%, #8a2be2 75%, #4b0082 100%);
+            --silver-gradient: linear-gradient(135deg, #f5f3ff 0%, #e9d5ff 25%, #ffffff 50%, #e9d5ff 75%, #f5f3ff 100%);
+            --red-silver-gradient: linear-gradient(135deg, #d8bffd 0%, #b794f4 25%, #ffffff 50%, #b794f4 75%, #d8bffd 100%);
             --text-primary: #ffffff;
-            --text-secondary: #ccffff;
+            --text-secondary: #e0e7ff;
             --text-light: rgba(255, 255, 255, 0.9);
-            --text-dark: #212529;
-            --shadow-lg: 0 20px 40px rgba(0, 77, 77, 0.5);
-            --shadow-xl: 0 25px 50px rgba(0, 77, 77, 0.7);
+            --text-dark: #1a0d2e;
+            --shadow-lg: 0 20px 40px rgba(75, 0, 130, 0.5);
+            --shadow-xl: 0 25px 50px rgba(75, 0, 130, 0.7);
         }
         
         * {
@@ -48,6 +48,203 @@
             background-attachment: fixed;
         }
         
+        /* Intro Animation Overlay */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--metallic-gradient);
+            z-index: 5000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+            padding: 20px;
+            text-align: center;
+        }
+        #intro-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .dna-container {
+            position: relative;
+            width: min(90vw, 400px);
+            height: 200px;
+            margin-bottom: 40px;
+        }
+        .dna-strand {
+            position: absolute;
+            top: 50%;
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, #8a2be2, #9370db);
+            border-radius: 2px;
+            transform-origin: center;
+        }
+        .dna-strand.left {
+            left: -200px;
+            animation: slideInLeft 2s ease-out forwards;
+        }
+        .dna-strand.right {
+            right: -200px;
+            animation: slideInRight 2s ease-out forwards;
+        }
+        .dna-stand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 100px;
+            background: linear-gradient(180deg, #8a2be2, #9370db);
+            transform: translate(-50%, -50%) scaleY(0);
+            animation: growStand 1s ease-out 2s forwards;
+            border-radius: 2px;
+        }
+        @keyframes slideInLeft {
+            to { left: 50%; transform: translateX(-100%); }
+        }
+        @keyframes slideInRight {
+            to { right: 50%; transform: translateX(100%); }
+        }
+        @keyframes growStand {
+            to { transform: translate(-50%, -50%) scaleY(1); }
+        }
+        .back-text {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            opacity: 0;
+            animation: fadeInText 1s ease-out 3s forwards;
+            background: var(--silver-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+        .recap-label {
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .learnt-section {
+            max-width: 100%;
+            width: 100%;
+            padding: 10px;
+            opacity: 0;
+            animation: fadeInLearnt 1s ease-out 4s forwards;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .learnt-section h2 {
+            text-align: center;
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 90vw), 1fr));
+            gap: 15px;
+            max-height: 50vh;
+            overflow-y: auto;
+            width: 100%;
+            padding: 10px;
+        }
+        .article-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .article-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: slideInCard 0.5s ease-out forwards;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+        .article-card h4 {
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        .article-card p {
+            font-size: clamp(0.7rem, 3vw, 0.9rem);
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .countdown-timer {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            background: var(--silver-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .read-article {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeInRead 1s ease-out 20s forwards;
+            font-size: clamp(1.2rem, 5vw, 2rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            cursor: pointer;
+            background: var(--silver-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        @keyframes fadeInLearnt {
+            to { opacity: 1; }
+        }
+        @keyframes fadeInRead {
+            to { opacity: 1; }
+        }
+        @keyframes slideInCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        .main-content.visible {
+            opacity: 1;
+        }
+        @keyframes floatBackground {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-30px, -30px) rotate(1deg); }
+            66% { transform: translate(30px, -20px) rotate(-1deg); }
+        }
+        
         .bg-pattern {
             position: fixed;
             top: 0;
@@ -55,17 +252,11 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(0, 128, 128, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 179, 179, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(147, 112, 219, 0.06) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
             z-index: -1;
             animation: floatBackground 20s ease-in-out infinite;
-        }
-        
-        @keyframes floatBackground {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(-30px, -30px) rotate(1deg); }
-            66% { transform: translate(30px, -20px) rotate(-1deg); }
         }
         
         .container {
@@ -107,7 +298,7 @@
         .logo-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #ffffff 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f3e5f5 100%);
             border-radius: 18px;
             display: flex;
             align-items: center;
@@ -191,7 +382,7 @@
             padding: 60px 40px;
             text-align: center;
             position: relative;
-            border-bottom: 2px solid rgba(0, 128, 128, 0.3);
+            border-bottom: 2px solid rgba(138, 43, 226, 0.3);
         }
         
         .hero-banner::before {
@@ -311,7 +502,7 @@
             font-weight: 800;
             color: var(--text-primary);
             margin-bottom: 20px;
-        }
+            }
         
         .content-box p {
             color: var(--text-secondary);
@@ -349,8 +540,8 @@
             margin: 20px 0;
             padding: 25px;
             border-radius: 15px;
-            border-left: 4px solid #008080;
-            box-shadow: 0 10px 20px rgba(0, 77, 77, 0.2);
+            border-left: 4px solid #8a2be2;
+            box-shadow: 0 10px 20px rgba(75, 0, 130, 0.2);
         }
         
         .tip-item strong {
@@ -454,8 +645,8 @@
             margin: 1rem 0;
             padding: 1.5rem;
             border-radius: 15px;
-            border-left: 4px solid #008080;
-            box-shadow: 0 10px 20px rgba(0, 77, 77, 0.2);
+            border-left: 4px solid #8a2be2;
+            box-shadow: 0 10px 20px rgba(75, 0, 130, 0.2);
         }
         
         .word-entry h4 {
@@ -526,6 +717,94 @@
             margin: 0;
             font-size: 1.1em;
             font-weight: 500;
+        }
+
+        /* Mind Crack Journal Styles */
+        .journal-toast {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            background: linear-gradient(135deg, rgba(75, 0, 130, 0.95) 0%, rgba(138, 43, 226, 0.95) 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1500;
+            animation: slideUpToast 0.6s ease-out forwards;
+        }
+        .journal-toast.show {
+            display: block;
+        }
+        .journal-wall {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(90deg, #4b0082 0%, #8a2be2 50%, #9370db 100%);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            animation: healCrack 4s ease-in-out infinite;
+        }
+        .journal-wall::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            transform: translateY(-50%) scaleX(0);
+            animation: crackHeal 2s ease-out 1s forwards;
+        }
+        .journal-content h4 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .journal-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .journal-streak {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .journal-btn {
+            background: var(--silver-gradient);
+            color: var(--text-dark);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s;
+            margin-right: 10px;
+        }
+        .journal-btn:hover {
+            transform: scale(1.05);
+        }
+        .journal-btn.secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--text-secondary);
+        }
+        @keyframes slideUpToast {
+            to {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        @keyframes crackHeal {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         
         @media (max-width: 768px) {
@@ -894,174 +1173,244 @@
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-    
-    <div class="container">
-        <header class="header">
-            <div class="brand-logo">
-                <div class="logo-icon">
-                    <img src="DNATech logo.png" alt="DNATech Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
-                </div>
-                <span>DNATech</span>
-            </div>
-            <h1>🧱 Fix the First Crack, Save the Whole Wall</h1>
-            <p class="subtitle">The psychology behind small negligence and how it silently shapes crime, culture, and even character.</p>
-            
-            <div class="article-meta">
-                <div class="meta-item">Psychology Insight</div>
-                <div class="meta-item">October 17, 2025</div>
-                <div class="meta-item">6 min read</div>
-            </div>
-        </header>
-        
-        <article class="main-article">
-            <div class="hero-banner">
-                <h2>Hook / Intro</h2>
-                <p>Recently, while taking a short break during my writing session, I stumbled across something called the “Broken Window Theory.”</p>
-            </div>
-            
-            <div class="article-content">
-                <div class="intro-section">
-                    <h3>Intro Hook Story</h3>
-                    <p class="intro-text">
-                        At first, it sounded like a crime documentary title — but the more I read, the more I realized it was about us. Our habits, our mindset, and those tiny cracks we ignore until they become walls of chaos.
-                        <br><br>
-                        The theory was originally built around urban crime — how one broken window left unrepaired signals neglect, inviting more damage, more crime, more decay. But somewhere between those lines, it clicked for me: this isn’t just about cities, it’s about people. About how we let small bad habits, unresolved emotions, or ignored boundaries slowly break the structure of our own lives.
-                    </p>
-                </div>
-                
-                <div class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">What Is the Broken Window Theory?</h2>
-                        <p class="section-subtitle">The “Broken Window Theory” was introduced in 1982 by social scientists James Q. Wilson and George L. Kelling.</p>
-                    </div>
-                    
-                    <div class="content-box">
-                        <h4>The Basics</h4>
-                        <p>Their idea was simple but powerful — if a single broken window in a neighborhood goes unrepaired, it sends a signal that no one cares, inviting more disorder and even crime.</p>
-                        <p>This theory gained massive attention in New York City during the 1990s, where focusing on small issues like graffiti, vandalism, and fare evasion surprisingly led to a huge drop in major crimes.</p>
-                        <p>In short, it proved that small visible signs of neglect breed larger chaos — whether it’s a street, a city, or a human behavior.</p>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">How It Connects to Personal Life</h2>
-                        <p class="section-subtitle">Ever thought about how an unseen message stays “unreplied” for weeks, or that one unwashed coffee mug just sits there on your desk like a silent protester?</p>
-                    </div>
-                    
-                    <div class="content-box">
-                        <h4>Small Neglects in Daily Life</h4>
-                        <p>Yeah, that’s your own version of a broken window. One small sign of neglect that quietly whispers, “I’ll deal with it later.” And “later” slowly turns into “never.”</p>
-                        <p>It’s funny how that logic spreads — from chores to chats, from “I’ll text them tomorrow” to “I’ll fix my sleep next week.” Before you know it, those small cracks in discipline become habits, and those habits start defining you.</p>
-                        <p>Now imagine meeting someone for the first time — maybe your shirt’s wrinkled, your tone’s a bit careless, or your vibe just leaks “I don’t really care.”</p>
-                        <p>That’s your broken window moment right there. People judge fast — not because they’re shallow, but because small flaws signal big stories.</p>
-                        <p>Think of it like this: a well-maintained car parked in a clean neighborhood looks respected and safe. But a car with a shattered window? It won’t last a week — people assume it’s already abandoned.</p>
-                        <p>Humans aren’t that different. We protect what looks valued, and overlook what looks neglected.</p>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">Broken Windows in Relationships & Personality</h2>
-                        <p class="section-subtitle">Relationships don’t fall apart in one big explosion — they rot quietly, one ignored moment at a time.</p>
-                    </div>
-                    
-                    <div class="content-box">
-                        <h4>In Relationships</h4>
-                        <p>You forget to reply, skip that “how was your day?”, stop noticing the small things. Nothing feels wrong at first, just like a single crack on a window. But over time, that silence becomes a pattern, and the pattern becomes distance.</p>
-                        <p>Ever met a person who ignores small issues for weeks and then suddenly blasts out of nowhere?</p>
-                        <p>That’s a broken window too — when you don’t repair little cracks of frustration or miscommunication, they build pressure until the whole thing shatters. Fixing small issues early isn’t overreacting — it’s emotional maintenance.</p>
-                        <p>The “broken window” here isn’t glass — it’s respect, effort, and consistency.</p>
-                        <p>When you stop fixing the small cracks — like appreciation, honesty, or simple communication — people start assuming you don’t care. And that assumption spreads like graffiti in a bad neighborhood: fast, messy, and hard to clean later.</p>
-                    </div>
-                    
-                    <div class="content-box">
-                        <h4>In Personality</h4>
-                        <p>Even personality works the same way.</p>
-                        <p>You skip one workout, one responsibility, one apology — and convince yourself it’s no big deal.</p>
-                        <p>But that’s how self-image weakens. Soon, you start carrying that vibe — the one that says “I don’t fix my cracks.”</p>
-                        <p>And trust me, people pick that up faster than you think.</p>
-                        <p>We often think “big flaws” ruin relationships or reputations — but truth is, it’s the micro ones. The daily ignorance. The tiny unkept promises. The emotional broken windows we walk past without noticing.</p>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <div class="section-header">
-                        <h2 class="section-title">Fixing the First Crack</h2>
-                        <p class="section-subtitle">The truth is, nobody’s life stays spotless. Cracks will show up — in habits, in emotions, in trust. What matters is whether you fix them while they’re small or wait till they collapse the whole wall.</p>
-                    </div>
-                    
-                    <div class="content-box">
-                        <h4>Practical Steps</h4>
-                        <p>Start with one thing — reply to that message, wash that mug, say that apology, organize that corner. These tiny repairs build momentum. And soon, your environment, your mindset, and even your relationships start mirroring that order.</p>
-                        <p>The Broken Window Theory isn’t just about preventing chaos — it’s about choosing care over comfort.</p>
-                        <p>Because when you take responsibility for the small things, the big things automatically fall in line.</p>
-                        <p>Fix the first crack, and you’ll be surprised how strong your whole wall becomes.</p>
-                    </div>
-                </div>
-                
-                <div class="highlight-box">
-                    <p><strong>A Note from DNATech 🧬</strong></p>
-                    <p>DNATech hadn’t published for a few days — yeah, even we had our own “broken window moment.”</p>
-                    <p>But we’re back, refocused, and more curious than ever. Expect fresh articles every 2–3 days, exploring ideas that connect psychology, tech, and real life in unexpected ways.</p>
-                    <p>Stay curious. Stay aware. And keep reading — because the cracks are where the light comes through. 🌟</p>
-                </div>
-            </div>
-        </article>
-        
-        <div class="author-section">
-            <h3>About DNATech Research</h3>
-            <p>I investigate emerging technologies, behavioral science, and provide actionable insights to help users make informed decisions about digital adoption, personal development, and security.</p>
-            <div class="author-info">
-                <div class="author-avatar">D</div>
-                <div class="author-details">
-                    <h4>DNATech Security Notes</h4>
-                    <p>Threat Horizon Scout | Preparing for Tomorrow's Cyber Fights</p>
-                </div>
-            </div>
+    <!-- Intro Overlay -->
+    <div id="intro-overlay">
+        <div class="dna-container">
+            <div class="dna-strand left"></div>
+            <div class="dna-strand right"></div>
+            <div class="dna-stand"></div>
         </div>
-
-        <div class="footer">
-            <p>© 2025 DNATech Notes. Stay informed. Stay connected. Stay secure.</p>
+        <div class="back-text">DNA Writer Is Back</div>
+        <div class="recap-label">Short recap of past articles in 20 sec, then Article 32 loads automatically.</div>
+        <div id="countdown-timer" class="countdown-timer">20</div>
+        <div class="learnt-section">
+            <h2>What We Learnt</h2>
+            <div id="articles-grid" class="articles-grid"></div>
         </div>
+        <div class="read-article" onclick="loadArticle()">Let's Read Article 32</div>
     </div>
 
-    <button class="dictionary-btn" onclick="openDictionary()">Today's Dictionary</button>
-
-    <div class="dictionary-modal" id="dictionaryModal">
-        <div class="dictionary-content">
-            <button class="close-btn" onclick="closeDictionary()">&times;</button>
-            <h2 style="text-align: center; margin-bottom: 2rem; color: #ffffff; background: var(--silver-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Today's Dictionary</h2>
+    <!-- Main Content (Hidden Initially) -->
+    <div class="main-content" id="main-content">
+        <div class="bg-pattern"></div>
+        
+        <div class="container">
+            <header class="header">
+                <div class="brand-logo">
+                    <div class="logo-icon">
+                        <img src="DNATech logo.png" alt="DNATech Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+                    </div>
+                    <span>DNATech</span>
+                </div>
+                <h1>🧱 Fix the First Crack, Save the Whole Wall</h1>
+                <p class="subtitle">The psychology behind small negligence and how it silently shapes crime, culture, and even character.</p>
+                
+                <div class="article-meta">
+                    <div class="meta-item">Psychology Insight</div>
+                    <div class="meta-item">October 17, 2025</div>
+                    <div class="meta-item">6 min read</div>
+                </div>
+            </header>
             
-            <div class="word-entry">
-                <h4>Broken Window Theory</h4>
-                <p>A criminological theory that suggests visible signs of disorder, such as a broken window, can encourage further disorder and crime if not addressed promptly.</p>
+            <article class="main-article">
+                <div class="hero-banner">
+                    <h2>Hook / Intro</h2>
+                    <p>Recently, while taking a short break during my writing session, I stumbled across something called the “Broken Window Theory.”</p>
+                </div>
+                
+                <div class="article-content">
+                    <div class="intro-section">
+                        <h3>Intro Hook Story</h3>
+                        <p class="intro-text">
+                            At first, it sounded like a crime documentary title - but the more I read, the more I realized it was about us. Our habits, our mindset, and those tiny cracks we ignore until they become walls of chaos.
+                            <br><br>
+                            The theory was originally built around urban crime - how one broken window left unrepaired signals neglect, inviting more damage, more crime, more decay. But somewhere between those lines, it clicked for me: this isn’t just about cities, it’s about people. About how we let small bad habits, unresolved emotions, or ignored boundaries slowly break the structure of our own lives.
+                        </p>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">What Is the Broken Window Theory?</h2>
+                            <p class="section-subtitle">The “Broken Window Theory” was introduced in 1982 by social scientists James Q. Wilson and George L. Kelling.</p>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h4>The Basics</h4>
+                            <p>Their idea was simple but powerful - if a single broken window in a neighborhood goes unrepaired, it sends a signal that no one cares, inviting more disorder and even crime.</p>
+                            <p>This theory gained massive attention in New York City during the 1990s, where focusing on small issues like graffiti, vandalism, and fare evasion surprisingly led to a huge drop in major crimes.</p>
+                            <p>In short, it proved that small visible signs of neglect breed larger chaos - whether it’s a street, a city, or a human behavior.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">How It Connects to Personal Life</h2>
+                            <p class="section-subtitle">Ever thought about how an unseen message stays “unreplied” for weeks, or that one unwashed coffee mug just sits there on your desk like a silent protester?</p>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h4>Small Neglects in Daily Life</h4>
+                            <p>Yeah, that’s your own version of a broken window. One small sign of neglect that quietly whispers, “I’ll deal with it later.” And “later” slowly turns into “never.”</p>
+                            <p>It’s funny how that logic spreads - from chores to chats, from “I’ll text them tomorrow” to “I’ll fix my sleep next week.” Before you know it, those small cracks in discipline become habits, and those habits start defining you.</p>
+                            <p>Now imagine meeting someone for the first time - maybe your shirt’s wrinkled, your tone’s a bit careless, or your vibe just leaks “I don’t really care.”</p>
+                            <p>That’s your broken window moment right there. People judge fast - not because they’re shallow, but because small flaws signal big stories.</p>
+                            <p>Think of it like this: a well-maintained car parked in a clean neighborhood looks respected and safe. But a car with a shattered window? It won’t last a week - people assume it’s already abandoned.</p>
+                            <p>Humans aren’t that different. We protect what looks valued, and overlook what looks neglected.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">Broken Windows in Relationships & Personality</h2>
+                            <p class="section-subtitle">Relationships don’t fall apart in one big explosion - they rot quietly, one ignored moment at a time.</p>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h4>In Relationships</h4>
+                            <p>You forget to reply, skip that “how was your day?”, stop noticing the small things. Nothing feels wrong at first, just like a single crack on a window. But over time, that silence becomes a pattern, and the pattern becomes distance.</p>
+                            <p>Ever met a person who ignores small issues for weeks and then suddenly blasts out of nowhere?</p>
+                            <p>That’s a broken window too - when you don’t repair little cracks of frustration or miscommunication, they build pressure until the whole thing shatters. Fixing small issues early isn’t overreacting - it’s emotional maintenance.</p>
+                            <p>The “broken window” here isn’t glass - it’s respect, effort, and consistency.</p>
+                            <p>When you stop fixing the small cracks - like appreciation, honesty, or simple communication - people start assuming you don’t care. And that assumption spreads like graffiti in a bad neighborhood: fast, messy, and hard to clean later.</p>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h4>In Personality</h4>
+                            <p>Even personality works the same way.</p>
+                            <p>You skip one workout, one responsibility, one apology - and convince yourself it’s no big deal.</p>
+                            <p>But that’s how self-image weakens. Soon, you start carrying that vibe - the one that says “I don’t fix my cracks.”</p>
+                            <p>And trust me, people pick that up faster than you think.</p>
+                            <p>We often think “big flaws” ruin relationships or reputations - but truth is, it’s the micro ones. The daily ignorance. The tiny unkept promises. The emotional broken windows we walk past without noticing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">Fixing the First Crack</h2>
+                            <p class="section-subtitle">The truth is, nobody’s life stays spotless. Cracks will show up - in habits, in emotions, in trust. What matters is whether you fix them while they’re small or wait till they collapse the whole wall.</p>
+                        </div>
+                        
+                        <div class="content-box">
+                            <h4>Practical Steps</h4>
+                            <p>Start with one thing - reply to that message, wash that mug, say that apology, organize that corner. These tiny repairs build momentum. And soon, your environment, your mindset, and even your relationships start mirroring that order.</p>
+                            <p>The Broken Window Theory isn’t just about preventing chaos - it’s about choosing care over comfort.</p>
+                            <p>Because when you take responsibility for the small things, the big things automatically fall in line.</p>
+                            <p>Fix the first crack, and you’ll be surprised how strong your whole wall becomes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <p><strong>A Note from DNATech 🧬</strong></p>
+                        <p>DNATech hadn’t published for a few days - yeah, even we had our own “broken window moment.”</p>
+                        <p>But we’re back, refocused, and more curious than ever. Expect fresh articles every 2–3 days, exploring ideas that connect psychology, tech, and real life in unexpected ways.</p>
+                        <p>Stay curious. Stay aware. And keep reading - because the cracks are where the light comes through. 🌟</p>
+                    </div>
+                </div>
+            </article>
+            
+            <div class="author-section">
+                <h3>About DNATech Research</h3>
+                <p>I investigate emerging technologies, behavioral science, and provide actionable insights to help users make informed decisions about digital adoption, personal development, and security.</p>
+                <div class="author-info">
+                    <div class="author-avatar">D</div>
+                    <div class="author-details">
+                        <h4>DNATech Security Notes</h4>
+                        <p>Threat Horizon Scout | Preparing for Tomorrow's Cyber Fights</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="word-entry">
-                <h4>Negligence</h4>
-                <p>The failure to take proper care in doing something, leading to small oversights that can escalate into larger problems.</p>
+            <div class="footer">
+                <p>© 2025 DNATech Notes. Stay informed. Stay connected. Stay secure.</p>
             </div>
+        </div>
 
-            <div class="word-entry">
-                <h4>Habit Formation</h4>
-                <p>The process by which behaviors become automatic through repetition, often starting from small, consistent actions.</p>
+        <button class="dictionary-btn" onclick="openDictionary()">Today's Dictionary</button>
+
+        <div class="dictionary-modal" id="dictionaryModal">
+            <div class="dictionary-content">
+                <button class="close-btn" onclick="closeDictionary()">&times;</button>
+                <h2 style="text-align: center; margin-bottom: 2rem; color: #ffffff; background: var(--silver-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Today's Dictionary</h2>
+                
+                <div class="word-entry">
+                    <h4>Broken Window Theory</h4>
+                    <p>A criminological theory that suggests visible signs of disorder, such as a broken window, can encourage further disorder and crime if not addressed promptly.</p>
+                </div>
+
+                <div class="word-entry">
+                    <h4>Negligence</h4>
+                    <p>The failure to take proper care in doing something, leading to small oversights that can escalate into larger problems.</p>
+                </div>
+
+                <div class="word-entry">
+                    <h4>Habit Formation</h4>
+                    <p>The process by which behaviors become automatic through repetition, often starting from small, consistent actions.</p>
+                </div>
+
+                <div class="word-entry">
+                    <h4>Emotional Maintenance</h4>
+                    <p>The practice of regularly addressing small emotional issues in relationships to prevent them from growing into major conflicts.</p>
+                </div>
+
+                <div class="word-entry">
+                    <h4>Self-Image</h4>
+                    <p>An individual's mental representation of themselves, influenced by habits and behaviors that signal self-respect or neglect.</p>
+                </div>
             </div>
+        </div>
 
-            <div class="word-entry">
-                <h4>Emotional Maintenance</h4>
-                <p>The practice of regularly addressing small emotional issues in relationships to prevent them from growing into major conflicts.</p>
-            </div>
-
-            <div class="word-entry">
-                <h4>Self-Image</h4>
-                <p>An individual's mental representation of themselves, influenced by habits and behaviors that signal self-respect or neglect.</p>
+        <!-- Mind Crack Journal Toast -->
+        <div id="journalToast" class="journal-toast">
+            <div class="journal-wall"></div>
+            <div class="journal-streak" id="streakText">Streak: 0 days</div>
+            <div class="journal-content">
+                <h4 id="journalTitle">Welcome to Your Mind Crack Journal</h4>
+                <p id="journalText">Last crack you fixed? Loneliness scrolls. Journal today's: Fix the first crack before it breaks the wall.</p>
+                <button id="addEntryBtn" class="journal-btn">Add Entry</button>
+                <button id="dismissToast" class="journal-btn secondary">Later</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Full Articles Archive
+        const articles = [
+            { id: 31, title: "Digital SIM, Real Scam", category: ["Cybersecurity", "Technology"], excerpt: "How a single eSIM swap can turn your phone number into a hacker's weapon and your bank account into their jackpot." },
+            { id: 30, title: "Maybe the Internet Isn't Addictive — Maybe We're Just Lonely", category: ["Digital Wellness", "Mental Health"], excerpt: "What if your endless scrolling isn't addiction, but loneliness in disguise? Discover how facing the silence within can free you from digital dependence." },
+            { id: 29, title: "They Don’t Hack Devices, They Hack Desires", category: ["Cyber Security", "Digital Awareness"], excerpt: "You think your phone is safe, but the real malware lives in your mind. How apps manipulate attention, craving, and habits to turn humans into carriers of digital infections." },
+            { id: 28, title: "⚡ The Moment You Lie, Your Android Knows Why", category: ["Cyber Security", "Privacy", "Behavioral Tech"], excerpt: "You hide it from people, but not from pixels. Exploring how our devices read emotions through typing patterns, scrolling behavior, and digital micro-expressions." },
+            { id: 27, title: "Are Brain and Mind Same? Wait, Let's Clear — Nothing to Blame", category: ["Personal View", "Psychology"], excerpt: "A personal exploration of the difference between brain and mind — understanding the hardware and software of human consciousness." },
+            { id: 26, title: "Phone in Danger, Hear the Stranger", category: ["Cyber Security"], excerpt: "From sudden lags to data drags, here's how to spot if your smartphone has fallen into the wrong hands." },
+            { id: 25, title: "Phish and Swish: Tricks That Make You Click in a Flick", category: ["Cyber Security"], excerpt: "From AI-personalized emails to SVG-in-PDFs and QR-code scams, phishing has grown smarter and harder to spot. Here's what everyone should know." },
+            { id: 24, title: "Your Forgotten Accounts Could Be a Security Nightmare", category: ["Cyber Security"], excerpt: "Learn how old, abandoned accounts can put your personal data and finances at risk, and what you can do to take control." },
+            { id: 23, title: "What Surroundings Bring, Shapes Everything", category: ["Personal Growth", "Psychology"], excerpt: "Explore how your surroundings — from yourself to your universal circle — quietly shape your thoughts, confidence, and potential." },
+            { id: 22, title: "Cut the Clutter, Clear the Mind: Digital Minimalism Defined", category: ["Digital Wellness", "Lifestyle"], excerpt: "Discover how stepping back from digital noise can sharpen focus, boost creativity, and bring peace to a hyperconnected life." },
+            { id: 21, title: "Juice Jacking: A Free Charge with a Hidden Discharge", category: ["Cyber Security", "Safety Tips"], excerpt: "That public USB port may be more than it seems—your phone could be getting drained in ways you don’t expect." },
+            { id: 20, title: "Room to Web: When Smart Things Start to Spread", category: ["Technology", "Security"], excerpt: "Every device in your home is quietly reaching out—connecting, syncing, and sharing with the world more than you think." },
+            { id: 19, title: "Bluetooth Bliss, Data Abyss", category: ["Technology", "Security"], excerpt: "That 'always-on' convenience could be a silent invitation for hackers. Discover the hidden risks lurking in your pocket's invisible signals." },
+            { id: 18, title: "Good or Bad, Habits Make You Glad or Sad", category: ["Lifestyle", "Self-Improvement"], excerpt: "Explore how daily habits shape your life, and why labeling them 'good' or 'bad' isn’t always accurate. Learn to evaluate what truly works for you." },
+            { id: 17, title: "Text in Air, or Stored with Care? Databases Decoded", category: ["Education", "Real-Life Analogy"], excerpt: "Understand where your messages and app data really live with a playful kitchen analogy, and learn how tech handles your information safely." },
+            { id: 16, title: "5G Uncovered: Is the Next-Gen Network Really Safer Than 4G?", category: ["Technology Analysis"], excerpt: "Blazing speed meets hidden risks — here's the truth behind 5G security and whether India's next-gen network revolution is worth the upgrade." },
+            { id: 15, title: "Lots of Threats, Get Some Acts", category: ["Digital Awareness"], excerpt: "Understanding India's Digital Personal Data Protection Act (DPDP) - your legal weapon against data misuse, privacy violations, and digital exploitation." },
+            { id: 14, title: "Click to Convert, Risk to Invert", category: ["Security Alert & Awareness"], excerpt: "Online tools make it easy, but they may take more than they give. Learn how file conversion sites can expose your personal documents and identity." },
+            { id: 13, title: "Digital Trash Talks — Through It, Your Data Walks", category: ["Digital Waste & Awareness"], excerpt: "Old devices aren’t just junk—they carry your private data. Learn how discarded phones, laptops, and drives can expose your information." },
+            { id: 12, title: "Scan to See or Spy on Me — The Hidden Life of QR Codes", category: ["Tech"], excerpt: "QR codes are everywhere, but each scan could silently reveal who you are. Learn how convenience meets risk in everyday life." },
+            { id: 11, title: "One Like, One Tag, One Clue — Footprints Follow You!", category: ["Digital Awareness & Tech"], excerpt: "Every click leaves a trail, your Internet is a passenger rail. Learn how your online actions create footprints that follow you everywhere." },
+            { id: 10, title: "When Right Feels Wrong: Understanding Perspectives", category: ["Personal Development & Mindset"], excerpt: "Ever felt torn between right and wrong? Discover how to see life through different eyes and make choices with clarity." },
+            { id: 9, title: "The Subscription Trap — How Tech is Sneaking Money Out of Your Wallet", category: ["Technology & Cybersecurity"], excerpt: "From 2GB/day packs to OTT and AI subscriptions — how small monthly fees and dark UX quietly drain your wallet, attention, and privacy." },
+            { id: 8, title: "Paradox of Choice — Too Many Options, Too Little Satisfaction", category: ["Psychology & Cybersecurity"], excerpt: "When more options promise freedom but end up causing confusion and insecurity. Explore how choice overload impacts both our digital safety and daily happiness." },
+            { id: 7, title: "Dependence is Human Nature — But Are We Overdoing It with AI?", category: ["AI Technology"], excerpt: "We're wired to take shortcuts, but AI dependence might be weakening our minds. Test your human intelligence with interactive challenges while exploring the balance between AI assistance and mental strength." },
+            { id: 6, title: "Nano Banana: Complete Guide to Google's Viral 3D Figurine AI", category: ["AI Technology"], excerpt: "Google's mysterious 'Nano Banana' AI has taken the internet by storm, creating photo-realistic 3D figurines. Discover how this viral trend works and why millions are obsessed." },
+            { id: 5, title: "No Files, No Fears? Your Phone Brings Others Tears", category: ["Mobile Security"], excerpt: "Many think an empty phone has nothing to lose, but attackers can still turn your device into a weapon against others. Discover why your phone's security matters beyond your own data." },
+            { id: 4, title: "OTP Scams: Are OTPs Really Safe?", category: ["Authentication Security"], excerpt: "Exploring the vulnerabilities in OTP systems and how scammers exploit them. Learn how to protect yourself from OTP-based fraud." },
+            { id: 3, title: "Advanced Phishing Attack Prevention", category: ["Threat Analysis"], excerpt: "How to identify and prevent sophisticated phishing attacks in your organization. Learn the latest tactics used by cybercriminals." },
+            { id: 2, title: "Zero Trust Architecture: Future of Security", category: ["Network Security"], excerpt: "Implementing Zero Trust security models in modern enterprise environments. Never trust, always verify - the new security paradigm." },
+            { id: 1, title: "Clipboard Hijacking: The Silent Threat", category: ["Malware Analysis"], excerpt: "Understanding how clipboard hijacking works and how to protect yourself from this emerging threat that silently steals your copied data." }
+        ];
+
+        let countdownInterval = null;
+        let isLoaded = false;
+
         function createParticles() {
             const particlesContainer = document.querySelector('.bg-pattern');
             for (let i = 0; i < 30; i++) {
@@ -1092,7 +1441,117 @@
             }
         });
 
-        window.addEventListener('load', createParticles);
+        // Intro Animation and Staggered Articles Grid
+        function initIntro() {
+            const grid = document.getElementById('articles-grid');
+            const totalTime = 20000; // 20 seconds in ms
+            const delayPerCard = totalTime / articles.length; // Even spacing over 20s
+
+            articles.forEach((article, index) => {
+                setTimeout(() => {
+                    const card = document.createElement('div');
+                    card.className = 'article-card';
+                    card.innerHTML = `
+                        <h4>${article.title}</h4>
+                        <p>${article.excerpt.substring(0, 80)}...</p>
+                    `;
+                    grid.appendChild(card);
+                    // Trigger visibility after short delay for stagger feel
+                    setTimeout(() => card.classList.add('visible'), 100);
+                }, index * delayPerCard);
+            });
+        }
+
+        function startCountdown() {
+            let timeLeft = 20;
+            const timerEl = document.getElementById('countdown-timer');
+            timerEl.textContent = timeLeft;
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    loadArticle();
+                }
+            }, 1000);
+        }
+
+        function loadArticle() {
+            if (isLoaded) return;
+            isLoaded = true;
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+            document.getElementById('intro-overlay').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('main-content').classList.add('visible');
+                initMindCrackJournal(); // Start journal after main load
+            }, 1000);
+        }
+
+        // Mind Crack Journal Logic (delayed to after intro)
+        function initMindCrackJournal() {
+            const toast = document.getElementById('journalToast');
+            const title = document.getElementById('journalTitle');
+            const text = document.getElementById('journalText');
+            const streakText = document.getElementById('streakText');
+            const addBtn = document.getElementById('addEntryBtn');
+            const dismissBtn = document.getElementById('dismissToast');
+
+            // Track streak and last entry
+            let streak = parseInt(localStorage.getItem('journalStreak') || '0');
+            let lastEntry = localStorage.getItem('lastJournalEntry') || '';
+            const today = new Date().toDateString();
+            const lastDate = localStorage.getItem('lastJournalDate');
+
+            if (lastDate !== today) {
+                streak = (lastDate && new Date(lastDate).toDateString() === new Date(Date.now() - 86400000).toDateString()) ? streak + 1 : 1;
+                localStorage.setItem('journalStreak', streak.toString());
+                localStorage.setItem('lastJournalDate', today);
+            }
+
+            streakText.textContent = `Streak: ${streak} days of fixing cracks!`;
+
+            // Dynamic recap from archive (simple random psych-related for demo)
+            const psychArticles = articles.filter(a => a.category.some(c => c.includes('Wellness') || c.includes('Psychology') || c.includes('Mental')));
+            const randomPast = psychArticles[Math.floor(Math.random() * psychArticles.length)] || articles[0];
+            title.textContent = `Journal Entry: Fixing Today's Crack`;
+            text.innerHTML = `Last crack? "${randomPast.excerpt.substring(0, 60)}..." <br> How's your wall holding? Journal a quick win below.`;
+
+            toast.classList.add('show');
+
+            // Auto-hide after 8s
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 8000);
+
+            // Add entry (simple localStorage note)
+            addBtn.onclick = () => {
+                const note = prompt('Quick journal: What crack are you fixing today?');
+                if (note) {
+                    const entries = JSON.parse(localStorage.getItem('journalEntries') || '[]');
+                    entries.push({ date: today, note: note, streak: streak });
+                    localStorage.setItem('journalEntries', JSON.stringify(entries));
+                    alert('Entry saved! Keep the streak going. 🧱');
+                }
+                toast.classList.remove('show');
+            };
+
+            // Dismiss
+            dismissBtn.onclick = () => toast.classList.remove('show');
+            toast.onclick = (e) => { if (e.target === toast) toast.classList.remove('show'); };
+        }
+
+        window.addEventListener('load', () => {
+            initIntro();
+            startCountdown();
+            // Backup auto-load after exactly 20 seconds
+            setTimeout(() => {
+                loadArticle();
+            }, 20000);
+            createParticles();
+        });
 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
